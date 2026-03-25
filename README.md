@@ -17,3 +17,45 @@ This repository is a **fast demo** focused on transparent, rule-based adaptive l
 - Diagnosis of likely cause
 - Next-step recommendation
 
+## Handy commands (demo setup)
+
+### Create venv + install deps
+
+```bash
+python -m venv .venv
+.venv/bin/python -m pip install -U pip
+.venv/bin/python -m pip install -r requirements.txt
+```
+
+### Initialize SQLite DB schema
+
+```bash
+.venv/bin/python scripts/init_db.py
+```
+
+### Seed Grade 7 Mathematics topic graph
+
+```bash
+.venv/bin/python scripts/seed_graph.py
+```
+
+### Quick sanity check (counts)
+
+```bash
+.venv/bin/python -c "import sqlite3; c=sqlite3.connect('db/demo.sqlite3'); print('topics', c.execute('select count(*) from topics').fetchone()[0]); print('edges', c.execute('select count(*) from topic_edges').fetchone()[0])"
+```
+
+### Run the demo API
+
+```bash
+.venv/bin/python -m uvicorn app.main:app --reload --port 8000
+```
+
+### Key files
+
+- `db/schema.sql`: SQLite schema
+- `data/grade7_math_graph.json`: Grade 7 topics + edges seed
+- `scripts/init_db.py`: create `db/demo.sqlite3` from schema
+- `scripts/seed_graph.py`: load seed JSON into SQLite
+- `app/main.py`: FastAPI demo API
+
