@@ -33,12 +33,12 @@ CREATE INDEX IF NOT EXISTS idx_topic_edges_type ON topic_edges(edge_type);
 -- ---------- Question ----------
 CREATE TABLE IF NOT EXISTS questions (
   id TEXT PRIMARY KEY,
-  prompt TEXT NOT NULL,
-  question_type TEXT NOT NULL, -- e.g. 'mcq', 'short'
+  question_text TEXT NOT NULL,
+  answer_type TEXT NOT NULL CHECK (answer_type IN ('numeric', 'mcq', 'short_text')),
   choices_json TEXT NOT NULL DEFAULT '[]', -- JSON array, empty if not MCQ
   correct_answer TEXT NOT NULL,
 
-  primary_topic_id TEXT NOT NULL,
+  topic_id TEXT NOT NULL,
   secondary_topic_ids_json TEXT NOT NULL DEFAULT '[]', -- JSON array of topic ids
 
   difficulty_prior REAL NOT NULL CHECK (difficulty_prior BETWEEN 0.0 AND 1.0),
@@ -47,12 +47,14 @@ CREATE TABLE IF NOT EXISTS questions (
   transfer_load REAL NOT NULL CHECK (transfer_load BETWEEN 0.0 AND 1.0),
   diagnostic_value REAL NOT NULL CHECK (diagnostic_value BETWEEN 0.0 AND 1.0),
 
-  tags_json TEXT NOT NULL DEFAULT '[]',
+  hint_text TEXT NOT NULL DEFAULT '',
+  explanation_text TEXT NOT NULL DEFAULT '',
+  likely_error_tags_json TEXT NOT NULL DEFAULT '[]',
 
-  FOREIGN KEY (primary_topic_id) REFERENCES topics(id) ON DELETE RESTRICT
+  FOREIGN KEY (topic_id) REFERENCES topics(id) ON DELETE RESTRICT
 );
 
-CREATE INDEX IF NOT EXISTS idx_questions_primary_topic ON questions(primary_topic_id);
+CREATE INDEX IF NOT EXISTS idx_questions_topic ON questions(topic_id);
 
 -- ---------- Student ----------
 CREATE TABLE IF NOT EXISTS students (

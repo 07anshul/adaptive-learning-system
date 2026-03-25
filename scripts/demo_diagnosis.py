@@ -42,18 +42,20 @@ def main() -> None:
     # Question: high transfer/word problem style
     q = Question(
         id="q_transfer_001",
-        prompt="A jacket costs $80. It is discounted by 25%. What is the sale price?",
-        question_type="short",
+        topic_id=topic_id,
+        secondary_topic_ids=[],
+        question_text="A jacket costs $80. It is discounted by 25%. What is the sale price?",
+        answer_type="short_text",
         choices=[],
         correct_answer="60",
-        primary_topic_id=topic_id,
-        secondary_topic_ids=[],
         difficulty_prior=0.60,
         conceptual_load=0.55,
         procedural_load=0.45,
         transfer_load=0.75,
         diagnostic_value=0.70,
-        tags=["word_problem"],
+        hint_text="First find 25% of 80, then subtract from 80.",
+        explanation_text="25% of 80 is 20. Sale price = 80 − 20 = 60.",
+        likely_error_tags=["discount_vs_sale_price_confusion"],
     )
 
     att_wrong = Attempt(

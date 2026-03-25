@@ -7,7 +7,7 @@ from pydantic import BaseModel, Field
 
 
 EdgeType = Literal["prerequisite", "encompassing"]
-QuestionType = Literal["mcq", "short"]
+AnswerType = Literal["numeric", "mcq", "short_text"]
 
 
 class Topic(BaseModel):
@@ -31,13 +31,13 @@ class TopicEdge(BaseModel):
 
 class Question(BaseModel):
     id: str
-    prompt: str
-    question_type: QuestionType
+    topic_id: str
     choices: list[str] = Field(default_factory=list)
-    correct_answer: str
-
-    primary_topic_id: str
     secondary_topic_ids: list[str] = Field(default_factory=list)
+
+    question_text: str
+    answer_type: AnswerType
+    correct_answer: str
 
     difficulty_prior: float = Field(ge=0.0, le=1.0)
     conceptual_load: float = Field(ge=0.0, le=1.0)
@@ -45,7 +45,9 @@ class Question(BaseModel):
     transfer_load: float = Field(ge=0.0, le=1.0)
     diagnostic_value: float = Field(ge=0.0, le=1.0)
 
-    tags: list[str] = Field(default_factory=list)
+    hint_text: str = ""
+    explanation_text: str = ""
+    likely_error_tags: list[str] = Field(default_factory=list)
 
 
 class Student(BaseModel):

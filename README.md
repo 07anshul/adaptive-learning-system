@@ -39,6 +39,12 @@ python -m venv .venv
 .venv/bin/python scripts/seed_graph.py
 ```
 
+### Seed Grade 7 Mathematics questions (first 12 topics)
+
+```bash
+.venv/bin/python scripts/seed_questions.py
+```
+
 ### Quick sanity check (counts)
 
 ```bash

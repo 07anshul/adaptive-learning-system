@@ -125,7 +125,7 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
         if q is None:
             raise HTTPException(status_code=404, detail="question_not_found")
 
-        topic_id = req.topic_id or q.primary_topic_id
+        topic_id = req.topic_id or q.topic_id
 
         # Save attempt
         att = Attempt(

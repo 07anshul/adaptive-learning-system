@@ -52,18 +52,20 @@ def main() -> None:
     # A minimal question object for scoring demo (normally fetched from DB)
     q = Question(
         id="q_demo_001",
-        prompt="Compute: -7 + 12",
-        question_type="mcq",
+        topic_id=topic_id,
+        secondary_topic_ids=[],
+        question_text="Compute: -7 + 12",
+        answer_type="mcq",
         choices=["-19", "-5", "5", "19"],
         correct_answer="5",
-        primary_topic_id=topic_id,
-        secondary_topic_ids=[],
         difficulty_prior=0.35,
         conceptual_load=0.30,
         procedural_load=0.40,
         transfer_load=0.10,
         diagnostic_value=0.55,
-        tags=[],
+        hint_text="Think: 12 − 7.",
+        explanation_text="-7 + 12 = 5",
+        likely_error_tags=["sign_error"],
     )
 
     prev = get_student_topic_state(conn, student_id=student_id, topic_id=topic_id)
