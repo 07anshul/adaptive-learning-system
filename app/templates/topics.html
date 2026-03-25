@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="pageHeader">
+    <h1>Topics</h1>
+    <p class="lead">Curated Grade 7 Mathematics topic set with sparse prerequisite/encompassing edges.</p>
+  </div>
+
+  <div class="card">
+    <div class="table">
+      <div class="table__row table__head">
+        <div>Topic</div>
+        <div>Cluster</div>
+        <div>Difficulty</div>
+        <div>Edges</div>
+        <div></div>
+      </div>
+      {% for t in topics %}
+        <div class="table__row">
+          <div>
+            <div class="strong">{{ t.title }}</div>
+            <div class="muted small">{{ t.id }}</div>
+          </div>
+          <div>{{ t.cluster }}</div>
+          <div>{{ "%.2f"|format(t.difficulty_prior) }}</div>
+          <div>{{ edge_counts[t.id] }}</div>
+          <div class="right">
+            <a class="btn btnSmall" href="/ui/topics/{{ t.id }}">View</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
+

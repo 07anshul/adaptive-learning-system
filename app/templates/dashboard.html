@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="pageHeader">
+    <h1>Student dashboard</h1>
+    <p class="lead">Student: <span class="mono">{{ student_id }}</span>. Focus: show scoring, fragility, diagnosis, and next step.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>Next recommended action</h2>
+      {% if next_topic_id %}
+        <div class="actions">
+          <a class="btn btnPrimary" href="/ui/students/{{ student_id }}/practice/{{ next_topic_id }}">Practice next topic</a>
+          <a class="btn" href="/ui/topics/{{ next_topic_id }}">View topic</a>
+        </div>
+        <div class="muted small">Chosen as weakest (or first topic if no history).</div>
+      {% else %}
+        <p class="muted">No topics available yet.</p>
+      {% endif %}
+    </div>
+
+    <div class="card">
+      <h2>Topic health panel</h2>
+      <div class="muted small">Labels are based on mastery/fragility. Goal: quickly spot Weak/Fragile topics.</div>
+      <div class="badgeRow">
+        <span class="badge badgeStrong">Strong</span>
+        <span class="badge badgeOkay">Okay</span>
+        <span class="badge badgeFragile">Fragile</span>
+        <span class="badge badgeWeak">Weak</span>
+        <span class="badge badgeUnseen">Unseen</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="card">
+      <h2>Strongest topics</h2>
+      {% if strongest|length == 0 %}
+        <p class="muted">No attempts yet.</p>
+      {% else %}
+        <ul class="list">
+          {% for x in strongest %}
+            <li>
+              <span class="badge badgeStrong">{{ x.status }}</span>
+              <a href="/ui/students/{{ student_id }}/practice/{{ x.topic.id }}">{{ x.topic.title }}</a>
+              <div class="muted small">mastery {{ "%.2f"|format(x.state.mastery_score) }}, fragility {{ "%.2f"|format(x.state.fragility_score) }}</div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div class="card">
+      <h2>Weakest topics</h2>
+      {% if weakest|length == 0 %}
+        <p class="muted">No attempts yet.</p>
+      {% else %}
+        <ul class="list">
+          {% for x in weakest %}
+            <li>
+              <span class="badge badgeWeak">{{ x.status }}</span>
+              <a href="/ui/students/{{ student_id }}/practice/{{ x.topic.id }}">{{ x.topic.title }}</a>
+              <div class="muted small">mastery {{ "%.2f"|format(x.state.mastery_score) }}, fluency {{ "%.2f"|format(x.state.fluency_score) }}</div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div class="card">
+      <h2>Most fragile topics</h2>
+      {% if fragile|length == 0 %}
+        <p class="muted">No attempts yet.</p>
+      {% else %}
+        <ul class="list">
+          {% for x in fragile %}
+            <li>
+              <span class="badge badgeFragile">{{ x.status }}</span>
+              <a href="/ui/students/{{ student_id }}/practice/{{ x.topic.id }}">{{ x.topic.title }}</a>
+              <div class="muted small">fragility {{ "%.2f"|format(x.state.fragility_score) }}, mastery {{ "%.2f"|format(x.state.mastery_score) }}</div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Recent attempts</h2>
+    {% if recent_attempts|length == 0 %}
+      <p class="muted">No attempts yet. Click “Practice next topic” to start.</p>
+    {% else %}
+      <div class="table">
+        <div class="table__row table__head">
+          <div>Time</div>
+          <div>Topic</div>
+          <div>Question</div>
+          <div>Correct</div>
+          <div>Time(s)</div>
+          <div>Hints</div>
+          <div>Conf</div>
+        </div>
+        {% for a in recent_attempts %}
+          <div class="table__row">
+            <div class="mono small">{{ a.submitted_at.isoformat() }}</div>
+            <div class="mono small">{{ a.topic_id }}</div>
+            <div class="mono small">{{ a.question_id }}</div>
+            <div>
+              {% if a.correctness %}
+                <span class="badge badgeStrong">Correct</span>
+              {% else %}
+                <span class="badge badgeWeak">Wrong</span>
+              {% endif %}
+            </div>
+            <div>{{ a.time_taken_seconds }}</div>
+            <div>{{ a.hints_used }}</div>
+            <div>{{ a.confidence_rating }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
+

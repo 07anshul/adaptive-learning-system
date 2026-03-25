@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="pageHeader">
+    <h1>{{ topic.title }}</h1>
+    <p class="lead">{{ topic.description }}</p>
+    <div class="pillRow">
+      <span class="pill">{{ topic.cluster }}</span>
+      <span class="pill">difficulty {{ "%.2f"|format(topic.difficulty_prior) }}</span>
+      <span class="pill">{{ questions|length }} questions seeded</span>
+      <span class="pill">{{ edges|length }} edges</span>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>Edges</h2>
+      {% if edges|length == 0 %}
+        <p class="muted">No edges for this topic (this is allowed).</p>
+      {% else %}
+        <ul class="list">
+          {% for e in edges %}
+            <li>
+              <span class="pill pillMono">{{ e.edge_type }}</span>
+              <span class="muted small">from</span> <span class="mono">{{ e.from_topic_id }}</span>
+              <span class="muted small">to</span> <span class="mono">{{ e.to_topic_id }}</span>
+              <span class="muted small">w={{ "%.2f"|format(e.weight) }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <div class="card">
+      <h2>Questions</h2>
+      {% if questions|length == 0 %}
+        <p class="muted">No questions seeded for this topic yet.</p>
+      {% else %}
+        <ul class="list">
+          {% for q in questions[:10] %}
+            <li>
+              <span class="pill pillMono">{{ q.answer_type }}</span>
+              <span class="mono">{{ q.id }}</span>
+              <div class="muted small">{{ q.question_text }}</div>
+            </li>
+          {% endfor %}
+        </ul>
+        {% if questions|length > 10 %}
+          <div class="muted small">Showing first 10 of {{ questions|length }}.</div>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
+

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title or "Adaptive Learning Demo" }}</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar__inner">
+        <div class="brand">
+          <a class="brand__link" href="/">Adaptive Learning Demo</a>
+          <span class="brand__tag">Grade 7 Math</span>
+        </div>
+        <nav class="nav">
+          <a class="nav__link" href="/ui/topics">Topics</a>
+          <a class="nav__link" href="/ui/students/stu_demo/dashboard">Student</a>
+        </nav>
+      </div>
+    </header>
+    <main class="container">
+      {% block content %}{% endblock %}
+    </main>
+    <footer class="footer container">
+      <div class="muted">Demo UI: simple, interpretable, no-ML.</div>
+    </footer>
+  </body>
+</html>
+

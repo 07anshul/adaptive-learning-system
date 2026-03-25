@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="pageHeader">
+    <h1>Adaptive Learning System (Demo)</h1>
+    <p class="lead">A minimal demo that makes adaptive behavior visible: scoring → fragility → diagnosis → next step.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>Start demo</h2>
+      <p class="muted">Use the demo student to see the dashboard, practice questions, and feedback.</p>
+      <div class="actions">
+        <a class="btn btnPrimary" href="/ui/students/stu_demo/dashboard">Open student dashboard</a>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Explore topics</h2>
+      <p class="muted">View the curated topic list and sparse skill graph edges.</p>
+      <div class="actions">
+        <a class="btn" href="/ui/topics">Open topics</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+

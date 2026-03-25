@@ -57,6 +57,12 @@ python -m venv .venv
 .venv/bin/python -m uvicorn app.main:app --reload --port 8000
 ```
 
+### Open the demo UI
+
+- Home: `http://127.0.0.1:8000/`
+- Student dashboard: `http://127.0.0.1:8000/ui/students/stu_demo/dashboard`
+- Topics list: `http://127.0.0.1:8000/ui/topics`
+
 ### Key files
 
 - `db/schema.sql`: SQLite schema

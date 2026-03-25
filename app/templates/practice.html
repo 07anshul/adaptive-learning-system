@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="pageHeader">
+    <h1>Practice: {{ topic.title }}</h1>
+    <p class="lead">Student <span class="mono">{{ student_id }}</span>. Topic status: <span class="badge {% if status=='Strong' %}badgeStrong{% elif status=='Fragile' %}badgeFragile{% elif status=='Weak' %}badgeWeak{% elif status=='Okay' %}badgeOkay{% else %}badgeUnseen{% endif %}">{{ status }}</span></p>
+    {% if topic_state %}
+      <div class="pillRow">
+        <span class="pill">mastery {{ "%.2f"|format(topic_state.mastery_score) }}</span>
+        <span class="pill">fragility {{ "%.2f"|format(topic_state.fragility_score) }}</span>
+        <span class="pill">fluency {{ "%.2f"|format(topic_state.fluency_score) }}</span>
+        <span class="pill">evidence {{ topic_state.evidence_count }}</span>
+      </div>
+    {% endif %}
+  </div>
+
+  {% if question is none %}
+    <div class="card">
+      <h2>No questions seeded yet</h2>
+      <p class="muted">Seed questions for this topic to use the attempt screen.</p>
+      <div class="actions">
+        <a class="btn" href="/ui/topics/{{ topic.id }}">View topic</a>
+        <a class="btn" href="/ui/students/{{ student_id }}/dashboard">Back to dashboard</a>
+      </div>
+    </div>
+  {% else %}
+    <div class="grid2">
+      <div class="card">
+        <h2>Question</h2>
+        <div class="muted small mono">{{ question.id }} · {{ question.answer_type }} · diff {{ "%.2f"|format(question.difficulty_prior) }} · transfer {{ "%.2f"|format(question.transfer_load) }}</div>
+        <p class="questionText">{{ question.question_text }}</p>
+
+        {% if question.answer_type == 'mcq' %}
+          <form method="post" action="/ui/attempts" class="form">
+            <input type="hidden" name="student_id" value="{{ student_id }}" />
+            <input type="hidden" name="topic_id" value="{{ topic.id }}" />
+            <input type="hidden" name="question_id" value="{{ question.id }}" />
+
+            <div class="field">
+              <label class="label">Your answer</label>
+              {% for c in question.choices %}
+                <label class="radio">
+                  <input type="radio" name="answer" value="{{ c }}" required />
+                  <span>{{ c }}</span>
+                </label>
+              {% endfor %}
+            </div>
+
+            <div class="grid3">
+              <div class="field">
+                <label class="label">Time taken (seconds)</label>
+                <input class="input" type="number" name="time_taken_seconds" value="30" min="0" />
+              </div>
+              <div class="field">
+                <label class="label">Hints used</label>
+                <input class="input" type="number" name="hints_used" value="0" min="0" />
+              </div>
+              <div class="field">
+                <label class="label">Confidence (1–5)</label>
+                <input class="input" type="number" name="confidence_rating" value="3" min="1" max="5" />
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="btn btnPrimary" type="submit">Submit attempt</button>
+              <a class="btn" href="/ui/students/{{ student_id }}/dashboard">Dashboard</a>
+            </div>
+          </form>
+        {% else %}
+          <form method="post" action="/ui/attempts" class="form">
+            <input type="hidden" name="student_id" value="{{ student_id }}" />
+            <input type="hidden" name="topic_id" value="{{ topic.id }}" />
+            <input type="hidden" name="question_id" value="{{ question.id }}" />
+
+            <div class="field">
+              <label class="label">Your answer</label>
+              <input class="input" name="answer" placeholder="Type your answer…" required />
+            </div>
+
+            <div class="grid3">
+              <div class="field">
+                <label class="label">Time taken (seconds)</label>
+                <input class="input" type="number" name="time_taken_seconds" value="30" min="0" />
+              </div>
+              <div class="field">
+                <label class="label">Hints used</label>
+                <input class="input" type="number" name="hints_used" value="0" min="0" />
+              </div>
+              <div class="field">
+                <label class="label">Confidence (1–5)</label>
+                <input class="input" type="number" name="confidence_rating" value="3" min="1" max="5" />
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="btn btnPrimary" type="submit">Submit attempt</button>
+              <a class="btn" href="/ui/students/{{ student_id }}/dashboard">Dashboard</a>
+            </div>
+          </form>
+        {% endif %}
+      </div>
+
+      <div class="card">
+        <h2>After-attempt feedback</h2>
+        {% if feedback is none %}
+          <p class="muted">Submit an attempt to see diagnosis and next recommendation.</p>
+          <div class="muted small">This panel is the “adaptive behavior” spotlight for the demo.</div>
+        {% else %}
+          <div class="feedbackHeader">
+            {% if feedback.is_correct %}
+              <span class="badge badgeStrong">Correct</span>
+            {% else %}
+              <span class="badge badgeWeak">Wrong</span>
+            {% endif %}
+            <span class="muted">Correct answer:</span> <span class="mono">{{ feedback.correct_answer }}</span>
+          </div>
+
+          <div class="section">
+            <div class="sectionTitle">Diagnosis</div>
+            <div class="pillRow">
+              <span class="pill pillMono">{{ feedback.diagnosis_label }}</span>
+            </div>
+            <p>{{ feedback.diagnosis_summary }}</p>
+          </div>
+
+          <div class="section">
+            <div class="sectionTitle">Next step</div>
+            <div class="pillRow">
+              <span class="pill pillMono">{{ feedback.recommendation.action }}</span>
+              {% if feedback.recommendation.next_topic_id %}
+                <span class="pill">topic {{ feedback.recommendation.next_topic_id }}</span>
+              {% endif %}
+              {% if feedback.recommendation.question_id %}
+                <span class="pill">question {{ feedback.recommendation.question_id }}</span>
+              {% endif %}
+            </div>
+            <ul class="list">
+              {% for r in feedback.recommendation.rationale %}
+                <li>{{ r }}</li>
+              {% endfor %}
+            </ul>
+            <div class="actions">
+              {% if feedback.recommendation.next_topic_id %}
+                <a class="btn btnPrimary" href="/ui/students/{{ student_id }}/practice/{{ feedback.recommendation.next_topic_id }}">Do next step</a>
+              {% else %}
+                <a class="btn btnPrimary" href="/ui/students/{{ student_id }}/practice/{{ topic.id }}">Keep practicing</a>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="sectionTitle">Hint / explanation</div>
+            <details>
+              <summary>Show hint</summary>
+              <p class="muted">{{ feedback.hint_text or "No hint available." }}</p>
+            </details>
+            <details>
+              <summary>Show explanation</summary>
+              <p class="muted">{{ feedback.explanation_text or "No explanation available." }}</p>
+            </details>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
+

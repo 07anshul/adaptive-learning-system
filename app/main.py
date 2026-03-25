@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from typing import Any, Optional
 
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from app.core.diagnosis import diagnose_attempt
@@ -13,6 +14,7 @@ from app.core.next_step import recommend_next_step
 from app.core.scoring import default_state, update_student_topic_state
 from app.db import connect, init_db
 from app.models.domain import Attempt, Question, StudentTopicState
+from app.ui import router as ui_router
 from app.repo.attempt_repo import (
     insert_attempt,
     list_recent_attempts,
@@ -25,6 +27,8 @@ from app.repo.topic_repo import get_topic, list_topics
 
 
 app = FastAPI(title="Adaptive Learning System (Demo API)")
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+app.include_router(ui_router)
 
 
 def _now() -> datetime:
