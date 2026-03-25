@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Literal
+from typing import Literal, Optional
 
 from pydantic import BaseModel, Field
 
@@ -64,7 +64,7 @@ class Attempt(BaseModel):
     time_taken_seconds: int = Field(ge=0)
     hints_used: int = Field(ge=0)
     confidence_rating: int = Field(ge=1, le=5)
-    self_report_reason: str | None = None
+    self_report_reason: Optional[str] = None
     submitted_at: datetime
 
 
