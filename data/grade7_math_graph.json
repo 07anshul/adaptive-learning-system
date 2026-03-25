@@ -1,0 +1,384 @@
+{
+  "topics": [
+    {
+      "id": "t_numline_rational",
+      "title": "Number line for rational numbers",
+      "description": "Place integers, fractions, and decimals on a number line; compare positions.",
+      "cluster": "Foundations",
+      "difficulty_prior": 0.25,
+      "grade_level": 7,
+      "order_index": 0,
+      "tags": []
+    },
+    {
+      "id": "t_compare_order_rational",
+      "title": "Compare & order rational numbers",
+      "description": "Use symbols and number line reasoning to order integers/fractions/decimals.",
+      "cluster": "Foundations",
+      "difficulty_prior": 0.3,
+      "grade_level": 7,
+      "order_index": 1,
+      "tags": []
+    },
+    {
+      "id": "t_round_estimate",
+      "title": "Rounding & estimation",
+      "description": "Round decimals and estimate results to check reasonableness.",
+      "cluster": "Foundations",
+      "difficulty_prior": 0.3,
+      "grade_level": 7,
+      "order_index": 2,
+      "tags": []
+    },
+    {
+      "id": "t_integer_abs_value",
+      "title": "Absolute value & distance",
+      "description": "Distance from zero; interpret “how far” on number line.",
+      "cluster": "Integers",
+      "difficulty_prior": 0.35,
+      "grade_level": 7,
+      "order_index": 3,
+      "tags": []
+    },
+    {
+      "id": "t_integer_add_sub",
+      "title": "Add & subtract integers",
+      "description": "Compute sums/differences with negatives; interpret with contexts.",
+      "cluster": "Integers",
+      "difficulty_prior": 0.4,
+      "grade_level": 7,
+      "order_index": 4,
+      "tags": []
+    },
+    {
+      "id": "t_integer_mult_div",
+      "title": "Multiply & divide integers",
+      "description": "Sign rules and integer products/quotients in word contexts.",
+      "cluster": "Integers",
+      "difficulty_prior": 0.45,
+      "grade_level": 7,
+      "order_index": 5,
+      "tags": []
+    },
+    {
+      "id": "t_integer_expressions",
+      "title": "Integer expressions",
+      "description": "Evaluate expressions with integers; order of operations.",
+      "cluster": "Integers",
+      "difficulty_prior": 0.45,
+      "grade_level": 7,
+      "order_index": 6,
+      "tags": []
+    },
+    {
+      "id": "t_fraction_concepts",
+      "title": "Fraction meaning & equivalence",
+      "description": "Part-whole, measure, and equivalent fractions.",
+      "cluster": "Fractions",
+      "difficulty_prior": 0.35,
+      "grade_level": 7,
+      "order_index": 7,
+      "tags": []
+    },
+    {
+      "id": "t_simplify_fractions",
+      "title": "Simplify fractions",
+      "description": "Reduce to simplest form using common factors.",
+      "cluster": "Fractions",
+      "difficulty_prior": 0.35,
+      "grade_level": 7,
+      "order_index": 8,
+      "tags": []
+    },
+    {
+      "id": "t_compare_fractions",
+      "title": "Compare fractions",
+      "description": "Common denominators/benchmarks; reason about size.",
+      "cluster": "Fractions",
+      "difficulty_prior": 0.45,
+      "grade_level": 7,
+      "order_index": 9,
+      "tags": []
+    },
+    {
+      "id": "t_fraction_add_sub_like",
+      "title": "Add/subtract fractions (like denominators)",
+      "description": "Combine fractions with same denominator; interpret.",
+      "cluster": "Fractions",
+      "difficulty_prior": 0.45,
+      "grade_level": 7,
+      "order_index": 10,
+      "tags": []
+    },
+    {
+      "id": "t_fraction_add_sub_unlike",
+      "title": "Add/subtract fractions (unlike denominators)",
+      "description": "Find common denominator and combine.",
+      "cluster": "Fractions",
+      "difficulty_prior": 0.55,
+      "grade_level": 7,
+      "order_index": 11,
+      "tags": []
+    },
+    {
+      "id": "t_fraction_mult",
+      "title": "Multiply fractions",
+      "description": "Multiply fractions/mixed numbers; scaling interpretation.",
+      "cluster": "Fractions",
+      "difficulty_prior": 0.55,
+      "grade_level": 7,
+      "order_index": 12,
+      "tags": []
+    },
+    {
+      "id": "t_fraction_div",
+      "title": "Divide fractions",
+      "description": "Division as “how many groups”; invert-and-multiply conceptually.",
+      "cluster": "Fractions",
+      "difficulty_prior": 0.65,
+      "grade_level": 7,
+      "order_index": 13,
+      "tags": []
+    },
+    {
+      "id": "t_decimal_place_value",
+      "title": "Decimal place value",
+      "description": "Tenths/hundredths/thousandths; compare by place value.",
+      "cluster": "Decimals",
+      "difficulty_prior": 0.35,
+      "grade_level": 7,
+      "order_index": 14,
+      "tags": []
+    },
+    {
+      "id": "t_decimal_add_sub",
+      "title": "Add/subtract decimals",
+      "description": "Align decimals; interpret results in context (money/measure).",
+      "cluster": "Decimals",
+      "difficulty_prior": 0.45,
+      "grade_level": 7,
+      "order_index": 15,
+      "tags": []
+    },
+    {
+      "id": "t_decimal_mult",
+      "title": "Multiply decimals",
+      "description": "Multiply with place-value reasoning; scaling.",
+      "cluster": "Decimals",
+      "difficulty_prior": 0.6,
+      "grade_level": 7,
+      "order_index": 16,
+      "tags": []
+    },
+    {
+      "id": "t_decimal_div",
+      "title": "Divide decimals",
+      "description": "Division with decimals; interpret quotient; scaling.",
+      "cluster": "Decimals",
+      "difficulty_prior": 0.7,
+      "grade_level": 7,
+      "order_index": 17,
+      "tags": []
+    },
+    {
+      "id": "t_fraction_decimal_convert",
+      "title": "Convert fractions \u2194 decimals",
+      "description": "Convert common fractions to decimals and back when possible.",
+      "cluster": "Conversions",
+      "difficulty_prior": 0.55,
+      "grade_level": 7,
+      "order_index": 18,
+      "tags": []
+    },
+    {
+      "id": "t_percent_concepts",
+      "title": "Percent meaning",
+      "description": "Percent as \u201cout of 100\u201d; represent visually and numerically.",
+      "cluster": "Percent",
+      "difficulty_prior": 0.45,
+      "grade_level": 7,
+      "order_index": 19,
+      "tags": []
+    },
+    {
+      "id": "t_percent_convert",
+      "title": "Convert fraction/decimal/percent",
+      "description": "Convert among forms; choose convenient representation.",
+      "cluster": "Conversions",
+      "difficulty_prior": 0.55,
+      "grade_level": 7,
+      "order_index": 20,
+      "tags": []
+    },
+    {
+      "id": "t_percent_of_quantity",
+      "title": "Find percent of a quantity",
+      "description": "Compute discounts/tax/tips; use multiplication strategies.",
+      "cluster": "Percent",
+      "difficulty_prior": 0.6,
+      "grade_level": 7,
+      "order_index": 21,
+      "tags": []
+    },
+    {
+      "id": "t_percent_change",
+      "title": "Percent increase/decrease",
+      "description": "Compare original vs new; interpret growth/decline.",
+      "cluster": "Percent",
+      "difficulty_prior": 0.7,
+      "grade_level": 7,
+      "order_index": 22,
+      "tags": []
+    },
+    {
+      "id": "t_ratio_concepts",
+      "title": "Ratio concepts",
+      "description": "Part-part and part-whole ratios; represent multiple ways.",
+      "cluster": "Ratios",
+      "difficulty_prior": 0.45,
+      "grade_level": 7,
+      "order_index": 23,
+      "tags": []
+    },
+    {
+      "id": "t_unit_rate",
+      "title": "Unit rates",
+      "description": "Rate per 1 unit; interpret with real contexts.",
+      "cluster": "Ratios",
+      "difficulty_prior": 0.55,
+      "grade_level": 7,
+      "order_index": 24,
+      "tags": []
+    },
+    {
+      "id": "t_proportions",
+      "title": "Proportional relationships",
+      "description": "Recognize proportionality; constant of proportionality.",
+      "cluster": "Ratios",
+      "difficulty_prior": 0.65,
+      "grade_level": 7,
+      "order_index": 25,
+      "tags": []
+    },
+    {
+      "id": "t_scale_drawings",
+      "title": "Scale drawings & maps",
+      "description": "Use scale factors; interpret distances on maps.",
+      "cluster": "Ratios",
+      "difficulty_prior": 0.65,
+      "grade_level": 7,
+      "order_index": 26,
+      "tags": []
+    },
+    {
+      "id": "t_simple_equations_1step",
+      "title": "One-step equations",
+      "description": "Solve x + a = b, ax = b with inverse operations.",
+      "cluster": "Algebra",
+      "difficulty_prior": 0.5,
+      "grade_level": 7,
+      "order_index": 27,
+      "tags": []
+    },
+    {
+      "id": "t_expressions_distribute",
+      "title": "Expressions & distributive property",
+      "description": "Simplify expressions; distribute; combine like terms (basic).",
+      "cluster": "Algebra",
+      "difficulty_prior": 0.6,
+      "grade_level": 7,
+      "order_index": 28,
+      "tags": []
+    },
+    {
+      "id": "t_simple_equations_2step",
+      "title": "Two-step equations",
+      "description": "Solve ax + b = c; check solutions.",
+      "cluster": "Algebra",
+      "difficulty_prior": 0.65,
+      "grade_level": 7,
+      "order_index": 29,
+      "tags": []
+    },
+    {
+      "id": "t_geometry_angle_basics",
+      "title": "Angle basics",
+      "description": "Identify/measure angles; complementary/supplementary ideas.",
+      "cluster": "Geometry",
+      "difficulty_prior": 0.35,
+      "grade_level": 7,
+      "order_index": 30,
+      "tags": []
+    },
+    {
+      "id": "t_area_perimeter",
+      "title": "Area & perimeter (rectangles/triangles)",
+      "description": "Compute area/perimeter; apply in word problems.",
+      "cluster": "Geometry",
+      "difficulty_prior": 0.55,
+      "grade_level": 7,
+      "order_index": 31,
+      "tags": []
+    },
+    {
+      "id": "t_circle_basics",
+      "title": "Circles (radius, diameter, circumference intro)",
+      "description": "Understand circle parts; simple circumference problems.",
+      "cluster": "Geometry",
+      "difficulty_prior": 0.6,
+      "grade_level": 7,
+      "order_index": 32,
+      "tags": []
+    },
+    {
+      "id": "t_volume_rect_prism",
+      "title": "Volume of rectangular prisms",
+      "description": "Volume as packing; compute V = lwh with units.",
+      "cluster": "Geometry",
+      "difficulty_prior": 0.65,
+      "grade_level": 7,
+      "order_index": 33,
+      "tags": []
+    }
+  ],
+  "edges": [
+    { "id": "e_001", "source": "t_numline_rational", "target": "t_compare_order_rational", "edge_type": "prerequisite", "weight": 0.7 },
+    { "id": "e_002", "source": "t_numline_rational", "target": "t_integer_abs_value", "edge_type": "prerequisite", "weight": 0.55 },
+    { "id": "e_003", "source": "t_integer_abs_value", "target": "t_integer_add_sub", "edge_type": "prerequisite", "weight": 0.35 },
+    { "id": "e_004", "source": "t_integer_add_sub", "target": "t_integer_mult_div", "edge_type": "prerequisite", "weight": 0.4 },
+    { "id": "e_005", "source": "t_integer_add_sub", "target": "t_integer_expressions", "edge_type": "prerequisite", "weight": 0.55 },
+    { "id": "e_006", "source": "t_integer_mult_div", "target": "t_integer_expressions", "edge_type": "prerequisite", "weight": 0.55 },
+    { "id": "e_007", "source": "t_fraction_concepts", "target": "t_simplify_fractions", "edge_type": "prerequisite", "weight": 0.65 },
+    { "id": "e_008", "source": "t_fraction_concepts", "target": "t_compare_fractions", "edge_type": "prerequisite", "weight": 0.55 },
+    { "id": "e_009", "source": "t_simplify_fractions", "target": "t_fraction_add_sub_like", "edge_type": "prerequisite", "weight": 0.45 },
+    { "id": "e_010", "source": "t_fraction_add_sub_like", "target": "t_fraction_add_sub_unlike", "edge_type": "prerequisite", "weight": 0.65 },
+    { "id": "e_011", "source": "t_simplify_fractions", "target": "t_fraction_mult", "edge_type": "prerequisite", "weight": 0.35 },
+    { "id": "e_012", "source": "t_fraction_mult", "target": "t_fraction_div", "edge_type": "prerequisite", "weight": 0.55 },
+    { "id": "e_013", "source": "t_decimal_place_value", "target": "t_decimal_add_sub", "edge_type": "prerequisite", "weight": 0.65 },
+    { "id": "e_014", "source": "t_decimal_add_sub", "target": "t_decimal_mult", "edge_type": "prerequisite", "weight": 0.4 },
+    { "id": "e_015", "source": "t_decimal_mult", "target": "t_decimal_div", "edge_type": "prerequisite", "weight": 0.45 },
+    { "id": "e_016", "source": "t_fraction_concepts", "target": "t_fraction_decimal_convert", "edge_type": "prerequisite", "weight": 0.45 },
+    { "id": "e_017", "source": "t_decimal_place_value", "target": "t_fraction_decimal_convert", "edge_type": "prerequisite", "weight": 0.35 },
+    { "id": "e_018", "source": "t_fraction_decimal_convert", "target": "t_percent_convert", "edge_type": "prerequisite", "weight": 0.55 },
+    { "id": "e_019", "source": "t_percent_concepts", "target": "t_percent_convert", "edge_type": "prerequisite", "weight": 0.55 },
+    { "id": "e_020", "source": "t_percent_convert", "target": "t_percent_of_quantity", "edge_type": "prerequisite", "weight": 0.65 },
+    { "id": "e_021", "source": "t_percent_of_quantity", "target": "t_percent_change", "edge_type": "prerequisite", "weight": 0.55 },
+    { "id": "e_022", "source": "t_ratio_concepts", "target": "t_unit_rate", "edge_type": "prerequisite", "weight": 0.55 },
+    { "id": "e_023", "source": "t_unit_rate", "target": "t_proportions", "edge_type": "prerequisite", "weight": 0.55 },
+    { "id": "e_024", "source": "t_proportions", "target": "t_scale_drawings", "edge_type": "prerequisite", "weight": 0.55 },
+    { "id": "e_025", "source": "t_expressions_distribute", "target": "t_simple_equations_2step", "edge_type": "prerequisite", "weight": 0.35 },
+    { "id": "e_026", "source": "t_simple_equations_1step", "target": "t_simple_equations_2step", "edge_type": "prerequisite", "weight": 0.7 },
+    { "id": "e_027", "source": "t_round_estimate", "target": "t_percent_of_quantity", "edge_type": "prerequisite", "weight": 0.25 },
+    { "id": "e_028", "source": "t_geometry_angle_basics", "target": "t_area_perimeter", "edge_type": "prerequisite", "weight": 0.2 },
+    { "id": "e_029", "source": "t_area_perimeter", "target": "t_volume_rect_prism", "edge_type": "prerequisite", "weight": 0.35 },
+    { "id": "e_030", "source": "t_decimal_mult", "target": "t_percent_of_quantity", "edge_type": "prerequisite", "weight": 0.25 },
+    { "id": "e_031", "source": "t_compare_order_rational", "target": "t_round_estimate", "edge_type": "prerequisite", "weight": 0.25 },
+
+    { "id": "e_032", "source": "t_compare_order_rational", "target": "t_compare_fractions", "edge_type": "encompassing", "weight": 0.3 },
+    { "id": "e_033", "source": "t_compare_order_rational", "target": "t_decimal_place_value", "edge_type": "encompassing", "weight": 0.25 },
+    { "id": "e_034", "source": "t_percent_convert", "target": "t_percent_of_quantity", "edge_type": "encompassing", "weight": 0.25 },
+    { "id": "e_035", "source": "t_proportions", "target": "t_percent_change", "edge_type": "encompassing", "weight": 0.2 },
+    { "id": "e_036", "source": "t_proportions", "target": "t_scale_drawings", "edge_type": "encompassing", "weight": 0.25 }
+  ]
+}
+

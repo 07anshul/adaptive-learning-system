@@ -12,9 +12,12 @@ QuestionType = Literal["mcq", "short"]
 
 class Topic(BaseModel):
     id: str
-    name: str
+    title: str
+    description: str
+    cluster: str
     grade_level: int = Field(ge=1, le=12)
     order_index: int = Field(ge=0)
+    difficulty_prior: float = Field(ge=0.0, le=1.0)
     tags: list[str] = Field(default_factory=list)
 
 
@@ -23,6 +26,7 @@ class TopicEdge(BaseModel):
     from_topic_id: str
     to_topic_id: str
     edge_type: EdgeType
+    weight: float = Field(ge=0.0, le=1.0)
 
 
 class Question(BaseModel):

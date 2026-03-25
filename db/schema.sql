@@ -6,9 +6,12 @@ PRAGMA foreign_keys = ON;
 -- ---------- Topic ----------
 CREATE TABLE IF NOT EXISTS topics (
   id TEXT PRIMARY KEY,
-  name TEXT NOT NULL,
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  cluster TEXT NOT NULL,
   grade_level INTEGER NOT NULL,
   order_index INTEGER NOT NULL,
+  difficulty_prior REAL NOT NULL CHECK (difficulty_prior BETWEEN 0.0 AND 1.0),
   tags_json TEXT NOT NULL DEFAULT '[]' -- JSON array of strings
 );
 
@@ -18,6 +21,7 @@ CREATE TABLE IF NOT EXISTS topic_edges (
   from_topic_id TEXT NOT NULL,
   to_topic_id TEXT NOT NULL,
   edge_type TEXT NOT NULL CHECK (edge_type IN ('prerequisite', 'encompassing')),
+  weight REAL NOT NULL DEFAULT 0.5 CHECK (weight BETWEEN 0.0 AND 1.0),
   FOREIGN KEY (from_topic_id) REFERENCES topics(id) ON DELETE CASCADE,
   FOREIGN KEY (to_topic_id) REFERENCES topics(id) ON DELETE CASCADE
 );
