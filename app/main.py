@@ -9,7 +9,7 @@ from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel, Field
 
 from app.core.diagnosis import diagnose_attempt
-from app.core.recommend import Recommendation, recommend_next
+from app.core.next_step import recommend_next_step
 from app.core.scoring import default_state, update_student_topic_state
 from app.db import connect, init_db
 from app.models.domain import Attempt, Question, StudentTopicState
@@ -175,19 +175,18 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
             recent_questions=qmap,
         )
 
-        # Recommendation
-        # For demo simplicity, suggest questions from the same topic if present.
-        qids = [qq.id for qq in list_questions_by_topic(conn, topic_id)]
-        weakest_prereq_id = None
-        if prereq_states:
-            weakest_prereq_id = min(prereq_states, key=lambda s: s.mastery_score).topic_id
-
-        rec = recommend_next(
-            topic_id=topic_id,
-            diagnosis=dx,
+        # Next-step recommendation (allowed actions only)
+        topic_ids_in_order = [t.id for t in list_topics(conn)]
+        prereq_ids = get_prereq_topic_ids(conn, topic_id)
+        available_qs = list_questions_by_topic(conn, topic_id)
+        rec = recommend_next_step(
+            latest_attempt=att,
+            latest_question=q,
+            diagnosis_label=dx.label,
             topic_state=upd.new,
-            weakest_prereq_topic_id=weakest_prereq_id,
-            available_question_ids=qids,
+            prereq_topic_ids=prereq_ids,
+            topics_in_order=topic_ids_in_order,
+            available_questions=available_qs,
         )
 
         return AttemptCreateResponse(
@@ -205,10 +204,11 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
                 "evidence": dx.evidence,
             },
             recommendation={
-                "next_topic_id": rec.next_topic_id,
                 "action": rec.action,
+                "next_topic_id": rec.next_topic_id,
+                "question_id": rec.question_id,
                 "rationale": rec.rationale,
-                "suggested_question_ids": rec.suggested_question_ids,
+                "payload": rec.payload,
             },
         )
     finally:
@@ -270,21 +270,46 @@ def _dashboard_recommendation(conn, student_id: str) -> dict[str, Any]:
     weakest = min(rows, key=lambda r: float(r["mastery_score"]))
     topic_id = weakest["topic_id"]
     st = get_student_topic_state(conn, student_id=student_id, topic_id=topic_id) or default_state(student_id, topic_id)
-    # Fake a minimal diagnosis for dashboard-only rec
-    dx = {"label": "direct_topic_weakness", "summary": "Weakest topic by mastery.", "evidence": {}}
-    qids = [qq.id for qq in list_questions_by_topic(conn, topic_id)]
-    rec = recommend_next(
+    # Minimal: pick a first question in the weakest topic.
+    available_qs = list_questions_by_topic(conn, topic_id)
+    q = available_qs[0] if available_qs else None
+    if q is None:
+        return {
+            "action": "retry_similar_question",
+            "next_topic_id": topic_id,
+            "question_id": None,
+            "rationale": ["Weakest topic by mastery, but no questions are seeded yet."],
+            "payload": {},
+        }
+    fake_attempt = Attempt(
+        id="att_dashboard",
+        student_id=student_id,
+        question_id=q.id,
         topic_id=topic_id,
-        diagnosis=type("Dx", (), dx)(),  # minimal duck-typed object
+        correctness=False,
+        time_taken_seconds=0,
+        hints_used=0,
+        confidence_rating=3,
+        self_report_reason=None,
+        submitted_at=_now(),
+    )
+    topic_ids_in_order = [t.id for t in list_topics(conn)]
+    prereq_ids = get_prereq_topic_ids(conn, topic_id)
+    rec = recommend_next_step(
+        latest_attempt=fake_attempt,
+        latest_question=q,
+        diagnosis_label="direct_topic_weakness",
         topic_state=st,
-        weakest_prereq_topic_id=None,
-        available_question_ids=qids,
+        prereq_topic_ids=prereq_ids,
+        topics_in_order=topic_ids_in_order,
+        available_questions=available_qs,
     )
     return {
-        "next_topic_id": rec.next_topic_id,
         "action": rec.action,
+        "next_topic_id": rec.next_topic_id,
+        "question_id": rec.question_id,
         "rationale": rec.rationale,
-        "suggested_question_ids": rec.suggested_question_ids,
+        "payload": rec.payload,
     }
 
 
