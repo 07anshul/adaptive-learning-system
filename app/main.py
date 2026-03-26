@@ -287,6 +287,26 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
             next_topic_title=next_topic_title,
         )
 
+        # Internal/audit: store the *actual* recommendation shown at attempt time.
+        with conn:
+            conn.execute(
+                """
+                INSERT OR REPLACE INTO attempt_recommendations
+                  (attempt_id, student_id, topic_id, recommendation_action, next_topic_id, question_id, created_at)
+                VALUES
+                  (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    att.id,
+                    att.student_id,
+                    att.topic_id,
+                    rec.action,
+                    rec.next_topic_id,
+                    rec.question_id,
+                    _iso(_now()),
+                ),
+            )
+
         return AttemptCreateResponse(
             attempt={
                 **att.model_dump(),

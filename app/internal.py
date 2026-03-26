@@ -25,6 +25,20 @@ templates = Jinja2Templates(directory="app/templates")
 # Internal/admin demo metrics
 # -----------------------------
 
+# Student IDs used by the simulator (demo/test only).
+# Important: the simulator oversamples weak topics for some profiles to make differences visible.
+SIMULATED_STUDENT_IDS = {
+    "stu_strong_overall",
+    "stu_weak_in_fractions",
+    "stu_good_but_slow",
+    "stu_low_confidence",
+    "stu_transfer_weak",
+    "stu_hint_dependent",
+    "stu_integer_strong",
+    "stu_percent_struggles",
+}
+FRESH_STUDENT_ID = "stu_fresh"
+
 # Mastery definition (demo thresholds; deterministic + explainable).
 MASTERY_SCORE_MIN = 0.75
 MASTERY_FRAGILITY_MAX = 0.30
@@ -148,6 +162,11 @@ def _compute_internal_metrics(conn) -> dict[str, Any]:
     total_attempts = len(attempts)
     total_students = len({a.student_id for a in attempts})
 
+    # Data source distinction for auditability
+    simulated_attempts = sum(1 for a in attempts if a.student_id in SIMULATED_STUDENT_IDS)
+    fresh_manual_attempts = sum(1 for a in attempts if a.student_id == FRESH_STUDENT_ID)
+    other_attempts = total_attempts - simulated_attempts - fresh_manual_attempts
+
     # Topic titles (for human-readable admin tables)
     topic_title_by_id = {t.id: t.title for t in list_topics(conn)}
 
@@ -171,6 +190,17 @@ def _compute_internal_metrics(conn) -> dict[str, Any]:
     # ---- 3) Recommendation effectiveness (approx via replay) ----
     rec_used_by_action: dict[str, int] = {}
     rec_success_by_action: dict[str, int] = {}
+    rec_action_source_counts = {"stored": 0, "recomputed": 0}
+    low_data_threshold = 10  # used for subtle "low data" labels in UI
+
+    # Stored recommendation map (when available)
+    stored_recs = conn.execute(
+        """
+        SELECT attempt_id, recommendation_action
+        FROM attempt_recommendations
+        """
+    ).fetchall()
+    stored_action_by_attempt_id = {r["attempt_id"]: r["recommendation_action"] for r in stored_recs}
 
     for (student_id, topic_id), seq in by_st_topic.items():
         if not seq:
@@ -307,16 +337,22 @@ def _compute_internal_metrics(conn) -> dict[str, Any]:
                     break
             latest_question = latest_question or q_like
 
-            rec = recommend_next_step(
-                latest_attempt=att_like,
-                latest_question=latest_question,
-                diagnosis_label=dx.label,
-                topic_state=effective_state,
-                prereq_topic_ids=prereq_ids,
-                topics_in_order=topics_in_order,
-                available_questions=available_qs,
-            )
-            action = rec.action
+            # Use the stored recommendation action if present; otherwise recompute.
+            action = stored_action_by_attempt_id.get(a.attempt_id)
+            if action is not None:
+                rec_action_source_counts["stored"] += 1
+            else:
+                rec = recommend_next_step(
+                    latest_attempt=att_like,
+                    latest_question=latest_question,
+                    diagnosis_label=dx.label,
+                    topic_state=effective_state,
+                    prereq_topic_ids=prereq_ids,
+                    topics_in_order=topics_in_order,
+                    available_questions=available_qs,
+                )
+                action = rec.action
+                rec_action_source_counts["recomputed"] += 1
             rec_used_by_action[action] = rec_used_by_action.get(action, 0) + 1
 
             # Look ahead next 1–2 attempts for improvements.
@@ -412,6 +448,11 @@ def _compute_internal_metrics(conn) -> dict[str, Any]:
             "fragile_success_count": fragile_correct_total,
             "recommendation_overall_used": rec_used_total,
             "recommendation_overall_improvement_rate": rec_overall_rate,
+            "data_sources": {
+                "simulated_attempts": simulated_attempts,
+                "fresh_manual_attempts": fresh_manual_attempts,
+                "other_attempts": other_attempts,
+            },
         },
         "time_to_mastery": {
             "definition": {
@@ -435,14 +476,22 @@ def _compute_internal_metrics(conn) -> dict[str, Any]:
         },
         "recommendation_effectiveness": {
             "approximation_note": (
-                "Recommendations are not persisted per attempt. "
-                "This section recomputes the engine's recommendation during a replay of attempts, "
-                "then checks whether the next 1–2 attempts show any improvement."
+                "Recommendation effectiveness uses the next 1–2 attempts on the same topic for the same student. "
+                "If the actual recommendation was stored at attempt time, we use it; otherwise we recompute it during replay."
             ),
             "overall_improvement_rate": rec_overall_rate,
             "best": best_rec,
             "weakest": weakest_rec,
             "rows": rec_rows,
+            "action_source_counts": rec_action_source_counts,
+        },
+        "audit_notes": {
+            "simulated_students": sorted(SIMULATED_STUDENT_IDS),
+            "simulation_note": (
+                "Demo simulations intentionally oversample weak topics for some profiles "
+                "and focus practice for the strong-overall profile to make dashboard differences visible."
+            ),
+            "low_data_threshold": low_data_threshold,
         },
     }
 

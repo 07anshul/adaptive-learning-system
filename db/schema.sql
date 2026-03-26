@@ -87,6 +87,25 @@ CREATE INDEX IF NOT EXISTS idx_attempts_question ON attempts(question_id);
 CREATE INDEX IF NOT EXISTS idx_attempts_topic ON attempts(topic_id);
 CREATE INDEX IF NOT EXISTS idx_attempts_submitted_at ON attempts(submitted_at);
 
+-- ---------- AttemptRecommendation (internal/audit) ----------
+-- Store the *actual* recommendation shown at attempt time.
+-- This enables internal analytics to avoid recomputing recommendations during replay.
+CREATE TABLE IF NOT EXISTS attempt_recommendations (
+  attempt_id TEXT PRIMARY KEY,
+  student_id TEXT NOT NULL,
+  topic_id TEXT NOT NULL,
+  recommendation_action TEXT NOT NULL,
+  next_topic_id TEXT NULL,
+  question_id TEXT NULL,
+  created_at TEXT NOT NULL,
+  FOREIGN KEY (attempt_id) REFERENCES attempts(id) ON DELETE CASCADE,
+  FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
+  FOREIGN KEY (topic_id) REFERENCES topics(id) ON DELETE RESTRICT
+);
+
+CREATE INDEX IF NOT EXISTS idx_attempt_recs_student ON attempt_recommendations(student_id);
+CREATE INDEX IF NOT EXISTS idx_attempt_recs_topic ON attempt_recommendations(topic_id);
+
 -- ---------- StudentTopicState ----------
 CREATE TABLE IF NOT EXISTS student_topic_state (
   student_id TEXT NOT NULL,

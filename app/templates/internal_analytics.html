@@ -4,7 +4,7 @@
   <section class="panel">
     <h1>Internal/Admin analytics</h1>
     <p class="muted">
-      Internal only. Not part of the student-facing demo. Use this to verify population calibration updates from aggregate attempts.
+      <strong>Internal validation only (demo).</strong> Not part of the student-facing demo. Use this to sanity-check calibration + learning behavior.
     </p>
   </section>
 
@@ -17,6 +17,11 @@
 
   <section class="panel">
     <h2>SECTION 1 — Summary cards</h2>
+    <div class="muted small" style="margin-top: 6px;">
+      Data sources: simulated attempts {{ metrics.summary.data_sources.simulated_attempts }},
+      manual fresh-student attempts {{ metrics.summary.data_sources.fresh_manual_attempts }},
+      other/real-user attempts {{ metrics.summary.data_sources.other_attempts }}.
+    </div>
     <div class="grid3" style="margin-top: 10px;">
       <div class="card">
         <div class="muted small">Total attempts</div>
@@ -152,6 +157,9 @@
                     <td class="muted">{{ r.topic_id }}</td>
                     <td><strong>{{ "%.0f"|format(100.0 * (r.fragile_success_rate or 0)) }}%</strong></td>
                     <td>{{ r.fragile_correct_attempts }} / {{ r.correct_attempts }}</td>
+                    {% if r.correct_attempts < metrics.audit_notes.low_data_threshold %}
+                      <td class="muted small"><span class="pill">low data</span></td>
+                    {% endif %}
                   </tr>
                 {% endfor %}
               </tbody>
@@ -173,6 +181,7 @@
                 <th>Topic</th>
                 <th>Fragile rate</th>
                 <th>Fragile / correct</th>
+                <th class="muted"> </th>
               </tr>
             </thead>
             <tbody>
@@ -181,6 +190,9 @@
                   <td class="muted">{{ r.topic_id }}</td>
                   <td>{{ "%.0f"|format(100.0 * (r.fragile_success_rate or 0)) }}%</td>
                   <td>{{ r.fragile_correct_attempts }} / {{ r.correct_attempts }}</td>
+                  <td class="muted small">
+                    {% if r.correct_attempts < metrics.audit_notes.low_data_threshold %}<span class="pill">low data</span>{% endif %}
+                  </td>
                 </tr>
               {% endfor %}
             </tbody>
@@ -193,6 +205,10 @@
   <section class="panel">
     <h2>SECTION 4 — Recommendation effectiveness</h2>
     <div class="muted">{{ metrics.recommendation_effectiveness.approximation_note }}</div>
+    <div class="muted small" style="margin-top: 6px;">
+      Action source: stored {{ metrics.recommendation_effectiveness.action_source_counts.stored }},
+      recomputed {{ metrics.recommendation_effectiveness.action_source_counts.recomputed }}.
+    </div>
 
     <div class="grid2" style="margin-top: 10px;">
       <div class="card">
@@ -233,6 +249,7 @@
                 <th>Used</th>
                 <th>Improved</th>
                 <th>Improvement rate</th>
+                <th class="muted"> </th>
               </tr>
             </thead>
             <tbody>
@@ -242,6 +259,9 @@
                   <td>{{ r.used }}</td>
                   <td>{{ r.success }}</td>
                   <td>{{ "%.0f"|format(100.0 * (r.improvement_rate or 0)) }}%</td>
+                  <td class="muted small">
+                    {% if r.used < metrics.audit_notes.low_data_threshold %}<span class="pill">low data</span>{% endif %}
+                  </td>
                 </tr>
               {% endfor %}
             </tbody>
@@ -261,6 +281,13 @@
       <li><strong>Recommendation effectiveness (approx)</strong>: recomputed during replay (recommendations are not stored per attempt); “improved” means at least one of correctness/time/hints/mastery/fragility improved within the next 1–2 attempts in the same topic.</li>
     </ul>
     <div class="muted small">These are internal demo validation metrics, not rigorous research metrics.</div>
+    <div class="section">
+      <div class="sectionTitle">Simulation caveats (demo)</div>
+      <div class="muted small">
+        Simulated student profiles: <span class="mono">{{ metrics.audit_notes.simulated_students|join(", ") }}</span>.
+        {{ metrics.audit_notes.simulation_note }}
+      </div>
+    </div>
   </section>
 
   <section class="panel">

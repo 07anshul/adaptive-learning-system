@@ -423,6 +423,26 @@ def ui_submit_attempt(
             next_topic_title=topic.title if rec.next_topic_id == topic.id else None,
         )
 
+        # Internal/audit: store the *actual* recommendation shown at attempt time.
+        with conn:
+            conn.execute(
+                """
+                INSERT OR REPLACE INTO attempt_recommendations
+                  (attempt_id, student_id, topic_id, recommendation_action, next_topic_id, question_id, created_at)
+                VALUES
+                  (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    att.id,
+                    att.student_id,
+                    att.topic_id,
+                    rec.action,
+                    rec.next_topic_id,
+                    rec.question_id,
+                    _iso(_now()),
+                ),
+            )
+
         feedback = {
             "is_correct": correctness,
             "correct_answer": q.correct_answer,
