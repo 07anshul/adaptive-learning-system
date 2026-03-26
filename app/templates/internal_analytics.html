@@ -9,6 +9,261 @@
   </section>
 
   <section class="panel">
+    <h2>Learning efficiency (demo metrics)</h2>
+    <div class="muted">
+      Admin-only validation metrics derived from attempts and replayed topic-state updates. Deterministic + interpretable.
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>SECTION 1 — Summary cards</h2>
+    <div class="grid3" style="margin-top: 10px;">
+      <div class="card">
+        <div class="muted small">Total attempts</div>
+        <div style="font-size: 28px; font-weight: 900; margin-top: 6px;">{{ metrics.summary.total_attempts }}</div>
+      </div>
+      <div class="card">
+        <div class="muted small">Total students</div>
+        <div style="font-size: 28px; font-weight: 900; margin-top: 6px;">{{ metrics.summary.total_students }}</div>
+      </div>
+      <div class="card">
+        <div class="muted small">Topics reaching mastery</div>
+        <div style="font-size: 28px; font-weight: 900; margin-top: 6px;">{{ metrics.summary.topics_reaching_mastery }}</div>
+        <div class="muted small">Count of topics where at least one student reached mastery.</div>
+      </div>
+      <div class="card">
+        <div class="muted small">Fragile correct attempts</div>
+        <div style="font-size: 28px; font-weight: 900; margin-top: 6px;">{{ metrics.summary.fragile_success_count }}</div>
+      </div>
+      <div class="card">
+        <div class="muted small">Overall recommendation effectiveness (approx)</div>
+        {% if metrics.summary.recommendation_overall_improvement_rate is not none %}
+          <div style="font-size: 28px; font-weight: 900; margin-top: 6px;">
+            {{ "%.0f"|format(100.0 * metrics.summary.recommendation_overall_improvement_rate) }}%
+          </div>
+          <div class="muted small">Across {{ metrics.summary.recommendation_overall_used }} replayed recommendations.</div>
+        {% else %}
+          <div class="muted" style="margin-top: 8px;">Not enough data yet.</div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>SECTION 2 — Time to mastery</h2>
+    <div class="muted">
+      Mastery definition: mastery_score ≥ {{ metrics.time_to_mastery.definition.mastery_score_min }}
+      and fragility_score ≤ {{ metrics.time_to_mastery.definition.fragility_score_max }}.
+    </div>
+
+    <div class="grid2" style="margin-top: 10px;">
+      <div class="card">
+        <div class="sectionTitle">Fastest mastery topic</div>
+        {% if metrics.time_to_mastery.fastest_topics %}
+          {% set f = metrics.time_to_mastery.fastest_topics[0] %}
+          <div style="font-size: 16px; font-weight: 900; margin-top: 6px;">{{ f.topic_title }}</div>
+          <div class="muted small">{{ f.topic_id }}</div>
+          <div class="pillRow" style="margin-top: 10px;">
+            <span class="pill"><span class="strong">{{ "%.2f"|format(f.avg_attempts_to_mastery) }}</span> avg attempts</span>
+            <span class="pill"><span class="strong">{{ "%.1f"|format((f.avg_time_to_mastery_seconds or 0) / 60.0) }}</span> avg minutes</span>
+            <span class="pill"><span class="strong">{{ f.students_mastered }}</span> mastered</span>
+          </div>
+        {% else %}
+          <div class="muted" style="margin-top: 8px;">No mastered topics yet.</div>
+        {% endif %}
+      </div>
+
+      <div class="card">
+        <div class="sectionTitle">Slowest mastery topic</div>
+        {% if metrics.time_to_mastery.slowest_topics %}
+          {% set s = metrics.time_to_mastery.slowest_topics[0] %}
+          <div style="font-size: 16px; font-weight: 900; margin-top: 6px;">{{ s.topic_title }}</div>
+          <div class="muted small">{{ s.topic_id }}</div>
+          <div class="pillRow" style="margin-top: 10px;">
+            <span class="pill"><span class="strong">{{ "%.2f"|format(s.avg_attempts_to_mastery) }}</span> avg attempts</span>
+            <span class="pill"><span class="strong">{{ "%.1f"|format((s.avg_time_to_mastery_seconds or 0) / 60.0) }}</span> avg minutes</span>
+            <span class="pill"><span class="strong">{{ s.students_mastered }}</span> mastered</span>
+          </div>
+        {% else %}
+          <div class="muted" style="margin-top: 8px;">No mastered topics yet.</div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if metrics.time_to_mastery.by_topic %}
+      <div class="section" style="margin-top: 10px;">
+        <div class="sectionTitle">Average attempts/time to mastery by topic</div>
+        <div class="table-wrap">
+          <table class="dataTable">
+            <thead>
+              <tr>
+                <th>Topic</th>
+                <th>Mastery count</th>
+                <th>Avg attempts</th>
+                <th>Avg time (min)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for r in metrics.time_to_mastery.by_topic %}
+                <tr>
+                  <td>
+                    <strong>{{ r.topic_title }}</strong>
+                    <div class="muted small">{{ r.topic_id }}</div>
+                  </td>
+                  <td>{{ r.students_mastered }}</td>
+                  <td>{{ "%.2f"|format(r.avg_attempts_to_mastery) }}</td>
+                  <td>{{ "%.1f"|format((r.avg_time_to_mastery_seconds or 0) / 60.0) }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {% else %}
+      <div class="muted" style="margin-top: 10px;">No time-to-mastery rows yet (no topic hit mastery thresholds).</div>
+    {% endif %}
+  </section>
+
+  <section class="panel">
+    <h2>SECTION 3 — Fragility metrics</h2>
+    <div class="muted">Fragile success = correct, but at least one shaky signal (slow / hints / low confidence / high fragility state).</div>
+
+    <div class="grid2" style="margin-top: 10px;">
+      <div class="card">
+        <div class="sectionTitle">Total fragile correct attempts</div>
+        <div style="font-size: 28px; font-weight: 900; margin-top: 6px;">{{ metrics.fragility_metrics.fragile_correct_total }}</div>
+        <div class="muted small">Across all students/topics.</div>
+      </div>
+      <div class="card">
+        <div class="sectionTitle">Top fragile topics</div>
+        {% if metrics.fragility_metrics.highest_fragility_topics %}
+          <div class="table-wrap">
+            <table class="dataTable">
+              <thead>
+                <tr>
+                  <th>Topic</th>
+                  <th>Fragile rate</th>
+                  <th>Fragile / correct</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for r in metrics.fragility_metrics.highest_fragility_topics %}
+                  <tr>
+                    <td class="muted">{{ r.topic_id }}</td>
+                    <td><strong>{{ "%.0f"|format(100.0 * (r.fragile_success_rate or 0)) }}%</strong></td>
+                    <td>{{ r.fragile_correct_attempts }} / {{ r.correct_attempts }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% else %}
+          <div class="muted" style="margin-top: 8px;">No correct attempts yet.</div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if metrics.fragility_metrics.by_topic %}
+      <div class="section" style="margin-top: 10px;">
+        <div class="sectionTitle">Fragile success rate by topic</div>
+        <div class="table-wrap">
+          <table class="dataTable">
+            <thead>
+              <tr>
+                <th>Topic</th>
+                <th>Fragile rate</th>
+                <th>Fragile / correct</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for r in metrics.fragility_metrics.by_topic %}
+                <tr>
+                  <td class="muted">{{ r.topic_id }}</td>
+                  <td>{{ "%.0f"|format(100.0 * (r.fragile_success_rate or 0)) }}%</td>
+                  <td>{{ r.fragile_correct_attempts }} / {{ r.correct_attempts }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {% endif %}
+  </section>
+
+  <section class="panel">
+    <h2>SECTION 4 — Recommendation effectiveness</h2>
+    <div class="muted">{{ metrics.recommendation_effectiveness.approximation_note }}</div>
+
+    <div class="grid2" style="margin-top: 10px;">
+      <div class="card">
+        <div class="sectionTitle">Best performing recommendation</div>
+        {% if metrics.recommendation_effectiveness.best %}
+          <div style="font-size: 16px; font-weight: 900; margin-top: 6px;">{{ metrics.recommendation_effectiveness.best.action }}</div>
+          <div class="pillRow" style="margin-top: 10px;">
+            <span class="pill"><span class="strong">{{ metrics.recommendation_effectiveness.best.used }}</span> used</span>
+            <span class="pill"><span class="strong">{{ "%.0f"|format(100.0 * (metrics.recommendation_effectiveness.best.improvement_rate or 0)) }}%</span> improved</span>
+          </div>
+        {% else %}
+          <div class="muted" style="margin-top: 8px;">Not enough data yet.</div>
+        {% endif %}
+      </div>
+
+      <div class="card">
+        <div class="sectionTitle">Weakest performing recommendation</div>
+        {% if metrics.recommendation_effectiveness.weakest %}
+          <div style="font-size: 16px; font-weight: 900; margin-top: 6px;">{{ metrics.recommendation_effectiveness.weakest.action }}</div>
+          <div class="pillRow" style="margin-top: 10px;">
+            <span class="pill"><span class="strong">{{ metrics.recommendation_effectiveness.weakest.used }}</span> used</span>
+            <span class="pill"><span class="strong">{{ "%.0f"|format(100.0 * (metrics.recommendation_effectiveness.weakest.improvement_rate or 0)) }}%</span> improved</span>
+          </div>
+        {% else %}
+          <div class="muted" style="margin-top: 8px;">Not enough data yet.</div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if metrics.recommendation_effectiveness.rows %}
+      <div class="section" style="margin-top: 10px;">
+        <div class="sectionTitle">Usage + improvement rate by recommendation type</div>
+        <div class="table-wrap">
+          <table class="dataTable">
+            <thead>
+              <tr>
+                <th>Recommendation type</th>
+                <th>Used</th>
+                <th>Improved</th>
+                <th>Improvement rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for r in metrics.recommendation_effectiveness.rows %}
+                <tr>
+                  <td><strong>{{ r.action }}</strong></td>
+                  <td>{{ r.used }}</td>
+                  <td>{{ r.success }}</td>
+                  <td>{{ "%.0f"|format(100.0 * (r.improvement_rate or 0)) }}%</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {% else %}
+      <div class="muted" style="margin-top: 10px;">No attempts yet.</div>
+    {% endif %}
+  </section>
+
+  <section class="panel">
+    <h2>SECTION 5 — Notes / definitions</h2>
+    <ul class="list">
+      <li><strong>Mastery</strong>: mastery_score ≥ {{ metrics.time_to_mastery.definition.mastery_score_min }} and fragility_score ≤ {{ metrics.time_to_mastery.definition.fragility_score_max }}.</li>
+      <li><strong>Fragile success</strong>: correctness=true plus slow/hints/low-confidence/high-fragility signal.</li>
+      <li><strong>Recommendation effectiveness (approx)</strong>: recomputed during replay (recommendations are not stored per attempt); “improved” means at least one of correctness/time/hints/mastery/fragility improved within the next 1–2 attempts in the same topic.</li>
+    </ul>
+    <div class="muted small">These are internal demo validation metrics, not rigorous research metrics.</div>
+  </section>
+
+  <section class="panel">
     <h2>Population topic stats</h2>
     <div class="muted">Hardest (calibrated difficulty high) first.</div>
     <div class="table-wrap">
