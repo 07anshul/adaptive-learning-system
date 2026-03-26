@@ -16,6 +16,7 @@ from app.core.explanations import explain_diagnosis, explain_recommendation
 from app.core.blending import blended_topic_state, DEFAULT_EVIDENCE_THRESHOLD
 from app.db import connect, init_db
 from app.models.domain import Attempt, Question, StudentTopicState
+from app.internal import router as internal_router
 from app.ui import router as ui_router
 from app.repo.attempt_repo import (
     insert_attempt,
@@ -39,6 +40,7 @@ from app.repo.state_propagation import apply_soft_neighbor_update
 app = FastAPI(title="Adaptive Learning System (Demo API)")
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 app.include_router(ui_router)
+app.include_router(internal_router)
 
 
 def _now() -> datetime:

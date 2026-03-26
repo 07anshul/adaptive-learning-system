@@ -135,3 +135,10 @@ h2 { margin: 0 0 10px; font-size: 18px; }
 
 .footer { padding-bottom: 30px; }
 
+/* Internal/admin analytics tables (real <table> styling; keep separate from .table grid UI) */
+.table-wrap { overflow: auto; margin-top: 10px; border: 1px solid var(--border); border-radius: 14px; }
+.dataTable { width: 100%; border-collapse: collapse; min-width: 900px; background: rgba(255,255,255,0.02); }
+.dataTable th, .dataTable td { padding: 10px 10px; border-bottom: 1px solid var(--border); vertical-align: top; text-align: left; }
+.dataTable thead th { position: sticky; top: 0; background: rgba(11,16,32,0.95); color: var(--muted); font-weight: 900; }
+.dataTable tbody tr:hover { background: rgba(255,255,255,0.03); }
+

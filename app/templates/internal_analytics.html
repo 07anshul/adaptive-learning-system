@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="panel">
+    <h1>Internal/Admin analytics</h1>
+    <p class="muted">
+      Internal only. Not part of the student-facing demo. Use this to verify population calibration updates from aggregate attempts.
+    </p>
+  </section>
+
+  <section class="panel">
+    <h2>Population topic stats</h2>
+    <div class="muted">Hardest (calibrated difficulty high) first.</div>
+    <div class="table-wrap">
+      <table class="dataTable">
+        <thead>
+          <tr>
+            <th>Topic</th>
+            <th>Attempts</th>
+            <th>Avg correct</th>
+            <th>Avg hints</th>
+            <th>Avg time (s)</th>
+            <th>Prior diff</th>
+            <th>Calibrated diff</th>
+            <th>Updated</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in topic_stats %}
+            <tr>
+              <td><strong>{{ r.topic_title or r.topic_id }}</strong><div class="muted">{{ r.topic_id }}</div></td>
+              <td>{{ r.attempt_count }}</td>
+              <td>{{ "%.2f"|format(r.avg_correctness or 0) }}</td>
+              <td>{{ "%.2f"|format(r.avg_hints_used or 0) }}</td>
+              <td>{{ "%.1f"|format(r.avg_time_taken_seconds or 0) }}</td>
+              <td>{{ "%.2f"|format(r.prior_difficulty or 0) }}</td>
+              <td><strong>{{ "%.2f"|format(r.calibrated_difficulty or 0) }}</strong></td>
+              <td class="muted">{{ r.updated_at }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Population question stats (top 80 hardest)</h2>
+    <div class="muted">Hardest (calibrated difficulty high) first.</div>
+    <div class="table-wrap">
+      <table class="dataTable">
+        <thead>
+          <tr>
+            <th>Question</th>
+            <th>Topic</th>
+            <th>Attempts</th>
+            <th>Avg correct</th>
+            <th>Avg hints</th>
+            <th>Avg time (s)</th>
+            <th>Prior diff</th>
+            <th>Calibrated diff</th>
+            <th>Updated</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in question_stats %}
+            <tr>
+              <td>
+                <strong>{{ r.question_id }}</strong>
+                <div class="muted">{{ r.question_text_short }}{% if (r.question_text_short|length) >= 120 %}…{% endif %}</div>
+              </td>
+              <td class="muted">{{ r.topic_id }}</td>
+              <td>{{ r.attempt_count }}</td>
+              <td>{{ "%.2f"|format(r.avg_correctness or 0) }}</td>
+              <td>{{ "%.2f"|format(r.avg_hints_used or 0) }}</td>
+              <td>{{ "%.1f"|format(r.avg_time_taken_seconds or 0) }}</td>
+              <td>{{ "%.2f"|format(r.prior_difficulty or 0) }}</td>
+              <td><strong>{{ "%.2f"|format(r.calibrated_difficulty or 0) }}</strong></td>
+              <td class="muted">{{ r.updated_at }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+{% endblock %}
+
