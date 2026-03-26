@@ -1,0 +1,3105 @@
+{
+  "question_format_version": "v1",
+  "generated_from": "data/grade7_math_graph.json",
+  "question_count": 150,
+  "questions": [
+    {
+      "id": "q_t_numline_rational_001",
+      "topic_id": "t_numline_rational",
+      "secondary_topic_ids": [],
+      "question_text": "Which number is greatest?",
+      "answer_type": "mcq",
+      "choices": [
+        "-0.5",
+        "-1/4",
+        "0",
+        "1/3"
+      ],
+      "correct_answer": "1/3",
+      "difficulty_prior": 0.25,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.1,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.55,
+      "hint_text": "Positive numbers are greater than 0; compare fractions/decimals by value.",
+      "explanation_text": "1/3 is positive and greater than 0, so it is the greatest here.",
+      "likely_error_tags": [
+        "negative_ordering_error",
+        "fraction_size_error"
+      ]
+    },
+    {
+      "id": "q_t_numline_rational_002",
+      "topic_id": "t_numline_rational",
+      "secondary_topic_ids": [],
+      "question_text": "Order from least to greatest: -2, -1.5, 0.2, 0",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "-2, -1.5, 0, 0.2",
+      "difficulty_prior": 0.4,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.15,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.6,
+      "hint_text": "Negatives are less than 0. Among negatives, farther left is smaller.",
+      "explanation_text": "-2 < -1.5 < 0 < 0.2.",
+      "likely_error_tags": [
+        "negative_decimal_ordering_error"
+      ]
+    },
+    {
+      "id": "q_t_numline_rational_003",
+      "topic_id": "t_numline_rational",
+      "secondary_topic_ids": [],
+      "question_text": "True or False: -3 is greater than -1.",
+      "answer_type": "mcq",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "correct_answer": "False",
+      "difficulty_prior": 0.3,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.05,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.55,
+      "hint_text": "On the number line, numbers to the right are greater.",
+      "explanation_text": "-3 is left of -1, so it is smaller.",
+      "likely_error_tags": [
+        "negative_ordering_error"
+      ]
+    },
+    {
+      "id": "q_t_numline_rational_004",
+      "topic_id": "t_numline_rational",
+      "secondary_topic_ids": [],
+      "question_text": "A point is at -4. What is its distance from 3?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "7",
+      "difficulty_prior": 0.5,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.15,
+      "diagnostic_value": 0.6,
+      "hint_text": "Distance = absolute difference: |3 - (-4)|.",
+      "explanation_text": "3 - (-4) = 7, so the distance is 7.",
+      "likely_error_tags": [
+        "subtracting_negative_error",
+        "distance_formula_error"
+      ]
+    },
+    {
+      "id": "q_t_compare_order_rational_001",
+      "topic_id": "t_compare_order_rational",
+      "secondary_topic_ids": [],
+      "question_text": "Which is greater?",
+      "answer_type": "mcq",
+      "choices": [
+        "0.7",
+        "0.65"
+      ],
+      "correct_answer": "0.7",
+      "difficulty_prior": 0.3,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.15,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.45,
+      "hint_text": "Write 0.7 as 0.70.",
+      "explanation_text": "0.70 > 0.65, so 0.7 is greater.",
+      "likely_error_tags": [
+        "place_value_error"
+      ]
+    },
+    {
+      "id": "q_t_compare_order_rational_002",
+      "topic_id": "t_compare_order_rational",
+      "secondary_topic_ids": [],
+      "question_text": "Which fraction is larger?",
+      "answer_type": "mcq",
+      "choices": [
+        "3/8",
+        "1/2"
+      ],
+      "correct_answer": "1/2",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.25,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.6,
+      "hint_text": "1/2 = 4/8.",
+      "explanation_text": "3/8 vs 4/8 \u2192 1/2 is larger.",
+      "likely_error_tags": [
+        "numerator_only_comparison"
+      ]
+    },
+    {
+      "id": "q_t_compare_order_rational_003",
+      "topic_id": "t_compare_order_rational",
+      "secondary_topic_ids": [],
+      "question_text": "Order from least to greatest: -2, -2.5, -1.9",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "-2.5, -2, -1.9",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.65,
+      "hint_text": "For negatives, bigger absolute value means smaller number.",
+      "explanation_text": "-2.5 < -2 < -1.9.",
+      "likely_error_tags": [
+        "negative_decimal_ordering_error"
+      ]
+    },
+    {
+      "id": "q_t_compare_order_rational_004",
+      "topic_id": "t_compare_order_rational",
+      "secondary_topic_ids": [],
+      "question_text": "Which is closest to 1?",
+      "answer_type": "mcq",
+      "choices": [
+        "0.98",
+        "1.02",
+        "0.89"
+      ],
+      "correct_answer": "0.98",
+      "difficulty_prior": 0.4,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.15,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.45,
+      "hint_text": "Compare distances from 1.",
+      "explanation_text": "0.98 is 0.02 away from 1 (same as 1.02), and closer than 0.89.",
+      "likely_error_tags": [
+        "distance_to_one_error"
+      ]
+    },
+    {
+      "id": "q_t_round_estimate_001",
+      "topic_id": "t_round_estimate",
+      "secondary_topic_ids": [],
+      "question_text": "Round 6.48 to the nearest tenth.",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "6.5",
+      "difficulty_prior": 0.25,
+      "conceptual_load": 0.3,
+      "procedural_load": 0.2,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.35,
+      "hint_text": "Look at the hundredths digit.",
+      "explanation_text": "Hundredths digit is 8, so 6.4 rounds up to 6.5.",
+      "likely_error_tags": [
+        "rounding_rule_error"
+      ]
+    },
+    {
+      "id": "q_t_round_estimate_002",
+      "topic_id": "t_round_estimate",
+      "secondary_topic_ids": [],
+      "question_text": "Estimate 49 \u00d7 21 by rounding to the nearest tens.",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "1000",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.35,
+      "transfer_load": 0.15,
+      "diagnostic_value": 0.45,
+      "hint_text": "49\u224850 and 21\u224820.",
+      "explanation_text": "50\u00d720 = 1000.",
+      "likely_error_tags": [
+        "rounding_error",
+        "estimate_strategy_missing"
+      ]
+    },
+    {
+      "id": "q_t_round_estimate_003",
+      "topic_id": "t_round_estimate",
+      "secondary_topic_ids": [],
+      "question_text": "An exact answer is 198. Which estimate is most reasonable?",
+      "answer_type": "mcq",
+      "choices": [
+        "20",
+        "200",
+        "2000",
+        "20000"
+      ],
+      "correct_answer": "200",
+      "difficulty_prior": 0.35,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.15,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.5,
+      "hint_text": "198 is close to 200.",
+      "explanation_text": "198 rounds to about 200.",
+      "likely_error_tags": [
+        "magnitude_error"
+      ]
+    },
+    {
+      "id": "q_t_round_estimate_004",
+      "topic_id": "t_round_estimate",
+      "secondary_topic_ids": [],
+      "question_text": "Explain briefly why estimation is useful when checking answers.",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "It helps check reasonableness",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.55,
+      "procedural_load": 0.1,
+      "transfer_load": 0.2,
+      "diagnostic_value": 0.5,
+      "hint_text": "Think: does the answer size make sense?",
+      "explanation_text": "Estimates help you see if an exact answer is too big or too small.",
+      "likely_error_tags": [
+        "metacognition_gap"
+      ]
+    },
+    {
+      "id": "q_t_integer_abs_value_001",
+      "topic_id": "t_integer_abs_value",
+      "secondary_topic_ids": [],
+      "question_text": "What is |\u22129| ?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "9",
+      "difficulty_prior": 0.2,
+      "conceptual_load": 0.3,
+      "procedural_load": 0.05,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.4,
+      "hint_text": "Absolute value is distance from 0.",
+      "explanation_text": "Distance from 0 to \u22129 is 9.",
+      "likely_error_tags": [
+        "absolute_value_sign_error"
+      ]
+    },
+    {
+      "id": "q_t_integer_abs_value_002",
+      "topic_id": "t_integer_abs_value",
+      "secondary_topic_ids": [],
+      "question_text": "Find the distance between \u22122 and 5.",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "7",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.6,
+      "hint_text": "Distance = |5 \u2212 (\u22122)|.",
+      "explanation_text": "5 \u2212 (\u22122)=7 so the distance is 7.",
+      "likely_error_tags": [
+        "subtracting_negative_error"
+      ]
+    },
+    {
+      "id": "q_t_integer_abs_value_003",
+      "topic_id": "t_integer_abs_value",
+      "secondary_topic_ids": [],
+      "question_text": "Which is greater?",
+      "answer_type": "mcq",
+      "choices": [
+        "|\u22124|",
+        "|3|",
+        "Equal"
+      ],
+      "correct_answer": "|\u22124|",
+      "difficulty_prior": 0.35,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.1,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.55,
+      "hint_text": "Compute both absolute values.",
+      "explanation_text": "|\u22124|=4, |3|=3 so |\u22124| is greater.",
+      "likely_error_tags": [
+        "absolute_value_confusion"
+      ]
+    },
+    {
+      "id": "q_t_integer_abs_value_004",
+      "topic_id": "t_integer_abs_value",
+      "secondary_topic_ids": [],
+      "question_text": "A submarine is at \u2212120 m and rises 35 m. New position?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "-85",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.25,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.65,
+      "hint_text": "Rising means add 35.",
+      "explanation_text": "\u2212120 + 35 = \u221285.",
+      "likely_error_tags": [
+        "context_direction_error"
+      ]
+    },
+    {
+      "id": "q_t_integer_add_sub_001",
+      "topic_id": "t_integer_add_sub",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: \u22127 + 12",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "5",
+      "difficulty_prior": 0.35,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.25,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.55,
+      "hint_text": "12 \u2212 7 = 5.",
+      "explanation_text": "\u22127 + 12 = 5.",
+      "likely_error_tags": [
+        "sign_error"
+      ]
+    },
+    {
+      "id": "q_t_integer_add_sub_002",
+      "topic_id": "t_integer_add_sub",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: 6 \u2212 (\u22123)",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "9",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.25,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.7,
+      "hint_text": "Subtracting a negative is adding.",
+      "explanation_text": "6 \u2212 (\u22123)=6+3=9.",
+      "likely_error_tags": [
+        "subtracting_negative_error"
+      ]
+    },
+    {
+      "id": "q_t_integer_add_sub_003",
+      "topic_id": "t_integer_add_sub",
+      "secondary_topic_ids": [],
+      "question_text": "Which is correct?",
+      "answer_type": "mcq",
+      "choices": [
+        "\u22129 \u2212 4 = \u22125",
+        "\u22129 \u2212 4 = \u221213",
+        "\u22129 \u2212 4 = 13",
+        "\u22129 \u2212 4 = 5"
+      ],
+      "correct_answer": "\u22129 \u2212 4 = \u221213",
+      "difficulty_prior": 0.4,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.3,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.65,
+      "hint_text": "Subtracting makes the number smaller (more negative).",
+      "explanation_text": "\u22129 \u2212 4 = \u221213.",
+      "likely_error_tags": [
+        "subtract_sign_error"
+      ]
+    },
+    {
+      "id": "q_t_integer_add_sub_004",
+      "topic_id": "t_integer_add_sub",
+      "secondary_topic_ids": [],
+      "question_text": "Temperature was \u22122\u00b0C and rose 7\u00b0C. New temperature?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "5",
+      "difficulty_prior": 0.5,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.25,
+      "transfer_load": 0.3,
+      "diagnostic_value": 0.6,
+      "hint_text": "Compute \u22122 + 7.",
+      "explanation_text": "\u22122 + 7 = 5\u00b0C.",
+      "likely_error_tags": [
+        "context_direction_error"
+      ]
+    },
+    {
+      "id": "q_t_integer_mult_div_001",
+      "topic_id": "t_integer_mult_div",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: (\u22124) \u00d7 6",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "-24",
+      "difficulty_prior": 0.35,
+      "conceptual_load": 0.25,
+      "procedural_load": 0.35,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.5,
+      "hint_text": "Negative \u00d7 positive = negative.",
+      "explanation_text": "4\u00d76=24, so result is \u221224.",
+      "likely_error_tags": [
+        "sign_rule_error"
+      ]
+    },
+    {
+      "id": "q_t_integer_mult_div_002",
+      "topic_id": "t_integer_mult_div",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: (\u22123) \u00d7 (\u22125)",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "15",
+      "difficulty_prior": 0.4,
+      "conceptual_load": 0.3,
+      "procedural_load": 0.35,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.6,
+      "hint_text": "Negative \u00d7 negative = positive.",
+      "explanation_text": "3\u00d75=15 and sign is positive.",
+      "likely_error_tags": [
+        "sign_rule_error"
+      ]
+    },
+    {
+      "id": "q_t_integer_mult_div_003",
+      "topic_id": "t_integer_mult_div",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: 28 \u00f7 (\u22127)",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "-4",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.25,
+      "procedural_load": 0.35,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.55,
+      "hint_text": "Positive \u00f7 negative = negative.",
+      "explanation_text": "28 \u00f7 7 = 4, so \u22124.",
+      "likely_error_tags": [
+        "sign_rule_error"
+      ]
+    },
+    {
+      "id": "q_t_integer_mult_div_004",
+      "topic_id": "t_integer_mult_div",
+      "secondary_topic_ids": [],
+      "question_text": "A diver goes down 5 m each minute for 6 minutes. Change in position?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "-30",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.3,
+      "transfer_load": 0.35,
+      "diagnostic_value": 0.65,
+      "hint_text": "Down is negative. Compute (\u22125)\u00d76.",
+      "explanation_text": "(\u22125)\u00d76 = \u221230.",
+      "likely_error_tags": [
+        "context_sign_error"
+      ]
+    },
+    {
+      "id": "q_t_integer_expressions_001",
+      "topic_id": "t_integer_expressions",
+      "secondary_topic_ids": [],
+      "question_text": "Evaluate: 3 + 2\u00d7(\u22124)",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "-5",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.45,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.6,
+      "hint_text": "Multiply first: 2\u00d7(\u22124)=\u22128, then add 3.",
+      "explanation_text": "3 + (\u22128) = \u22125.",
+      "likely_error_tags": [
+        "order_of_operations_error",
+        "sign_error"
+      ]
+    },
+    {
+      "id": "q_t_integer_expressions_002",
+      "topic_id": "t_integer_expressions",
+      "secondary_topic_ids": [],
+      "question_text": "Evaluate: \u22126 \u2212 (\u22122) + 5",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "1",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.45,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.65,
+      "hint_text": "Subtracting a negative is adding.",
+      "explanation_text": "\u22126 + 2 + 5 = 1.",
+      "likely_error_tags": [
+        "subtracting_negative_error"
+      ]
+    },
+    {
+      "id": "q_t_integer_expressions_003",
+      "topic_id": "t_integer_expressions",
+      "secondary_topic_ids": [],
+      "question_text": "If x = \u22123, which expression equals 2?",
+      "answer_type": "mcq",
+      "choices": [
+        "x+5",
+        "5\u2212x",
+        "x\u22125",
+        "\u2212x+5"
+      ],
+      "correct_answer": "x+5",
+      "difficulty_prior": 0.6,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.45,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.7,
+      "hint_text": "Plug in x = \u22123 and compute each.",
+      "explanation_text": "x+5 = \u22123+5 = 2. Others are not 2.",
+      "likely_error_tags": [
+        "substitution_error"
+      ]
+    },
+    {
+      "id": "q_t_integer_expressions_004",
+      "topic_id": "t_integer_expressions",
+      "secondary_topic_ids": [],
+      "question_text": "Explain why 2\u00d7(\u22124) is negative.",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "Because a positive times a negative is negative",
+      "difficulty_prior": 0.6,
+      "conceptual_load": 0.55,
+      "procedural_load": 0.15,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.5,
+      "hint_text": "Think about sign rules.",
+      "explanation_text": "A positive times a negative gives a negative product.",
+      "likely_error_tags": [
+        "sign_rule_misconception"
+      ]
+    },
+    {
+      "id": "q_t_integer_expressions_005",
+      "topic_id": "t_integer_expressions",
+      "secondary_topic_ids": [],
+      "question_text": "Extra diagnostic (demo) for t_integer_expressions: Which choice is most reasonable?",
+      "answer_type": "mcq",
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.55,
+      "hint_text": "Pick B for this demo diagnostic.",
+      "explanation_text": "This is an extra diagnostic item to vary difficulty and triggers in the demo.",
+      "likely_error_tags": [
+        "diagnostic_placeholder"
+      ]
+    },
+    {
+      "id": "q_t_fraction_concepts_001",
+      "topic_id": "t_fraction_concepts",
+      "secondary_topic_ids": [],
+      "question_text": "Which fraction is equivalent to 2/3?",
+      "answer_type": "mcq",
+      "choices": [
+        "4/6",
+        "2/5",
+        "3/2",
+        "6/4"
+      ],
+      "correct_answer": "4/6",
+      "difficulty_prior": 0.35,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.6,
+      "hint_text": "Multiply top and bottom by the same number.",
+      "explanation_text": "2/3\u00d7(2/2)=4/6.",
+      "likely_error_tags": [
+        "equivalence_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_concepts_002",
+      "topic_id": "t_fraction_concepts",
+      "secondary_topic_ids": [],
+      "question_text": "A pizza is cut into 8 equal slices. You eat 3 slices. What fraction did you eat?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "3/8",
+      "difficulty_prior": 0.25,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.1,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.45,
+      "hint_text": "Parts eaten / total parts.",
+      "explanation_text": "3 out of 8 \u2192 3/8.",
+      "likely_error_tags": [
+        "part_whole_reversal"
+      ]
+    },
+    {
+      "id": "q_t_fraction_concepts_003",
+      "topic_id": "t_fraction_concepts",
+      "secondary_topic_ids": [],
+      "question_text": "True or False: 3/5 is the same as 3 \u00f7 5.",
+      "answer_type": "mcq",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "correct_answer": "True",
+      "difficulty_prior": 0.4,
+      "conceptual_load": 0.55,
+      "procedural_load": 0.1,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.65,
+      "hint_text": "A fraction bar means division.",
+      "explanation_text": "3/5 represents 3 divided by 5.",
+      "likely_error_tags": [
+        "fraction_as_division_misconception"
+      ]
+    },
+    {
+      "id": "q_t_fraction_concepts_004",
+      "topic_id": "t_fraction_concepts",
+      "secondary_topic_ids": [],
+      "question_text": "Which is closer to 1?",
+      "answer_type": "mcq",
+      "choices": [
+        "5/6",
+        "3/4"
+      ],
+      "correct_answer": "5/6",
+      "difficulty_prior": 0.5,
+      "conceptual_load": 0.55,
+      "procedural_load": 0.25,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.55,
+      "hint_text": "Compare 1\u2212fraction.",
+      "explanation_text": "1\u22125/6=1/6 and 1\u22123/4=1/4; 1/6 is smaller so 5/6 is closer.",
+      "likely_error_tags": [
+        "fraction_distance_to_one_error"
+      ]
+    },
+    {
+      "id": "q_t_simplify_fractions_001",
+      "topic_id": "t_simplify_fractions",
+      "secondary_topic_ids": [],
+      "question_text": "Simplify: 12/18",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "2/3",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.4,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.55,
+      "hint_text": "Divide by the GCF (6).",
+      "explanation_text": "12/18 = 2/3.",
+      "likely_error_tags": [
+        "gcf_error"
+      ]
+    },
+    {
+      "id": "q_t_simplify_fractions_002",
+      "topic_id": "t_simplify_fractions",
+      "secondary_topic_ids": [],
+      "question_text": "Simplify: 15/20",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "3/4",
+      "difficulty_prior": 0.4,
+      "conceptual_load": 0.3,
+      "procedural_load": 0.35,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.45,
+      "hint_text": "Divide by 5.",
+      "explanation_text": "15/20 = 3/4.",
+      "likely_error_tags": [
+        "simplify_error"
+      ]
+    },
+    {
+      "id": "q_t_simplify_fractions_003",
+      "topic_id": "t_simplify_fractions",
+      "secondary_topic_ids": [],
+      "question_text": "Which fraction is already simplest?",
+      "answer_type": "mcq",
+      "choices": [
+        "6/9",
+        "8/12",
+        "7/10",
+        "12/16"
+      ],
+      "correct_answer": "7/10",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.25,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.6,
+      "hint_text": "Check common factors.",
+      "explanation_text": "7 and 10 share no factor >1.",
+      "likely_error_tags": [
+        "gcf_error"
+      ]
+    },
+    {
+      "id": "q_t_simplify_fractions_004",
+      "topic_id": "t_simplify_fractions",
+      "secondary_topic_ids": [],
+      "question_text": "Simplify: 9/27",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "1/3",
+      "difficulty_prior": 0.35,
+      "conceptual_load": 0.25,
+      "procedural_load": 0.3,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.45,
+      "hint_text": "Divide by 9.",
+      "explanation_text": "9/27 = 1/3.",
+      "likely_error_tags": [
+        "division_error"
+      ]
+    },
+    {
+      "id": "q_t_compare_fractions_001",
+      "topic_id": "t_compare_fractions",
+      "secondary_topic_ids": [],
+      "question_text": "Which is larger?",
+      "answer_type": "mcq",
+      "choices": [
+        "2/5",
+        "3/5"
+      ],
+      "correct_answer": "3/5",
+      "difficulty_prior": 0.3,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.15,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.4,
+      "hint_text": "Same denominator, compare numerators.",
+      "explanation_text": "3/5 > 2/5.",
+      "likely_error_tags": [
+        "numerator_comparison_error"
+      ]
+    },
+    {
+      "id": "q_t_compare_fractions_002",
+      "topic_id": "t_compare_fractions",
+      "secondary_topic_ids": [],
+      "question_text": "Which is larger?",
+      "answer_type": "mcq",
+      "choices": [
+        "3/8",
+        "1/2"
+      ],
+      "correct_answer": "1/2",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.25,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.6,
+      "hint_text": "Convert 1/2 to 4/8.",
+      "explanation_text": "4/8 > 3/8.",
+      "likely_error_tags": [
+        "common_denominator_error"
+      ]
+    },
+    {
+      "id": "q_t_compare_fractions_003",
+      "topic_id": "t_compare_fractions",
+      "secondary_topic_ids": [],
+      "question_text": "Which is larger?",
+      "answer_type": "mcq",
+      "choices": [
+        "5/6",
+        "7/9"
+      ],
+      "correct_answer": "5/6",
+      "difficulty_prior": 0.6,
+      "conceptual_load": 0.5,
+      "procedural_load": 0.35,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.65,
+      "hint_text": "Compare to 1: 5/6 is 1/6 away; 7/9 is 2/9 away.",
+      "explanation_text": "1/6 \u2248 0.167 and 2/9 \u2248 0.222, so 5/6 is closer to 1 and larger.",
+      "likely_error_tags": [
+        "benchmark_fraction_error"
+      ]
+    },
+    {
+      "id": "q_t_compare_fractions_004",
+      "topic_id": "t_compare_fractions",
+      "secondary_topic_ids": [],
+      "question_text": "Order from least to greatest: 1/2, 2/3, 3/4",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "1/2, 2/3, 3/4",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.3,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.55,
+      "hint_text": "Use common denominators or decimals.",
+      "explanation_text": "0.5 < 0.666... < 0.75.",
+      "likely_error_tags": [
+        "fraction_ordering_error"
+      ]
+    },
+    {
+      "id": "q_t_compare_fractions_005",
+      "topic_id": "t_compare_fractions",
+      "secondary_topic_ids": [],
+      "question_text": "Extra diagnostic (demo) for t_compare_fractions: Which choice is most reasonable?",
+      "answer_type": "mcq",
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.55,
+      "hint_text": "Pick B for this demo diagnostic.",
+      "explanation_text": "This is an extra diagnostic item to vary difficulty and triggers in the demo.",
+      "likely_error_tags": [
+        "diagnostic_placeholder"
+      ]
+    },
+    {
+      "id": "q_t_fraction_add_sub_like_001",
+      "topic_id": "t_fraction_add_sub_like",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: 3/8 + 2/8",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "5/8",
+      "difficulty_prior": 0.35,
+      "conceptual_load": 0.3,
+      "procedural_load": 0.35,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.45,
+      "hint_text": "Add numerators; keep denominator.",
+      "explanation_text": "3/8+2/8=5/8.",
+      "likely_error_tags": [
+        "add_denominator_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_add_sub_like_002",
+      "topic_id": "t_fraction_add_sub_like",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: 7/10 \u2212 3/10",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "4/10",
+      "difficulty_prior": 0.35,
+      "conceptual_load": 0.3,
+      "procedural_load": 0.35,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.45,
+      "hint_text": "Subtract numerators; keep denominator.",
+      "explanation_text": "7/10\u22123/10=4/10 (simplify to 2/5 if asked).",
+      "likely_error_tags": [
+        "subtract_denominator_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_add_sub_like_003",
+      "topic_id": "t_fraction_add_sub_like",
+      "secondary_topic_ids": [],
+      "question_text": "Which is correct?",
+      "answer_type": "mcq",
+      "choices": [
+        "1/5+2/5=3/10",
+        "1/5+2/5=3/5",
+        "1/5+2/5=2/5",
+        "1/5+2/5=1/10"
+      ],
+      "correct_answer": "1/5+2/5=3/5",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.35,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.65,
+      "hint_text": "Denominators stay the same for like denominators.",
+      "explanation_text": "1/5+2/5=3/5.",
+      "likely_error_tags": [
+        "add_denominators_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_add_sub_like_004",
+      "topic_id": "t_fraction_add_sub_like",
+      "secondary_topic_ids": [],
+      "question_text": "You drank 2/6 liter of water and then 1/6 liter. Total?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "3/6",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.35,
+      "transfer_load": 0.2,
+      "diagnostic_value": 0.55,
+      "hint_text": "Add: 2/6 + 1/6.",
+      "explanation_text": "3/6 (which equals 1/2).",
+      "likely_error_tags": [
+        "word_problem_translation_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_add_sub_unlike_001",
+      "topic_id": "t_fraction_add_sub_unlike",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: 1/4 + 1/6",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "5/12",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.55,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.7,
+      "hint_text": "Use denominator 12.",
+      "explanation_text": "3/12+2/12=5/12.",
+      "likely_error_tags": [
+        "common_denominator_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_add_sub_unlike_002",
+      "topic_id": "t_fraction_add_sub_unlike",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: 3/5 \u2212 1/2",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "1/10",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.5,
+      "procedural_load": 0.6,
+      "transfer_load": 0.15,
+      "diagnostic_value": 0.7,
+      "hint_text": "Use denominator 10.",
+      "explanation_text": "6/10\u22125/10=1/10.",
+      "likely_error_tags": [
+        "common_denominator_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_add_sub_unlike_003",
+      "topic_id": "t_fraction_add_sub_unlike",
+      "secondary_topic_ids": [],
+      "question_text": "2/3 + 1/6 equals:",
+      "answer_type": "mcq",
+      "choices": [
+        "3/9",
+        "3/6",
+        "5/6",
+        "1/2"
+      ],
+      "correct_answer": "5/6",
+      "difficulty_prior": 0.6,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.55,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.75,
+      "hint_text": "2/3=4/6.",
+      "explanation_text": "4/6+1/6=5/6.",
+      "likely_error_tags": [
+        "add_denominators_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_add_sub_unlike_004",
+      "topic_id": "t_fraction_add_sub_unlike",
+      "secondary_topic_ids": [],
+      "question_text": "A recipe needs 3/4 cup milk. You have 1/3 cup. How much more do you need?",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "5/12",
+      "difficulty_prior": 0.7,
+      "conceptual_load": 0.55,
+      "procedural_load": 0.6,
+      "transfer_load": 0.35,
+      "diagnostic_value": 0.7,
+      "hint_text": "Compute 3/4\u22121/3.",
+      "explanation_text": "9/12\u22124/12=5/12.",
+      "likely_error_tags": [
+        "word_problem_translation_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_add_sub_unlike_005",
+      "topic_id": "t_fraction_add_sub_unlike",
+      "secondary_topic_ids": [],
+      "question_text": "Extra diagnostic (demo) for t_fraction_add_sub_unlike: Which choice is most reasonable?",
+      "answer_type": "mcq",
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.55,
+      "hint_text": "Pick B for this demo diagnostic.",
+      "explanation_text": "This is an extra diagnostic item to vary difficulty and triggers in the demo.",
+      "likely_error_tags": [
+        "diagnostic_placeholder"
+      ]
+    },
+    {
+      "id": "q_t_fraction_mult_001",
+      "topic_id": "t_fraction_mult",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: 2/3 \u00d7 3/4",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "1/2",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.55,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.6,
+      "hint_text": "Multiply numerators and denominators, then simplify.",
+      "explanation_text": "6/12 = 1/2.",
+      "likely_error_tags": [
+        "multiply_denominators_missing",
+        "simplify_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_mult_002",
+      "topic_id": "t_fraction_mult",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: 1/2 \u00d7 8",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "4",
+      "difficulty_prior": 0.35,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.35,
+      "transfer_load": 0.15,
+      "diagnostic_value": 0.45,
+      "hint_text": "Half of 8 is 4.",
+      "explanation_text": "1/2 of 8 is 4.",
+      "likely_error_tags": [
+        "fraction_of_quantity_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_mult_003",
+      "topic_id": "t_fraction_mult",
+      "secondary_topic_ids": [],
+      "question_text": "Which is bigger?",
+      "answer_type": "mcq",
+      "choices": [
+        "3/4 of 12",
+        "2/3 of 12"
+      ],
+      "correct_answer": "3/4 of 12",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.35,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.55,
+      "hint_text": "Compute both: 3/4 of 12 is 9; 2/3 of 12 is 8.",
+      "explanation_text": "9 is greater than 8.",
+      "likely_error_tags": [
+        "compare_fraction_of_quantity_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_mult_004",
+      "topic_id": "t_fraction_mult",
+      "secondary_topic_ids": [],
+      "question_text": "A ribbon is 6 m long. You use 2/3 of it. How many meters is that?",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "4",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.45,
+      "transfer_load": 0.3,
+      "diagnostic_value": 0.6,
+      "hint_text": "Compute 2/3 \u00d7 6.",
+      "explanation_text": "2/3 \u00d7 6 = 4.",
+      "likely_error_tags": [
+        "word_problem_translation_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_mult_005",
+      "topic_id": "t_fraction_mult",
+      "secondary_topic_ids": [],
+      "question_text": "Extra diagnostic (demo) for t_fraction_mult: Which choice is most reasonable?",
+      "answer_type": "mcq",
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.55,
+      "hint_text": "Pick B for this demo diagnostic.",
+      "explanation_text": "This is an extra diagnostic item to vary difficulty and triggers in the demo.",
+      "likely_error_tags": [
+        "diagnostic_placeholder"
+      ]
+    },
+    {
+      "id": "q_t_fraction_div_001",
+      "topic_id": "t_fraction_div",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: 1/2 \u00f7 1/4",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "2",
+      "difficulty_prior": 0.7,
+      "conceptual_load": 0.5,
+      "procedural_load": 0.65,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.7,
+      "hint_text": "Multiply by the reciprocal: 1/2 \u00d7 4/1.",
+      "explanation_text": "1/2 \u00d7 4 = 2.",
+      "likely_error_tags": [
+        "invert_multiply_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_div_002",
+      "topic_id": "t_fraction_div",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: 3/4 \u00f7 3",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "1/4",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.6,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.6,
+      "hint_text": "Dividing by 3 is multiplying by 1/3.",
+      "explanation_text": "3/4 \u00d7 1/3 = 1/4.",
+      "likely_error_tags": [
+        "divide_by_integer_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_div_003",
+      "topic_id": "t_fraction_div",
+      "secondary_topic_ids": [],
+      "question_text": "How many 1/3-cup servings are in 1 cup?",
+      "answer_type": "mcq",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_answer": "3",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.55,
+      "procedural_load": 0.45,
+      "transfer_load": 0.35,
+      "diagnostic_value": 0.75,
+      "hint_text": "Compute 1 \u00f7 (1/3).",
+      "explanation_text": "1 \u00f7 (1/3) = 3.",
+      "likely_error_tags": [
+        "division_as_groups_misconception"
+      ]
+    },
+    {
+      "id": "q_t_fraction_div_004",
+      "topic_id": "t_fraction_div",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: 2/5 \u00f7 1/10",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "4",
+      "difficulty_prior": 0.75,
+      "conceptual_load": 0.5,
+      "procedural_load": 0.7,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.7,
+      "hint_text": "2/5 \u00d7 10/1.",
+      "explanation_text": "2/5 \u00d7 10 = 20/5 = 4.",
+      "likely_error_tags": [
+        "invert_multiply_error",
+        "simplify_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_div_005",
+      "topic_id": "t_fraction_div",
+      "secondary_topic_ids": [],
+      "question_text": "Extra diagnostic (demo) for t_fraction_div: Which choice is most reasonable?",
+      "answer_type": "mcq",
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.55,
+      "hint_text": "Pick B for this demo diagnostic.",
+      "explanation_text": "This is an extra diagnostic item to vary difficulty and triggers in the demo.",
+      "likely_error_tags": [
+        "diagnostic_placeholder"
+      ]
+    },
+    {
+      "id": "q_t_decimal_place_value_001",
+      "topic_id": "t_decimal_place_value",
+      "secondary_topic_ids": [],
+      "question_text": "Which digit is in the hundredths place in 4.372?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "7",
+      "difficulty_prior": 0.3,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.15,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.45,
+      "hint_text": "Hundredths is the second digit right of the decimal.",
+      "explanation_text": "4.372 has 7 in the hundredths place.",
+      "likely_error_tags": [
+        "place_value_error"
+      ]
+    },
+    {
+      "id": "q_t_decimal_place_value_002",
+      "topic_id": "t_decimal_place_value",
+      "secondary_topic_ids": [],
+      "question_text": "Which is greater?",
+      "answer_type": "mcq",
+      "choices": [
+        "0.503",
+        "0.53"
+      ],
+      "correct_answer": "0.53",
+      "difficulty_prior": 0.4,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.2,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.55,
+      "hint_text": "Write 0.53 as 0.530.",
+      "explanation_text": "0.530 > 0.503.",
+      "likely_error_tags": [
+        "decimal_length_misconception"
+      ]
+    },
+    {
+      "id": "q_t_decimal_place_value_003",
+      "topic_id": "t_decimal_place_value",
+      "secondary_topic_ids": [],
+      "question_text": "Write 0.09 as a fraction in simplest form.",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "9/100",
+      "difficulty_prior": 0.5,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.3,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.6,
+      "hint_text": "0.09 is 9 hundredths.",
+      "explanation_text": "9/100.",
+      "likely_error_tags": [
+        "fraction_from_decimal_error"
+      ]
+    },
+    {
+      "id": "q_t_decimal_place_value_004",
+      "topic_id": "t_decimal_place_value",
+      "secondary_topic_ids": [],
+      "question_text": "A bottle holds 1.5 liters. How many milliliters is that? (1 L = 1000 mL)",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "1500",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.4,
+      "transfer_load": 0.4,
+      "diagnostic_value": 0.6,
+      "hint_text": "Multiply by 1000.",
+      "explanation_text": "1.5\u00d71000=1500.",
+      "likely_error_tags": [
+        "unit_conversion_error"
+      ]
+    },
+    {
+      "id": "q_t_decimal_add_sub_001",
+      "topic_id": "t_decimal_add_sub",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: 3.4 + 2.56",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "5.96",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.3,
+      "procedural_load": 0.45,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.5,
+      "hint_text": "Align decimals: 3.40 + 2.56.",
+      "explanation_text": "3.40 + 2.56 = 5.96.",
+      "likely_error_tags": [
+        "decimal_alignment_error"
+      ]
+    },
+    {
+      "id": "q_t_decimal_add_sub_002",
+      "topic_id": "t_decimal_add_sub",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: 10.00 \u2212 3.75",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "6.25",
+      "difficulty_prior": 0.5,
+      "conceptual_load": 0.3,
+      "procedural_load": 0.5,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.55,
+      "hint_text": "Borrow across the decimal if needed.",
+      "explanation_text": "10.00 \u2212 3.75 = 6.25.",
+      "likely_error_tags": [
+        "borrowing_error"
+      ]
+    },
+    {
+      "id": "q_t_decimal_add_sub_003",
+      "topic_id": "t_decimal_add_sub",
+      "secondary_topic_ids": [],
+      "question_text": "Which is correct?",
+      "answer_type": "mcq",
+      "choices": [
+        "2.3 + 0.7 = 2.10",
+        "2.3 + 0.7 = 3.0",
+        "2.3 + 0.7 = 2.37",
+        "2.3 + 0.7 = 23.7"
+      ],
+      "correct_answer": "2.3 + 0.7 = 3.0",
+      "difficulty_prior": 0.4,
+      "conceptual_load": 0.3,
+      "procedural_load": 0.35,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.6,
+      "hint_text": "2.3 is 23 tenths and 0.7 is 7 tenths.",
+      "explanation_text": "23 tenths + 7 tenths = 30 tenths = 3.0.",
+      "likely_error_tags": [
+        "place_value_error"
+      ]
+    },
+    {
+      "id": "q_t_decimal_add_sub_004",
+      "topic_id": "t_decimal_add_sub",
+      "secondary_topic_ids": [],
+      "question_text": "You buy snacks costing $2.35 and $1.70. Total cost?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "4.05",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.3,
+      "procedural_load": 0.45,
+      "transfer_load": 0.3,
+      "diagnostic_value": 0.55,
+      "hint_text": "Add as decimals: 2.35+1.70.",
+      "explanation_text": "4.05.",
+      "likely_error_tags": [
+        "decimal_addition_error"
+      ]
+    },
+    {
+      "id": "q_t_decimal_mult_001",
+      "topic_id": "t_decimal_mult",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: 0.6 \u00d7 0.3",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "0.18",
+      "difficulty_prior": 0.6,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.55,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.55,
+      "hint_text": "6\u00d73=18 and there are 2 decimal places total.",
+      "explanation_text": "0.18.",
+      "likely_error_tags": [
+        "decimal_place_error"
+      ]
+    },
+    {
+      "id": "q_t_decimal_mult_002",
+      "topic_id": "t_decimal_mult",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: 2.5 \u00d7 4",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "10",
+      "difficulty_prior": 0.5,
+      "conceptual_load": 0.3,
+      "procedural_load": 0.45,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.45,
+      "hint_text": "25\u00d74=100 then divide by 10.",
+      "explanation_text": "10.",
+      "likely_error_tags": [
+        "decimal_multiplication_error"
+      ]
+    },
+    {
+      "id": "q_t_decimal_mult_003",
+      "topic_id": "t_decimal_mult",
+      "secondary_topic_ids": [],
+      "question_text": "Which is correct?",
+      "answer_type": "mcq",
+      "choices": [
+        "0.2\u00d70.5=1.0",
+        "0.2\u00d70.5=0.1",
+        "0.2\u00d70.5=0.7",
+        "0.2\u00d70.5=0.01"
+      ],
+      "correct_answer": "0.2\u00d70.5=0.1",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.55,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.65,
+      "hint_text": "2\u00d75=10; two decimal places total.",
+      "explanation_text": "0.1.",
+      "likely_error_tags": [
+        "decimal_place_error"
+      ]
+    },
+    {
+      "id": "q_t_decimal_mult_004",
+      "topic_id": "t_decimal_mult",
+      "secondary_topic_ids": [],
+      "question_text": "A notebook costs $1.25. What is the cost of 6 notebooks?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "7.5",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.6,
+      "transfer_load": 0.35,
+      "diagnostic_value": 0.6,
+      "hint_text": "Compute 1.25\u00d76.",
+      "explanation_text": "1.25\u00d76=7.50.",
+      "likely_error_tags": [
+        "word_problem_translation_error",
+        "decimal_multiplication_error"
+      ]
+    },
+    {
+      "id": "q_t_decimal_mult_005",
+      "topic_id": "t_decimal_mult",
+      "secondary_topic_ids": [],
+      "question_text": "Extra diagnostic (demo) for t_decimal_mult: Which choice is most reasonable?",
+      "answer_type": "mcq",
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.55,
+      "hint_text": "Pick B for this demo diagnostic.",
+      "explanation_text": "This is an extra diagnostic item to vary difficulty and triggers in the demo.",
+      "likely_error_tags": [
+        "diagnostic_placeholder"
+      ]
+    },
+    {
+      "id": "q_t_decimal_div_001",
+      "topic_id": "t_decimal_div",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: 4.8 \u00f7 2",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "2.4",
+      "difficulty_prior": 0.6,
+      "conceptual_load": 0.3,
+      "procedural_load": 0.6,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.55,
+      "hint_text": "Divide 48 by 2 then place decimal.",
+      "explanation_text": "2.4.",
+      "likely_error_tags": [
+        "decimal_division_error"
+      ]
+    },
+    {
+      "id": "q_t_decimal_div_002",
+      "topic_id": "t_decimal_div",
+      "secondary_topic_ids": [],
+      "question_text": "Compute: 3.6 \u00f7 0.9",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "4",
+      "difficulty_prior": 0.75,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.7,
+      "transfer_load": 0.15,
+      "diagnostic_value": 0.7,
+      "hint_text": "Multiply both by 10: 36 \u00f7 9.",
+      "explanation_text": "36/9 = 4.",
+      "likely_error_tags": [
+        "move_decimal_wrong_way"
+      ]
+    },
+    {
+      "id": "q_t_decimal_div_003",
+      "topic_id": "t_decimal_div",
+      "secondary_topic_ids": [],
+      "question_text": "Which is correct?",
+      "answer_type": "mcq",
+      "choices": [
+        "5 \u00f7 0.5 = 2.5",
+        "5 \u00f7 0.5 = 10",
+        "5 \u00f7 0.5 = 0.1",
+        "5 \u00f7 0.5 = 5.5"
+      ],
+      "correct_answer": "5 \u00f7 0.5 = 10",
+      "difficulty_prior": 0.7,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.65,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.7,
+      "hint_text": "Dividing by 0.5 doubles.",
+      "explanation_text": "5 \u00f7 0.5 = 10.",
+      "likely_error_tags": [
+        "division_by_decimal_misconception"
+      ]
+    },
+    {
+      "id": "q_t_decimal_div_004",
+      "topic_id": "t_decimal_div",
+      "secondary_topic_ids": [],
+      "question_text": "A 7.2 m rope is cut into pieces of length 0.6 m. How many pieces?",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "12",
+      "difficulty_prior": 0.75,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.7,
+      "transfer_load": 0.35,
+      "diagnostic_value": 0.7,
+      "hint_text": "Compute 7.2 \u00f7 0.6; multiply both by 10.",
+      "explanation_text": "72 \u00f7 6 = 12.",
+      "likely_error_tags": [
+        "word_problem_translation_error"
+      ]
+    },
+    {
+      "id": "q_t_decimal_div_005",
+      "topic_id": "t_decimal_div",
+      "secondary_topic_ids": [],
+      "question_text": "Extra diagnostic (demo) for t_decimal_div: Which choice is most reasonable?",
+      "answer_type": "mcq",
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.55,
+      "hint_text": "Pick B for this demo diagnostic.",
+      "explanation_text": "This is an extra diagnostic item to vary difficulty and triggers in the demo.",
+      "likely_error_tags": [
+        "diagnostic_placeholder"
+      ]
+    },
+    {
+      "id": "q_t_fraction_decimal_convert_001",
+      "topic_id": "t_fraction_decimal_convert",
+      "secondary_topic_ids": [],
+      "question_text": "Convert 1/4 to a decimal.",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "0.25",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.35,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.55,
+      "hint_text": "1 \u00f7 4 = 0.25.",
+      "explanation_text": "0.25.",
+      "likely_error_tags": [
+        "fraction_to_decimal_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_decimal_convert_002",
+      "topic_id": "t_fraction_decimal_convert",
+      "secondary_topic_ids": [],
+      "question_text": "Convert 0.6 to a fraction in simplest form.",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "3/5",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.4,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.6,
+      "hint_text": "0.6 = 6/10; simplify.",
+      "explanation_text": "6/10 = 3/5.",
+      "likely_error_tags": [
+        "simplify_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_decimal_convert_003",
+      "topic_id": "t_fraction_decimal_convert",
+      "secondary_topic_ids": [],
+      "question_text": "Which equals 0.125?",
+      "answer_type": "mcq",
+      "choices": [
+        "1/8",
+        "1/4",
+        "1/2",
+        "1/16"
+      ],
+      "correct_answer": "1/8",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.45,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.65,
+      "hint_text": "0.125 = 125/1000; simplify.",
+      "explanation_text": "125/1000 = 1/8.",
+      "likely_error_tags": [
+        "decimal_to_fraction_error"
+      ]
+    },
+    {
+      "id": "q_t_fraction_decimal_convert_004",
+      "topic_id": "t_fraction_decimal_convert",
+      "secondary_topic_ids": [],
+      "question_text": "A cup is 0.75 liters. Write 0.75 as a fraction.",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "3/4",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.4,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.6,
+      "hint_text": "0.75 = 75/100; simplify.",
+      "explanation_text": "75/100 = 3/4.",
+      "likely_error_tags": [
+        "simplify_error"
+      ]
+    },
+    {
+      "id": "q_t_percent_concepts_001",
+      "topic_id": "t_percent_concepts",
+      "secondary_topic_ids": [],
+      "question_text": "What percent is the same as 25/100?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "25",
+      "difficulty_prior": 0.25,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.1,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.4,
+      "hint_text": "Percent means out of 100.",
+      "explanation_text": "25%.",
+      "likely_error_tags": [
+        "percent_definition_error"
+      ]
+    },
+    {
+      "id": "q_t_percent_concepts_002",
+      "topic_id": "t_percent_concepts",
+      "secondary_topic_ids": [],
+      "question_text": "Which best describes 60%?",
+      "answer_type": "mcq",
+      "choices": [
+        "60 out of 10",
+        "6 out of 10",
+        "60 out of 100",
+        "0.6 out of 100"
+      ],
+      "correct_answer": "60 out of 100",
+      "difficulty_prior": 0.35,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.1,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.55,
+      "hint_text": "Percent means per 100.",
+      "explanation_text": "60% = 60 out of 100.",
+      "likely_error_tags": [
+        "percent_definition_error"
+      ]
+    },
+    {
+      "id": "q_t_percent_concepts_003",
+      "topic_id": "t_percent_concepts",
+      "secondary_topic_ids": [],
+      "question_text": "True or False: 150% means more than the whole.",
+      "answer_type": "mcq",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "correct_answer": "True",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.55,
+      "procedural_load": 0.05,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.65,
+      "hint_text": "100% is the whole.",
+      "explanation_text": "150% is 50% more than the whole.",
+      "likely_error_tags": [
+        "percent_over_100_misconception"
+      ]
+    },
+    {
+      "id": "q_t_percent_concepts_004",
+      "topic_id": "t_percent_concepts",
+      "secondary_topic_ids": [],
+      "question_text": "Shade 30% of a 10\u00d710 grid. How many squares?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "30",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.55,
+      "procedural_load": 0.15,
+      "transfer_load": 0.15,
+      "diagnostic_value": 0.6,
+      "hint_text": "A 10\u00d710 grid has 100 squares.",
+      "explanation_text": "30% of 100 is 30.",
+      "likely_error_tags": [
+        "percent_of_100_error"
+      ]
+    },
+    {
+      "id": "q_t_percent_convert_001",
+      "topic_id": "t_percent_convert",
+      "secondary_topic_ids": [],
+      "question_text": "Convert 0.25 to a percent.",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "25%",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.4,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.55,
+      "hint_text": "Multiply by 100.",
+      "explanation_text": "0.25\u00d7100=25%.",
+      "likely_error_tags": [
+        "percent_conversion_error"
+      ]
+    },
+    {
+      "id": "q_t_percent_convert_002",
+      "topic_id": "t_percent_convert",
+      "secondary_topic_ids": [],
+      "question_text": "Convert 40% to a decimal.",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "0.4",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.35,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.45,
+      "hint_text": "Divide by 100.",
+      "explanation_text": "40% = 0.40 = 0.4.",
+      "likely_error_tags": [
+        "percent_conversion_error"
+      ]
+    },
+    {
+      "id": "q_t_percent_convert_003",
+      "topic_id": "t_percent_convert",
+      "secondary_topic_ids": [],
+      "question_text": "Convert 3/5 to a percent.",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "60%",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.45,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.65,
+      "hint_text": "3/5 = 0.6 then convert to percent.",
+      "explanation_text": "0.6 = 60%.",
+      "likely_error_tags": [
+        "fraction_to_percent_error"
+      ]
+    },
+    {
+      "id": "q_t_percent_convert_004",
+      "topic_id": "t_percent_convert",
+      "secondary_topic_ids": [],
+      "question_text": "Which equals 12.5%?",
+      "answer_type": "mcq",
+      "choices": [
+        "0.125",
+        "0.0125",
+        "1.25",
+        "125"
+      ],
+      "correct_answer": "0.125",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.4,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.65,
+      "hint_text": "12.5% = 12.5/100.",
+      "explanation_text": "12.5/100 = 0.125.",
+      "likely_error_tags": [
+        "decimal_shift_error"
+      ]
+    },
+    {
+      "id": "q_t_percent_of_quantity_001",
+      "topic_id": "t_percent_of_quantity",
+      "secondary_topic_ids": [],
+      "question_text": "Find 20% of 50.",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "10",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.35,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.5,
+      "hint_text": "20% = 0.2; multiply.",
+      "explanation_text": "0.2\u00d750=10.",
+      "likely_error_tags": [
+        "percent_of_quantity_error"
+      ]
+    },
+    {
+      "id": "q_t_percent_of_quantity_002",
+      "topic_id": "t_percent_of_quantity",
+      "secondary_topic_ids": [],
+      "question_text": "A shirt costs $40. It is on sale for 25% off. What is the discount amount?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "10",
+      "difficulty_prior": 0.6,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.45,
+      "transfer_load": 0.55,
+      "diagnostic_value": 0.65,
+      "hint_text": "Discount is 25% of 40.",
+      "explanation_text": "0.25\u00d740=10.",
+      "likely_error_tags": [
+        "sale_price_vs_discount_confusion"
+      ]
+    },
+    {
+      "id": "q_t_percent_of_quantity_003",
+      "topic_id": "t_percent_of_quantity",
+      "secondary_topic_ids": [],
+      "question_text": "A test has 80 questions. You got 75% correct. How many correct?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "60",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.45,
+      "transfer_load": 0.55,
+      "diagnostic_value": 0.65,
+      "hint_text": "75% = 3/4; take 3/4 of 80.",
+      "explanation_text": "3/4 of 80 is 60.",
+      "likely_error_tags": [
+        "percent_to_fraction_strategy_missing"
+      ]
+    },
+    {
+      "id": "q_t_percent_of_quantity_004",
+      "topic_id": "t_percent_of_quantity",
+      "secondary_topic_ids": [],
+      "question_text": "A phone costs $200 and sales tax is 8%. What is the tax amount?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "16",
+      "difficulty_prior": 0.7,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.45,
+      "transfer_load": 0.6,
+      "diagnostic_value": 0.7,
+      "hint_text": "Compute 0.08\u00d7200.",
+      "explanation_text": "16.",
+      "likely_error_tags": [
+        "decimal_shift_error"
+      ]
+    },
+    {
+      "id": "q_t_percent_of_quantity_005",
+      "topic_id": "t_percent_of_quantity",
+      "secondary_topic_ids": [],
+      "question_text": "Extra diagnostic (demo) for t_percent_of_quantity: Which choice is most reasonable?",
+      "answer_type": "mcq",
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.55,
+      "hint_text": "Pick B for this demo diagnostic.",
+      "explanation_text": "This is an extra diagnostic item to vary difficulty and triggers in the demo.",
+      "likely_error_tags": [
+        "diagnostic_placeholder"
+      ]
+    },
+    {
+      "id": "q_t_percent_change_001",
+      "topic_id": "t_percent_change",
+      "secondary_topic_ids": [],
+      "question_text": "A price increases from $50 to $60. What is the percent increase?",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "20%",
+      "difficulty_prior": 0.7,
+      "conceptual_load": 0.5,
+      "procedural_load": 0.55,
+      "transfer_load": 0.55,
+      "diagnostic_value": 0.65,
+      "hint_text": "Increase is 10. Divide by original 50.",
+      "explanation_text": "10/50 = 0.2 = 20%.",
+      "likely_error_tags": [
+        "wrong_base_for_percent_change"
+      ]
+    },
+    {
+      "id": "q_t_percent_change_002",
+      "topic_id": "t_percent_change",
+      "secondary_topic_ids": [],
+      "question_text": "A score drops from 80 to 60. What percent decrease is that?",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "25%",
+      "difficulty_prior": 0.75,
+      "conceptual_load": 0.5,
+      "procedural_load": 0.6,
+      "transfer_load": 0.55,
+      "diagnostic_value": 0.7,
+      "hint_text": "Decrease is 20. Divide by original 80.",
+      "explanation_text": "20/80=0.25=25%.",
+      "likely_error_tags": [
+        "wrong_base_for_percent_change"
+      ]
+    },
+    {
+      "id": "q_t_percent_change_003",
+      "topic_id": "t_percent_change",
+      "secondary_topic_ids": [],
+      "question_text": "A value goes from 40 to 30. Which is correct?",
+      "answer_type": "mcq",
+      "choices": [
+        "25% decrease",
+        "10% decrease",
+        "33% decrease",
+        "75% decrease"
+      ],
+      "correct_answer": "25% decrease",
+      "difficulty_prior": 0.7,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.55,
+      "transfer_load": 0.4,
+      "diagnostic_value": 0.65,
+      "hint_text": "Change is 10 out of original 40.",
+      "explanation_text": "10/40=25%.",
+      "likely_error_tags": [
+        "percent_change_error"
+      ]
+    },
+    {
+      "id": "q_t_percent_change_004",
+      "topic_id": "t_percent_change",
+      "secondary_topic_ids": [],
+      "question_text": "Explain what 'percent change' compares.",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "Change relative to the original",
+      "difficulty_prior": 0.6,
+      "conceptual_load": 0.6,
+      "procedural_load": 0.1,
+      "transfer_load": 0.2,
+      "diagnostic_value": 0.5,
+      "hint_text": "Think: what is the base?",
+      "explanation_text": "Percent change compares the change to the original amount.",
+      "likely_error_tags": [
+        "percent_change_concept_gap"
+      ]
+    },
+    {
+      "id": "q_t_percent_change_005",
+      "topic_id": "t_percent_change",
+      "secondary_topic_ids": [],
+      "question_text": "Extra diagnostic (demo) for t_percent_change: Which choice is most reasonable?",
+      "answer_type": "mcq",
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.55,
+      "hint_text": "Pick B for this demo diagnostic.",
+      "explanation_text": "This is an extra diagnostic item to vary difficulty and triggers in the demo.",
+      "likely_error_tags": [
+        "diagnostic_placeholder"
+      ]
+    },
+    {
+      "id": "q_t_ratio_concepts_001",
+      "topic_id": "t_ratio_concepts",
+      "secondary_topic_ids": [],
+      "question_text": "Write the ratio of 3 red to 5 blue as a fraction.",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "3/5",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.55,
+      "hint_text": "Red:Blue = 3:5.",
+      "explanation_text": "3/5.",
+      "likely_error_tags": [
+        "ratio_order_error"
+      ]
+    },
+    {
+      "id": "q_t_ratio_concepts_002",
+      "topic_id": "t_ratio_concepts",
+      "secondary_topic_ids": [],
+      "question_text": "Which shows the same ratio as 2:3?",
+      "answer_type": "mcq",
+      "choices": [
+        "4:5",
+        "4:6",
+        "6:9",
+        "3:6"
+      ],
+      "correct_answer": "4:6",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.35,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.6,
+      "hint_text": "Multiply both parts by the same number.",
+      "explanation_text": "2:3 \u00d72 = 4:6.",
+      "likely_error_tags": [
+        "equivalence_error"
+      ]
+    },
+    {
+      "id": "q_t_ratio_concepts_003",
+      "topic_id": "t_ratio_concepts",
+      "secondary_topic_ids": [],
+      "question_text": "In a class of 12 students, 7 are girls. What is the ratio of girls to total?",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "7/12",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.5,
+      "procedural_load": 0.25,
+      "transfer_load": 0.3,
+      "diagnostic_value": 0.55,
+      "hint_text": "Girls:Total.",
+      "explanation_text": "7/12.",
+      "likely_error_tags": [
+        "part_whole_confusion"
+      ]
+    },
+    {
+      "id": "q_t_ratio_concepts_004",
+      "topic_id": "t_ratio_concepts",
+      "secondary_topic_ids": [],
+      "question_text": "Which is a part-to-part ratio?",
+      "answer_type": "mcq",
+      "choices": [
+        "3/10",
+        "3 out of 10",
+        "3:7",
+        "30%"
+      ],
+      "correct_answer": "3:7",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.55,
+      "procedural_load": 0.1,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.6,
+      "hint_text": "Part-to-part compares two parts, not part to whole.",
+      "explanation_text": "3:7 compares two parts.",
+      "likely_error_tags": [
+        "ratio_type_confusion"
+      ]
+    },
+    {
+      "id": "q_t_unit_rate_001",
+      "topic_id": "t_unit_rate",
+      "secondary_topic_ids": [],
+      "question_text": "A car travels 150 km in 3 hours. What is the unit rate (km per hour)?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "50",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.4,
+      "transfer_load": 0.35,
+      "diagnostic_value": 0.6,
+      "hint_text": "Divide 150 by 3.",
+      "explanation_text": "50 km/h.",
+      "likely_error_tags": [
+        "unit_rate_division_error"
+      ]
+    },
+    {
+      "id": "q_t_unit_rate_002",
+      "topic_id": "t_unit_rate",
+      "secondary_topic_ids": [],
+      "question_text": "6 apples cost $3. What is the cost per apple?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "0.5",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.4,
+      "transfer_load": 0.35,
+      "diagnostic_value": 0.55,
+      "hint_text": "Divide 3 by 6.",
+      "explanation_text": "$0.50 per apple.",
+      "likely_error_tags": [
+        "divide_wrong_way"
+      ]
+    },
+    {
+      "id": "q_t_unit_rate_003",
+      "topic_id": "t_unit_rate",
+      "secondary_topic_ids": [],
+      "question_text": "Which is a unit rate?",
+      "answer_type": "mcq",
+      "choices": [
+        "5 miles in 2 hours",
+        "2:3",
+        "$4 per 1 item",
+        "25%"
+      ],
+      "correct_answer": "$4 per 1 item",
+      "difficulty_prior": 0.5,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.15,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.55,
+      "hint_text": "Unit rate is per 1 unit.",
+      "explanation_text": "$4 per 1 item is per 1.",
+      "likely_error_tags": [
+        "definition_error"
+      ]
+    },
+    {
+      "id": "q_t_unit_rate_004",
+      "topic_id": "t_unit_rate",
+      "secondary_topic_ids": [],
+      "question_text": "A faucet fills 12 liters in 4 minutes. Unit rate?",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "3 liters per minute",
+      "difficulty_prior": 0.6,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.35,
+      "transfer_load": 0.35,
+      "diagnostic_value": 0.55,
+      "hint_text": "Divide 12 by 4.",
+      "explanation_text": "3 liters per minute.",
+      "likely_error_tags": [
+        "unit_rate_division_error"
+      ]
+    },
+    {
+      "id": "q_t_unit_rate_005",
+      "topic_id": "t_unit_rate",
+      "secondary_topic_ids": [],
+      "question_text": "Extra diagnostic (demo) for t_unit_rate: Which choice is most reasonable?",
+      "answer_type": "mcq",
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.55,
+      "hint_text": "Pick B for this demo diagnostic.",
+      "explanation_text": "This is an extra diagnostic item to vary difficulty and triggers in the demo.",
+      "likely_error_tags": [
+        "diagnostic_placeholder"
+      ]
+    },
+    {
+      "id": "q_t_proportions_001",
+      "topic_id": "t_proportions",
+      "secondary_topic_ids": [],
+      "question_text": "Solve: 2/3 = x/12",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "8",
+      "difficulty_prior": 0.7,
+      "conceptual_load": 0.5,
+      "procedural_load": 0.6,
+      "transfer_load": 0.15,
+      "diagnostic_value": 0.65,
+      "hint_text": "Cross-multiply: 2\u00d712 = 3\u00d7x.",
+      "explanation_text": "24 = 3x so x=8.",
+      "likely_error_tags": [
+        "cross_multiply_error"
+      ]
+    },
+    {
+      "id": "q_t_proportions_002",
+      "topic_id": "t_proportions",
+      "secondary_topic_ids": [],
+      "question_text": "Which relationship is proportional?",
+      "answer_type": "mcq",
+      "choices": [
+        "y=2x",
+        "y=2x+1",
+        "y=x^2",
+        "y=3"
+      ],
+      "correct_answer": "y=2x",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.55,
+      "procedural_load": 0.2,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.6,
+      "hint_text": "Proportional means a constant ratio and passes through (0,0).",
+      "explanation_text": "y=2x is proportional.",
+      "likely_error_tags": [
+        "proportional_definition_error"
+      ]
+    },
+    {
+      "id": "q_t_proportions_003",
+      "topic_id": "t_proportions",
+      "secondary_topic_ids": [],
+      "question_text": "If 5 notebooks cost $15, how much do 8 notebooks cost (same price each)?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "24",
+      "difficulty_prior": 0.7,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.55,
+      "transfer_load": 0.45,
+      "diagnostic_value": 0.65,
+      "hint_text": "Find unit rate: 15/5=3, then 3\u00d78.",
+      "explanation_text": "24.",
+      "likely_error_tags": [
+        "unit_rate_missing"
+      ]
+    },
+    {
+      "id": "q_t_proportions_004",
+      "topic_id": "t_proportions",
+      "secondary_topic_ids": [],
+      "question_text": "Explain what it means for two ratios to be equivalent.",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "They represent the same relationship",
+      "difficulty_prior": 0.6,
+      "conceptual_load": 0.6,
+      "procedural_load": 0.1,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.45,
+      "hint_text": "Think: scaling both parts.",
+      "explanation_text": "Equivalent ratios can be made by multiplying/dividing both parts by the same number.",
+      "likely_error_tags": [
+        "concept_gap"
+      ]
+    },
+    {
+      "id": "q_t_proportions_005",
+      "topic_id": "t_proportions",
+      "secondary_topic_ids": [],
+      "question_text": "Extra diagnostic (demo) for t_proportions: Which choice is most reasonable?",
+      "answer_type": "mcq",
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.55,
+      "hint_text": "Pick B for this demo diagnostic.",
+      "explanation_text": "This is an extra diagnostic item to vary difficulty and triggers in the demo.",
+      "likely_error_tags": [
+        "diagnostic_placeholder"
+      ]
+    },
+    {
+      "id": "q_t_scale_drawings_001",
+      "topic_id": "t_scale_drawings",
+      "secondary_topic_ids": [],
+      "question_text": "A map scale is 1 cm : 5 km. If two towns are 4 cm apart on the map, how far apart are they?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "20",
+      "difficulty_prior": 0.7,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.55,
+      "transfer_load": 0.55,
+      "diagnostic_value": 0.65,
+      "hint_text": "Multiply 4 by 5.",
+      "explanation_text": "20 km.",
+      "likely_error_tags": [
+        "scale_factor_error"
+      ]
+    },
+    {
+      "id": "q_t_scale_drawings_002",
+      "topic_id": "t_scale_drawings",
+      "secondary_topic_ids": [],
+      "question_text": "A scale factor of 2 means the drawing is:",
+      "answer_type": "mcq",
+      "choices": [
+        "Half size",
+        "Same size",
+        "Double size",
+        "Quarter size"
+      ],
+      "correct_answer": "Double size",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.55,
+      "procedural_load": 0.15,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.55,
+      "hint_text": "Scale factor multiplies lengths.",
+      "explanation_text": "Lengths double.",
+      "likely_error_tags": [
+        "scale_definition_error"
+      ]
+    },
+    {
+      "id": "q_t_scale_drawings_003",
+      "topic_id": "t_scale_drawings",
+      "secondary_topic_ids": [],
+      "question_text": "A model is built at scale 1:10. A real length is 80 cm. Model length?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "8",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.45,
+      "transfer_load": 0.4,
+      "diagnostic_value": 0.55,
+      "hint_text": "Divide by 10.",
+      "explanation_text": "8 cm.",
+      "likely_error_tags": [
+        "invert_scale_error"
+      ]
+    },
+    {
+      "id": "q_t_scale_drawings_004",
+      "topic_id": "t_scale_drawings",
+      "secondary_topic_ids": [],
+      "question_text": "Explain what a scale means in one sentence.",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "It shows how drawing lengths compare to real lengths",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.6,
+      "procedural_load": 0.1,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.4,
+      "hint_text": "Think: drawing vs real.",
+      "explanation_text": "A scale tells how much real lengths are reduced or enlarged in a drawing.",
+      "likely_error_tags": [
+        "definition_error"
+      ]
+    },
+    {
+      "id": "q_t_scale_drawings_005",
+      "topic_id": "t_scale_drawings",
+      "secondary_topic_ids": [],
+      "question_text": "Extra diagnostic (demo) for t_scale_drawings: Which choice is most reasonable?",
+      "answer_type": "mcq",
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.55,
+      "hint_text": "Pick B for this demo diagnostic.",
+      "explanation_text": "This is an extra diagnostic item to vary difficulty and triggers in the demo.",
+      "likely_error_tags": [
+        "diagnostic_placeholder"
+      ]
+    },
+    {
+      "id": "q_t_simple_equations_1step_001",
+      "topic_id": "t_simple_equations_1step",
+      "secondary_topic_ids": [],
+      "question_text": "Solve: x + 7 = 19",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "12",
+      "difficulty_prior": 0.4,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.3,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.55,
+      "hint_text": "Subtract 7 from both sides.",
+      "explanation_text": "x=12.",
+      "likely_error_tags": [
+        "inverse_operation_error"
+      ]
+    },
+    {
+      "id": "q_t_simple_equations_1step_002",
+      "topic_id": "t_simple_equations_1step",
+      "secondary_topic_ids": [],
+      "question_text": "Solve: 5x = 35",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "7",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.35,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.55,
+      "hint_text": "Divide by 5.",
+      "explanation_text": "x=7.",
+      "likely_error_tags": [
+        "divide_wrong_side"
+      ]
+    },
+    {
+      "id": "q_t_simple_equations_1step_003",
+      "topic_id": "t_simple_equations_1step",
+      "secondary_topic_ids": [],
+      "question_text": "Solve: x \u2212 9 = 4",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "13",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.3,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.6,
+      "hint_text": "Add 9 to both sides.",
+      "explanation_text": "x=13.",
+      "likely_error_tags": [
+        "inverse_operation_error"
+      ]
+    },
+    {
+      "id": "q_t_simple_equations_1step_004",
+      "topic_id": "t_simple_equations_1step",
+      "secondary_topic_ids": [],
+      "question_text": "A number minus 6 equals 15. What is the number?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "21",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.3,
+      "transfer_load": 0.35,
+      "diagnostic_value": 0.65,
+      "hint_text": "x\u22126=15.",
+      "explanation_text": "x=21.",
+      "likely_error_tags": [
+        "word_to_equation_error"
+      ]
+    },
+    {
+      "id": "q_t_expressions_distribute_001",
+      "topic_id": "t_expressions_distribute",
+      "secondary_topic_ids": [],
+      "question_text": "Simplify: 3(2x + 4)",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "6x+12",
+      "difficulty_prior": 0.6,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.55,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.6,
+      "hint_text": "Multiply 3 by both terms.",
+      "explanation_text": "3\u00d72x=6x and 3\u00d74=12 \u2192 6x+12.",
+      "likely_error_tags": [
+        "distribution_error"
+      ]
+    },
+    {
+      "id": "q_t_expressions_distribute_002",
+      "topic_id": "t_expressions_distribute",
+      "secondary_topic_ids": [],
+      "question_text": "Simplify: 5x + 2x \u2212 3",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "7x-3",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.55,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.55,
+      "hint_text": "Combine like terms.",
+      "explanation_text": "5x+2x=7x, so 7x\u22123.",
+      "likely_error_tags": [
+        "combine_like_terms_error"
+      ]
+    },
+    {
+      "id": "q_t_expressions_distribute_003",
+      "topic_id": "t_expressions_distribute",
+      "secondary_topic_ids": [],
+      "question_text": "Which equals 2(x+3)?",
+      "answer_type": "mcq",
+      "choices": [
+        "2x+3",
+        "2x+6",
+        "x+6",
+        "2x+9"
+      ],
+      "correct_answer": "2x+6",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.45,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.6,
+      "hint_text": "Distribute 2.",
+      "explanation_text": "2x+6.",
+      "likely_error_tags": [
+        "distribution_error"
+      ]
+    },
+    {
+      "id": "q_t_expressions_distribute_004",
+      "topic_id": "t_expressions_distribute",
+      "secondary_topic_ids": [],
+      "question_text": "Simplify: \u2212(x \u2212 5)",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "\u2212x+5",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.55,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.65,
+      "hint_text": "Multiply everything inside by \u22121.",
+      "explanation_text": "\u2212x + 5.",
+      "likely_error_tags": [
+        "negative_distribution_error"
+      ]
+    },
+    {
+      "id": "q_t_simple_equations_2step_001",
+      "topic_id": "t_simple_equations_2step",
+      "secondary_topic_ids": [],
+      "question_text": "Solve: 3x + 5 = 20",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "5",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.55,
+      "transfer_load": 0.15,
+      "diagnostic_value": 0.65,
+      "hint_text": "Subtract 5, then divide by 3.",
+      "explanation_text": "3x=15 so x=5.",
+      "likely_error_tags": [
+        "order_of_inverse_ops_error"
+      ]
+    },
+    {
+      "id": "q_t_simple_equations_2step_002",
+      "topic_id": "t_simple_equations_2step",
+      "secondary_topic_ids": [],
+      "question_text": "Solve: 4x \u2212 8 = 12",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "5",
+      "difficulty_prior": 0.7,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.6,
+      "transfer_load": 0.15,
+      "diagnostic_value": 0.65,
+      "hint_text": "Add 8, then divide by 4.",
+      "explanation_text": "4x=20 so x=5.",
+      "likely_error_tags": [
+        "inverse_operation_error"
+      ]
+    },
+    {
+      "id": "q_t_simple_equations_2step_003",
+      "topic_id": "t_simple_equations_2step",
+      "secondary_topic_ids": [],
+      "question_text": "Which is the first step to solve 2x + 7 = 15?",
+      "answer_type": "mcq",
+      "choices": [
+        "Divide by 2",
+        "Subtract 7",
+        "Add 7",
+        "Multiply by 2"
+      ],
+      "correct_answer": "Subtract 7",
+      "difficulty_prior": 0.6,
+      "conceptual_load": 0.55,
+      "procedural_load": 0.2,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.6,
+      "hint_text": "Undo +7 first.",
+      "explanation_text": "Subtract 7 from both sides first.",
+      "likely_error_tags": [
+        "procedure_confusion"
+      ]
+    },
+    {
+      "id": "q_t_simple_equations_2step_004",
+      "topic_id": "t_simple_equations_2step",
+      "secondary_topic_ids": [],
+      "question_text": "Check the solution x=3 for 5x\u22121=14. Is it correct? (yes/no)",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "yes",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.4,
+      "transfer_load": 0.15,
+      "diagnostic_value": 0.55,
+      "hint_text": "Substitute x=3.",
+      "explanation_text": "5(3)\u22121=15\u22121=14, so yes.",
+      "likely_error_tags": [
+        "substitution_error"
+      ]
+    },
+    {
+      "id": "q_t_simple_equations_2step_005",
+      "topic_id": "t_simple_equations_2step",
+      "secondary_topic_ids": [],
+      "question_text": "Extra diagnostic (demo) for t_simple_equations_2step: Which choice is most reasonable?",
+      "answer_type": "mcq",
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.55,
+      "hint_text": "Pick B for this demo diagnostic.",
+      "explanation_text": "This is an extra diagnostic item to vary difficulty and triggers in the demo.",
+      "likely_error_tags": [
+        "diagnostic_placeholder"
+      ]
+    },
+    {
+      "id": "q_t_geometry_angle_basics_001",
+      "topic_id": "t_geometry_angle_basics",
+      "secondary_topic_ids": [],
+      "question_text": "What is the measure of a straight angle?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "180",
+      "difficulty_prior": 0.25,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.1,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.35,
+      "hint_text": "A straight line is 180\u00b0.",
+      "explanation_text": "180.",
+      "likely_error_tags": [
+        "angle_definition_error"
+      ]
+    },
+    {
+      "id": "q_t_geometry_angle_basics_002",
+      "topic_id": "t_geometry_angle_basics",
+      "secondary_topic_ids": [],
+      "question_text": "Two angles are complementary. One is 35\u00b0. What is the other?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "55",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.3,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.55,
+      "hint_text": "Complementary angles sum to 90\u00b0.",
+      "explanation_text": "90\u221235=55.",
+      "likely_error_tags": [
+        "complementary_sum_error"
+      ]
+    },
+    {
+      "id": "q_t_geometry_angle_basics_003",
+      "topic_id": "t_geometry_angle_basics",
+      "secondary_topic_ids": [],
+      "question_text": "Two angles are supplementary. One is 110\u00b0. What is the other?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "70",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.3,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.55,
+      "hint_text": "Supplementary angles sum to 180\u00b0.",
+      "explanation_text": "180\u2212110=70.",
+      "likely_error_tags": [
+        "supplementary_sum_error"
+      ]
+    },
+    {
+      "id": "q_t_geometry_angle_basics_004",
+      "topic_id": "t_geometry_angle_basics",
+      "secondary_topic_ids": [],
+      "question_text": "An acute angle is:",
+      "answer_type": "mcq",
+      "choices": [
+        "less than 90\u00b0",
+        "exactly 90\u00b0",
+        "between 90\u00b0 and 180\u00b0",
+        "exactly 180\u00b0"
+      ],
+      "correct_answer": "less than 90\u00b0",
+      "difficulty_prior": 0.3,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.1,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.45,
+      "hint_text": "Acute means small.",
+      "explanation_text": "Acute angles are less than 90\u00b0.",
+      "likely_error_tags": [
+        "angle_type_confusion"
+      ]
+    },
+    {
+      "id": "q_t_area_perimeter_001",
+      "topic_id": "t_area_perimeter",
+      "secondary_topic_ids": [],
+      "question_text": "A rectangle is 8 cm by 3 cm. What is its perimeter?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "22",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.55,
+      "transfer_load": 0.2,
+      "diagnostic_value": 0.55,
+      "hint_text": "Perimeter = 2(l+w).",
+      "explanation_text": "2(8+3)=22.",
+      "likely_error_tags": [
+        "formula_confusion"
+      ]
+    },
+    {
+      "id": "q_t_area_perimeter_002",
+      "topic_id": "t_area_perimeter",
+      "secondary_topic_ids": [],
+      "question_text": "A rectangle is 8 cm by 3 cm. What is its area?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "24",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.35,
+      "procedural_load": 0.55,
+      "transfer_load": 0.2,
+      "diagnostic_value": 0.55,
+      "hint_text": "Area = l\u00d7w.",
+      "explanation_text": "8\u00d73=24.",
+      "likely_error_tags": [
+        "area_perimeter_confusion"
+      ]
+    },
+    {
+      "id": "q_t_area_perimeter_003",
+      "topic_id": "t_area_perimeter",
+      "secondary_topic_ids": [],
+      "question_text": "A triangle has base 10 cm and height 6 cm. What is its area?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "30",
+      "difficulty_prior": 0.6,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.6,
+      "transfer_load": 0.2,
+      "diagnostic_value": 0.6,
+      "hint_text": "Area = 1/2 \u00d7 base \u00d7 height.",
+      "explanation_text": "1/2\u00d710\u00d76=30.",
+      "likely_error_tags": [
+        "missing_half_factor"
+      ]
+    },
+    {
+      "id": "q_t_area_perimeter_004",
+      "topic_id": "t_area_perimeter",
+      "secondary_topic_ids": [],
+      "question_text": "Explain the difference between area and perimeter.",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "Area is inside; perimeter is boundary",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.6,
+      "procedural_load": 0.1,
+      "transfer_load": 0.15,
+      "diagnostic_value": 0.45,
+      "hint_text": "Think inside vs around.",
+      "explanation_text": "Area measures the inside space; perimeter measures the distance around.",
+      "likely_error_tags": [
+        "concept_gap"
+      ]
+    },
+    {
+      "id": "q_t_area_perimeter_005",
+      "topic_id": "t_area_perimeter",
+      "secondary_topic_ids": [],
+      "question_text": "Extra diagnostic (demo) for t_area_perimeter: Which choice is most reasonable?",
+      "answer_type": "mcq",
+      "choices": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "correct_answer": "B",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.2,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.55,
+      "hint_text": "Pick B for this demo diagnostic.",
+      "explanation_text": "This is an extra diagnostic item to vary difficulty and triggers in the demo.",
+      "likely_error_tags": [
+        "diagnostic_placeholder"
+      ]
+    },
+    {
+      "id": "q_t_circle_basics_001",
+      "topic_id": "t_circle_basics",
+      "secondary_topic_ids": [],
+      "question_text": "A circle has radius 5 cm. What is its diameter?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "10",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.4,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.5,
+      "hint_text": "Diameter = 2\u00d7radius.",
+      "explanation_text": "10 cm.",
+      "likely_error_tags": [
+        "radius_diameter_confusion"
+      ]
+    },
+    {
+      "id": "q_t_circle_basics_002",
+      "topic_id": "t_circle_basics",
+      "secondary_topic_ids": [],
+      "question_text": "Name the line segment from the center to the circle.",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "radius",
+      "difficulty_prior": 0.35,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.05,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.4,
+      "hint_text": "It starts at the center.",
+      "explanation_text": "Radius.",
+      "likely_error_tags": [
+        "vocabulary_error"
+      ]
+    },
+    {
+      "id": "q_t_circle_basics_003",
+      "topic_id": "t_circle_basics",
+      "secondary_topic_ids": [],
+      "question_text": "Use \u03c0\u22483.14. A circle has diameter 10 cm. Estimate its circumference.",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "31.4",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.55,
+      "transfer_load": 0.2,
+      "diagnostic_value": 0.55,
+      "hint_text": "Circumference \u2248 \u03c0\u00d7d.",
+      "explanation_text": "3.14\u00d710=31.4.",
+      "likely_error_tags": [
+        "formula_error"
+      ]
+    },
+    {
+      "id": "q_t_circle_basics_004",
+      "topic_id": "t_circle_basics",
+      "secondary_topic_ids": [],
+      "question_text": "If the radius doubles, the circumference:",
+      "answer_type": "mcq",
+      "choices": [
+        "stays same",
+        "doubles",
+        "triples",
+        "halves"
+      ],
+      "correct_answer": "doubles",
+      "difficulty_prior": 0.7,
+      "conceptual_load": 0.55,
+      "procedural_load": 0.25,
+      "transfer_load": 0.25,
+      "diagnostic_value": 0.6,
+      "hint_text": "C = 2\u03c0r.",
+      "explanation_text": "If r doubles, C doubles.",
+      "likely_error_tags": [
+        "proportional_reasoning_error"
+      ]
+    },
+    {
+      "id": "q_t_volume_rect_prism_001",
+      "topic_id": "t_volume_rect_prism",
+      "secondary_topic_ids": [],
+      "question_text": "Find the volume of a box 4 cm \u00d7 3 cm \u00d7 5 cm.",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "60",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.4,
+      "procedural_load": 0.6,
+      "transfer_load": 0.2,
+      "diagnostic_value": 0.55,
+      "hint_text": "Volume = l\u00d7w\u00d7h.",
+      "explanation_text": "4\u00d73\u00d75=60 cubic cm.",
+      "likely_error_tags": [
+        "multiply_error"
+      ]
+    },
+    {
+      "id": "q_t_volume_rect_prism_002",
+      "topic_id": "t_volume_rect_prism",
+      "secondary_topic_ids": [],
+      "question_text": "A rectangular prism has base 6 cm by 2 cm and height 5 cm. Volume?",
+      "answer_type": "numeric",
+      "choices": [],
+      "correct_answer": "60",
+      "difficulty_prior": 0.65,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.6,
+      "transfer_load": 0.2,
+      "diagnostic_value": 0.55,
+      "hint_text": "Base area \u00d7 height.",
+      "explanation_text": "(6\u00d72)\u00d75=60.",
+      "likely_error_tags": [
+        "formula_confusion"
+      ]
+    },
+    {
+      "id": "q_t_volume_rect_prism_003",
+      "topic_id": "t_volume_rect_prism",
+      "secondary_topic_ids": [],
+      "question_text": "Volume is measured in:",
+      "answer_type": "mcq",
+      "choices": [
+        "cm",
+        "cm^2",
+        "cm^3",
+        "degrees"
+      ],
+      "correct_answer": "cm^3",
+      "difficulty_prior": 0.45,
+      "conceptual_load": 0.45,
+      "procedural_load": 0.1,
+      "transfer_load": 0.05,
+      "diagnostic_value": 0.45,
+      "hint_text": "Think cubes.",
+      "explanation_text": "Cubic units (cm^3).",
+      "likely_error_tags": [
+        "units_error"
+      ]
+    },
+    {
+      "id": "q_t_volume_rect_prism_004",
+      "topic_id": "t_volume_rect_prism",
+      "secondary_topic_ids": [],
+      "question_text": "Explain in one sentence what volume means.",
+      "answer_type": "short_text",
+      "choices": [],
+      "correct_answer": "How much space an object takes up",
+      "difficulty_prior": 0.55,
+      "conceptual_load": 0.6,
+      "procedural_load": 0.1,
+      "transfer_load": 0.1,
+      "diagnostic_value": 0.4,
+      "hint_text": "Space inside.",
+      "explanation_text": "Volume is the amount of space inside or taken up by a 3D object.",
+      "likely_error_tags": [
+        "concept_gap"
+      ]
+    }
+  ]
+}

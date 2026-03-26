@@ -68,7 +68,10 @@
             <li>
               <span class="badge badgeStrong">{{ x.status }}</span>
               <a href="/ui/students/{{ student_id }}/practice/{{ x.topic.id }}">{{ x.topic.title }}</a>
-              <div class="muted small">mastery {{ "%.2f"|format(x.state.mastery_score) }}, fragility {{ "%.2f"|format(x.state.fragility_score) }}</div>
+              <div class="muted small">
+                student mastery {{ "%.2f"|format(x.state.mastery_score) }}, fragility {{ "%.2f"|format(x.state.fragility_score) }}
+                · population-calibrated difficulty {{ "%.2f"|format(x.pop_calibrated) }}
+              </div>
             </li>
           {% endfor %}
         </ul>
@@ -85,7 +88,10 @@
             <li>
               <span class="badge badgeWeak">{{ x.status }}</span>
               <a href="/ui/students/{{ student_id }}/practice/{{ x.topic.id }}">{{ x.topic.title }}</a>
-              <div class="muted small">mastery {{ "%.2f"|format(x.state.mastery_score) }}, fluency {{ "%.2f"|format(x.state.fluency_score) }}</div>
+              <div class="muted small">
+                student mastery {{ "%.2f"|format(x.state.mastery_score) }}, fluency {{ "%.2f"|format(x.state.fluency_score) }}
+                · population-calibrated difficulty {{ "%.2f"|format(x.pop_calibrated) }}
+              </div>
             </li>
           {% endfor %}
         </ul>
@@ -102,7 +108,10 @@
             <li>
               <span class="badge badgeFragile">{{ x.status }}</span>
               <a href="/ui/students/{{ student_id }}/practice/{{ x.topic.id }}">{{ x.topic.title }}</a>
-              <div class="muted small">fragility {{ "%.2f"|format(x.state.fragility_score) }}, mastery {{ "%.2f"|format(x.state.mastery_score) }}</div>
+              <div class="muted small">
+                student fragility {{ "%.2f"|format(x.state.fragility_score) }}, mastery {{ "%.2f"|format(x.state.mastery_score) }}
+                · population-calibrated difficulty {{ "%.2f"|format(x.pop_calibrated) }}
+              </div>
             </li>
           {% endfor %}
         </ul>

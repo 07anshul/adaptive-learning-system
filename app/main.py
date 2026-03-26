@@ -22,10 +22,12 @@ from app.repo.attempt_repo import (
     list_recent_attempts_for_topic,
 )
 from app.repo.edge_repo import get_prereq_topic_ids, list_edges_for_topic
+from app.repo.edge_repo import get_encompassing_parent_ids, get_edge_weight
 from app.repo.question_repo import get_question, list_questions_by_topic
 from app.repo.student_state_repo import get_student_topic_state, upsert_student_topic_state
 from app.repo.topic_repo import get_topic, list_topics
 from app.repo.population_repo import update_population_from_attempt, ensure_population_priors, get_population_question_difficulty, get_population_topic_difficulty
+from app.repo.state_propagation import apply_soft_neighbor_update
 
 
 app = FastAPI(title="Adaptive Learning System (Demo API)")
@@ -135,6 +137,11 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
 
         topic_id = req.topic_id or q.topic_id
 
+        # Use population-calibrated difficulty as the active prior (separate from student state).
+        pop_q = get_population_question_difficulty(conn, q.id)
+        if pop_q is not None:
+            q = q.model_copy(update={"difficulty_prior": pop_q[1]})
+
         # Save attempt
         att = Attempt(
             id=f"att_{uuid.uuid4().hex[:12]}",
@@ -160,6 +167,35 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
         # Update global population calibration (separate from student state)
         with conn:
             update_population_from_attempt(conn, attempt=att, question=q)
+
+        # Optional conservative neighbor-topic propagation (only if edges exist)
+        with conn:
+            prereqs = get_prereq_topic_ids(conn, topic_id)
+            for pid in prereqs:
+                w = get_edge_weight(conn, pid, topic_id, "prerequisite")
+                apply_soft_neighbor_update(
+                    conn,
+                    student_id=req.student_id,
+                    topic_id=pid,
+                    mastery_delta=upd.mastery_delta,
+                    fragility_delta=upd.fragility_delta,
+                    fluency_delta=upd.fluency_delta,
+                    weight=w,
+                    scale=0.08,
+                )
+            parents = get_encompassing_parent_ids(conn, topic_id)
+            for parent_id in parents:
+                w = get_edge_weight(conn, parent_id, topic_id, "encompassing")
+                apply_soft_neighbor_update(
+                    conn,
+                    student_id=req.student_id,
+                    topic_id=parent_id,
+                    mastery_delta=upd.mastery_delta,
+                    fragility_delta=upd.fragility_delta,
+                    fluency_delta=upd.fluency_delta,
+                    weight=w,
+                    scale=0.06,
+                )
 
         # Diagnosis inputs
         prereq_topic_ids = get_prereq_topic_ids(conn, topic_id)
@@ -224,7 +260,6 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
             next_topic_title=next_topic_title,
         )
 
-        pop_q = get_population_question_difficulty(conn, q.id)
         pop_t = get_population_topic_difficulty(conn, topic_id)
 
         return AttemptCreateResponse(

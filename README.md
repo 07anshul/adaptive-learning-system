@@ -39,10 +39,11 @@ python -m venv .venv
 .venv/bin/python scripts/seed_graph.py
 ```
 
-### Seed Grade 7 Mathematics questions (first 12 topics)
+### Generate + seed Grade 7 Mathematics questions (~150)
 
 ```bash
-.venv/bin/python scripts/seed_questions.py
+.venv/bin/python scripts/generate_questions_all.py
+.venv/bin/python scripts/seed_questions_all.py
 ```
 
 ### Simulate demo students (6–10 profiles)

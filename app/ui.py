@@ -16,11 +16,12 @@ from app.core.scoring import default_state, update_student_topic_state
 from app.db import connect, init_db
 from app.models.domain import Attempt, Question, StudentTopicState
 from app.repo.attempt_repo import insert_attempt, list_recent_attempts
-from app.repo.edge_repo import get_prereq_topic_ids, list_edges_for_topic
+from app.repo.edge_repo import get_prereq_topic_ids, list_edges_for_topic, get_encompassing_parent_ids, get_edge_weight
 from app.repo.question_repo import get_question, list_questions_by_topic
 from app.repo.population_repo import ensure_population_priors, get_population_topic_difficulty, get_population_question_difficulty, update_population_from_attempt
 from app.repo.student_state_repo import get_student_topic_state, upsert_student_topic_state
 from app.repo.topic_repo import get_topic, list_topics
+from app.repo.state_propagation import apply_soft_neighbor_update
 
 
 router = APIRouter()
@@ -281,6 +282,10 @@ def ui_submit_attempt(
         q = get_question(conn, question_id)
         if q is None:
             raise HTTPException(status_code=404, detail="question_not_found")
+        # Use population-calibrated difficulty as the active prior.
+        pop_qd = get_population_question_difficulty(conn, q.id)
+        if pop_qd is not None:
+            q = q.model_copy(update={"difficulty_prior": pop_qd[1]})
         topic = get_topic(conn, topic_id)
         if topic is None:
             raise HTTPException(status_code=404, detail="topic_not_found")
@@ -311,6 +316,35 @@ def ui_submit_attempt(
         # Update population calibration (global, not tied to this student)
         with conn:
             update_population_from_attempt(conn, attempt=att, question=q)
+
+        # Optional conservative neighbor-topic propagation (only if edges exist)
+        with conn:
+            prereqs = get_prereq_topic_ids(conn, topic_id)
+            for pid in prereqs:
+                w = get_edge_weight(conn, pid, topic_id, "prerequisite")
+                apply_soft_neighbor_update(
+                    conn,
+                    student_id=student_id,
+                    topic_id=pid,
+                    mastery_delta=upd.mastery_delta,
+                    fragility_delta=upd.fragility_delta,
+                    fluency_delta=upd.fluency_delta,
+                    weight=w,
+                    scale=0.08,
+                )
+            parents = get_encompassing_parent_ids(conn, topic_id)
+            for parent_id in parents:
+                w = get_edge_weight(conn, parent_id, topic_id, "encompassing")
+                apply_soft_neighbor_update(
+                    conn,
+                    student_id=student_id,
+                    topic_id=parent_id,
+                    mastery_delta=upd.mastery_delta,
+                    fragility_delta=upd.fragility_delta,
+                    fluency_delta=upd.fluency_delta,
+                    weight=w,
+                    scale=0.06,
+                )
 
         prereq_ids = get_prereq_topic_ids(conn, topic_id)
         prereq_states = []
