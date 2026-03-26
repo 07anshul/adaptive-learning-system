@@ -51,6 +51,12 @@ python -m venv .venv
 .venv/bin/python scripts/simulate_students.py
 ```
 
+### Fresh student mode (no personal history)
+
+```bash
+.venv/bin/python scripts/reset_fresh_student.py
+```
+
 ### Quick sanity check (counts)
 
 ```bash

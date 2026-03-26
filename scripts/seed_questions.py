@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from app.db import connect, init_db  # noqa: E402
+from app.repo.population_repo import ensure_population_priors  # noqa: E402
 
 
 SEED_PATH = Path("data/grade7_math_questions_seed_12topics.json")
@@ -52,6 +53,12 @@ def seed_questions(seed_path: Path = SEED_PATH) -> None:
 
 def main() -> None:
     seed_questions()
+    # Ensure population priors exist after question insert.
+    conn = connect()
+    init_db(conn)
+    with conn:
+        ensure_population_priors(conn)
+    conn.close()
     print(f"OK: seeded questions from {SEED_PATH}")
 
 

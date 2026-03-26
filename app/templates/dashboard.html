@@ -3,6 +3,31 @@
   <div class="pageHeader">
     <h1>Student dashboard</h1>
     <p class="lead">Student: <span class="mono">{{ student_id }}</span>. Focus: show scoring, fragility, diagnosis, and next step.</p>
+    <div class="card" style="margin-top:12px;">
+      <div class="grid2">
+        <div>
+          <div class="muted small">Select student</div>
+          <form method="post" action="/ui/select-student" class="form" style="margin-top:8px;">
+            <select class="input" name="student_id">
+              {% for s in student_list %}
+                <option value="{{ s.id }}" {% if s.id==student_id %}selected{% endif %}>{{ s.display_name }} ({{ s.id }})</option>
+              {% endfor %}
+            </select>
+            <div class="actions">
+              <button class="btn btnPrimary" type="submit">Switch</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <div class="muted small">About the separation</div>
+          {% if is_fresh %}
+            <p class="muted">This student has <strong>no personal attempt history</strong>. The demo uses <strong>population-calibrated difficulty</strong> for priors, but <strong>student-specific mastery</strong> starts neutral and updates only after this student attempts questions.</p>
+          {% else %}
+            <p class="muted">This student has historical attempts. Topic difficulty shown in the UI uses <strong>population-calibrated difficulty</strong>, while mastery/fragility/fluency are <strong>student-specific</strong>.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="grid2">
@@ -21,7 +46,7 @@
 
     <div class="card">
       <h2>Topic health panel</h2>
-      <div class="muted small">Labels are based on mastery/fragility. Goal: quickly spot Weak/Fragile topics.</div>
+      <div class="muted small">Labels are based on <strong>student-specific mastery</strong> and fragility. Difficulty uses <strong>population-calibrated difficulty</strong> (global).</div>
       <div class="badgeRow">
         <span class="badge badgeStrong">Strong</span>
         <span class="badge badgeOkay">Okay</span>

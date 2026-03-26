@@ -105,3 +105,35 @@ CREATE TABLE IF NOT EXISTS student_topic_state (
 
 CREATE INDEX IF NOT EXISTS idx_state_topic ON student_topic_state(topic_id);
 
+-- ---------- Population calibration (global aggregates) ----------
+-- Interpretable aggregates updated from attempts.
+-- Store priors separately from calibrated values.
+
+CREATE TABLE IF NOT EXISTS population_question_stats (
+  question_id TEXT PRIMARY KEY,
+  prior_difficulty REAL NOT NULL CHECK (prior_difficulty BETWEEN 0.0 AND 1.0),
+  calibrated_difficulty REAL NOT NULL CHECK (calibrated_difficulty BETWEEN 0.0 AND 1.0),
+
+  attempt_count INTEGER NOT NULL DEFAULT 0 CHECK (attempt_count >= 0),
+  avg_correctness REAL NOT NULL DEFAULT 0.0 CHECK (avg_correctness BETWEEN 0.0 AND 1.0),
+  avg_hints_used REAL NOT NULL DEFAULT 0.0 CHECK (avg_hints_used >= 0.0),
+  avg_time_taken_seconds REAL NOT NULL DEFAULT 0.0 CHECK (avg_time_taken_seconds >= 0.0),
+  updated_at TEXT NOT NULL DEFAULT ''
+,
+  FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS population_topic_stats (
+  topic_id TEXT PRIMARY KEY,
+  prior_difficulty REAL NOT NULL CHECK (prior_difficulty BETWEEN 0.0 AND 1.0),
+  calibrated_difficulty REAL NOT NULL CHECK (calibrated_difficulty BETWEEN 0.0 AND 1.0),
+
+  attempt_count INTEGER NOT NULL DEFAULT 0 CHECK (attempt_count >= 0),
+  avg_correctness REAL NOT NULL DEFAULT 0.0 CHECK (avg_correctness BETWEEN 0.0 AND 1.0),
+  avg_hints_used REAL NOT NULL DEFAULT 0.0 CHECK (avg_hints_used >= 0.0),
+  avg_time_taken_seconds REAL NOT NULL DEFAULT 0.0 CHECK (avg_time_taken_seconds >= 0.0),
+  updated_at TEXT NOT NULL DEFAULT ''
+,
+  FOREIGN KEY (topic_id) REFERENCES topics(id) ON DELETE CASCADE
+);
+

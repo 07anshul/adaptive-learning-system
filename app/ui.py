@@ -18,6 +18,7 @@ from app.models.domain import Attempt, Question, StudentTopicState
 from app.repo.attempt_repo import insert_attempt, list_recent_attempts
 from app.repo.edge_repo import get_prereq_topic_ids, list_edges_for_topic
 from app.repo.question_repo import get_question, list_questions_by_topic
+from app.repo.population_repo import ensure_population_priors, get_population_topic_difficulty, get_population_question_difficulty, update_population_from_attempt
 from app.repo.student_state_repo import get_student_topic_state, upsert_student_topic_state
 from app.repo.topic_repo import get_topic, list_topics
 
@@ -64,6 +65,21 @@ def _ensure_student_exists(conn, student_id: str) -> None:
     )
 
 
+def _list_students(conn) -> list[dict]:
+    rows = conn.execute(
+        """
+        SELECT id, display_name
+        FROM students
+        ORDER BY id ASC
+        """
+    ).fetchall()
+    out = [{"id": r["id"], "display_name": r["display_name"]} for r in rows]
+    # Ensure fresh student is always visible even if not inserted yet.
+    if not any(x["id"] == "stu_fresh" for x in out):
+        out.insert(0, {"id": "stu_fresh", "display_name": "Fresh demo student (no history)"})
+    return out
+
+
 @router.get("/", response_class=HTMLResponse)
 def home(request: Request) -> HTMLResponse:
     return templates.TemplateResponse(
@@ -96,6 +112,11 @@ def ui_topics(request: Request) -> HTMLResponse:
         conn.close()
 
 
+@router.post("/ui/select-student")
+def ui_select_student(student_id: str = Form(...)) -> RedirectResponse:
+    return RedirectResponse(url=f"/ui/students/{student_id}/dashboard", status_code=303)
+
+
 @router.get("/ui/topics/{topic_id}", response_class=HTMLResponse)
 def ui_topic_detail(request: Request, topic_id: str) -> HTMLResponse:
     conn = connect()
@@ -124,6 +145,7 @@ def ui_student_dashboard(request: Request, student_id: str) -> HTMLResponse:
     conn = connect()
     try:
         init_db(conn)
+        ensure_population_priors(conn)
         _ensure_student_exists(conn, student_id)
 
         topics = list_topics(conn)
@@ -136,11 +158,14 @@ def ui_student_dashboard(request: Request, student_id: str) -> HTMLResponse:
         enriched = []
         for t in topics:
             st = states_by_topic.get(t.id)
+            pop = get_population_topic_difficulty(conn, t.id)
             enriched.append(
                 {
                     "topic": t,
                     "state": st,
                     "status": topic_status_label(st),
+                    "pop_prior": pop[0] if pop else t.difficulty_prior,
+                    "pop_calibrated": pop[1] if pop else t.difficulty_prior,
                 }
             )
 
@@ -165,6 +190,7 @@ def ui_student_dashboard(request: Request, student_id: str) -> HTMLResponse:
             {
                 "request": request,
                 "student_id": student_id,
+                "student_list": _list_students(conn),
                 "topics": topics,
                 "states_by_topic": states_by_topic,
                 "enriched": enriched,
@@ -173,6 +199,7 @@ def ui_student_dashboard(request: Request, student_id: str) -> HTMLResponse:
                 "fragile": fragile,
                 "recent_attempts": recent,
                 "next_topic_id": next_topic_id,
+                "is_fresh": student_id == "stu_fresh",
             },
         )
     finally:
@@ -248,6 +275,7 @@ def ui_submit_attempt(
     conn = connect()
     try:
         init_db(conn)
+        ensure_population_priors(conn)
         _ensure_student_exists(conn, student_id)
 
         q = get_question(conn, question_id)
@@ -279,6 +307,10 @@ def ui_submit_attempt(
         upd = update_student_topic_state(prev_state, attempt=att, question=q)
         with conn:
             upsert_student_topic_state(conn, upd.new)
+
+        # Update population calibration (global, not tied to this student)
+        with conn:
+            update_population_from_attempt(conn, attempt=att, question=q)
 
         prereq_ids = get_prereq_topic_ids(conn, topic_id)
         prereq_states = []
@@ -330,6 +362,9 @@ def ui_submit_attempt(
             next_topic_title=topic.title if rec.next_topic_id == topic.id else None,
         )
 
+        pop_q = get_population_question_difficulty(conn, q.id)
+        pop_t = get_population_topic_difficulty(conn, topic_id)
+
         feedback = {
             "is_correct": correctness,
             "correct_answer": q.correct_answer,
@@ -340,6 +375,12 @@ def ui_submit_attempt(
             "diagnosis_explanation": diagnosis_expl,
             "recommendation": rec,
             "recommendation_explanation": rec_expl,
+            "population": {
+                "question_prior": pop_q[0] if pop_q else q.difficulty_prior,
+                "question_calibrated": pop_q[1] if pop_q else q.difficulty_prior,
+                "topic_prior": pop_t[0] if pop_t else topic.difficulty_prior,
+                "topic_calibrated": pop_t[1] if pop_t else topic.difficulty_prior,
+            },
         }
 
         return templates.TemplateResponse(

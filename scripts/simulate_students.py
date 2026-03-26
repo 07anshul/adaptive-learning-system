@@ -19,6 +19,7 @@ from app.db import connect, init_db  # noqa: E402
 from app.models.domain import Attempt, Question, StudentTopicState  # noqa: E402
 from app.repo.attempt_repo import insert_attempt  # noqa: E402
 from app.repo.question_repo import list_questions_by_topic  # noqa: E402
+from app.repo.population_repo import ensure_population_priors, update_population_from_attempt  # noqa: E402
 from app.repo.student_state_repo import get_student_topic_state, upsert_student_topic_state  # noqa: E402
 from app.repo.topic_repo import list_topics  # noqa: E402
 
@@ -332,6 +333,9 @@ def simulate_student(
         upd = update_student_topic_state(prev, attempt=att, question=q)
         upsert_student_topic_state(conn, upd.new)
 
+        # Population calibration updates globally (separate from student state)
+        update_population_from_attempt(conn, attempt=att, question=q)
+
 
 # ----------------------------
 # 3) Seeding script entrypoint
@@ -381,6 +385,7 @@ def main() -> None:
     rng = random.Random(7)  # deterministic demo seed
     conn = connect()
     init_db(conn)
+    ensure_population_priors(conn)
 
     questions = choose_questions_for_simulation(conn)
     profiles = build_profiles()
@@ -389,7 +394,8 @@ def main() -> None:
     with conn:
         conn.execute("DELETE FROM attempts;")
         conn.execute("DELETE FROM student_topic_state;")
-        conn.execute("DELETE FROM students;")
+        # Keep the fresh student row if present; simulations are "historical students".
+        conn.execute("DELETE FROM students WHERE id != 'stu_fresh';")
 
     start = datetime.now(tz=timezone.utc) - timedelta(hours=2)
 
