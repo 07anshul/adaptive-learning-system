@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field
 from app.core.diagnosis import diagnose_attempt
 from app.core.next_step import recommend_next_step
 from app.core.scoring import default_state, update_student_topic_state
+from app.core.explanations import explain_diagnosis, explain_recommendation
 from app.db import connect, init_db
 from app.models.domain import Attempt, Question, StudentTopicState
 from app.ui import router as ui_router
@@ -193,6 +194,29 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
             available_questions=available_qs,
         )
 
+        # Plain-English explanations (deterministic templates)
+        topic_obj = get_topic(conn, topic_id)
+        current_topic_title = topic_obj.title if topic_obj is not None else topic_id
+
+        diagnosis_explanation = explain_diagnosis(
+            diagnosis_label=dx.label,
+            topic_state=upd.new,
+            topic_title=current_topic_title,
+            evidence=dx.evidence,
+        )
+
+        next_topic_title = None
+        if rec.next_topic_id:
+            next_topic_obj = get_topic(conn, rec.next_topic_id)
+            next_topic_title = next_topic_obj.title if next_topic_obj is not None else None
+
+        rec_explanation = explain_recommendation(
+            recommendation_action=rec.action,
+            diagnosis_label=dx.label,
+            topic_state=upd.new,
+            next_topic_title=next_topic_title,
+        )
+
         return AttemptCreateResponse(
             attempt={
                 **att.model_dump(),
@@ -206,6 +230,7 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
                 "label": dx.label,
                 "summary": dx.summary,
                 "evidence": dx.evidence,
+                "explanation": diagnosis_explanation,
             },
             recommendation={
                 "action": rec.action,
@@ -213,6 +238,7 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
                 "question_id": rec.question_id,
                 "rationale": rec.rationale,
                 "payload": rec.payload,
+                "explanation": rec_explanation,
             },
         )
     finally:

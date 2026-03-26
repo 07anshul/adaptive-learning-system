@@ -11,6 +11,7 @@ from fastapi.templating import Jinja2Templates
 
 from app.core.diagnosis import diagnose_attempt
 from app.core.next_step import recommend_next_step
+from app.core.explanations import explain_diagnosis, explain_recommendation
 from app.core.scoring import default_state, update_student_topic_state
 from app.db import connect, init_db
 from app.models.domain import Attempt, Question, StudentTopicState
@@ -316,6 +317,19 @@ def ui_submit_attempt(
             available_questions=available_qs,
         )
 
+        diagnosis_expl = explain_diagnosis(
+            diagnosis_label=dx.label,
+            topic_state=upd.new,
+            topic_title=topic.title if topic is not None else upd.new.topic_id,
+            evidence=dx.evidence,
+        )
+        rec_expl = explain_recommendation(
+            recommendation_action=rec.action,
+            diagnosis_label=dx.label,
+            topic_state=upd.new,
+            next_topic_title=topic.title if rec.next_topic_id == topic.id else None,
+        )
+
         feedback = {
             "is_correct": correctness,
             "correct_answer": q.correct_answer,
@@ -323,7 +337,9 @@ def ui_submit_attempt(
             "hint_text": q.hint_text,
             "diagnosis_label": dx.label,
             "diagnosis_summary": dx.summary,
+            "diagnosis_explanation": diagnosis_expl,
             "recommendation": rec,
+            "recommendation_explanation": rec_expl,
         }
 
         return templates.TemplateResponse(

@@ -120,6 +120,9 @@
               <span class="pill pillMono">{{ feedback.diagnosis_label }}</span>
             </div>
             <p>{{ feedback.diagnosis_summary }}</p>
+            {% if feedback.diagnosis_explanation %}
+              <p class="muted">Teacher note: {{ feedback.diagnosis_explanation }}</p>
+            {% endif %}
           </div>
 
           <div class="section">
@@ -133,6 +136,9 @@
                 <span class="pill">question {{ feedback.recommendation.question_id }}</span>
               {% endif %}
             </div>
+            {% if feedback.recommendation_explanation %}
+              <p class="muted">Next step note: {{ feedback.recommendation_explanation }}</p>
+            {% endif %}
             <ul class="list">
               {% for r in feedback.recommendation.rationale %}
                 <li>{{ r }}</li>
