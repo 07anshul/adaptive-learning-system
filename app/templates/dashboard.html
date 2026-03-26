@@ -21,9 +21,9 @@
         <div>
           <div class="muted small">About the separation</div>
           {% if is_fresh %}
-            <p class="muted">This student has <strong>no personal attempt history</strong>. The demo uses <strong>population-calibrated difficulty</strong> for priors, but <strong>student-specific mastery</strong> starts neutral and updates only after this student attempts questions.</p>
+            <p class="muted">This student has <strong>no personal attempt history</strong>. Topic health will update only after this student attempts questions.</p>
           {% else %}
-            <p class="muted">This student has historical attempts. Topic difficulty shown in the UI uses <strong>population-calibrated difficulty</strong>, while mastery/fragility/fluency are <strong>student-specific</strong>.</p>
+            <p class="muted">This student has historical attempts. Topic health reflects only this student’s own activity.</p>
           {% endif %}
         </div>
       </div>
@@ -46,7 +46,7 @@
 
     <div class="card">
       <h2>Topic health panel</h2>
-      <div class="muted small">Labels are based on <strong>student-specific mastery</strong> and fragility. Difficulty uses <strong>population-calibrated difficulty</strong> (global).</div>
+      <div class="muted small">Labels are based on this student’s mastery/fragility. Goal: quickly spot Weak/Fragile topics.</div>
       <div class="badgeRow">
         <span class="badge badgeStrong">Strong</span>
         <span class="badge badgeOkay">Okay</span>
@@ -69,8 +69,7 @@
               <span class="badge badgeStrong">{{ x.status }}</span>
               <a href="/ui/students/{{ student_id }}/practice/{{ x.topic.id }}">{{ x.topic.title }}</a>
               <div class="muted small">
-                student mastery {{ "%.2f"|format(x.state.mastery_score) }}, fragility {{ "%.2f"|format(x.state.fragility_score) }}
-                · population-calibrated difficulty {{ "%.2f"|format(x.pop_calibrated) }}
+                mastery {{ "%.2f"|format(x.state.mastery_score) }}, fragility {{ "%.2f"|format(x.state.fragility_score) }}
               </div>
             </li>
           {% endfor %}
@@ -89,8 +88,7 @@
               <span class="badge badgeWeak">{{ x.status }}</span>
               <a href="/ui/students/{{ student_id }}/practice/{{ x.topic.id }}">{{ x.topic.title }}</a>
               <div class="muted small">
-                student mastery {{ "%.2f"|format(x.state.mastery_score) }}, fluency {{ "%.2f"|format(x.state.fluency_score) }}
-                · population-calibrated difficulty {{ "%.2f"|format(x.pop_calibrated) }}
+                mastery {{ "%.2f"|format(x.state.mastery_score) }}, fluency {{ "%.2f"|format(x.state.fluency_score) }}
               </div>
             </li>
           {% endfor %}
@@ -109,8 +107,7 @@
               <span class="badge badgeFragile">{{ x.status }}</span>
               <a href="/ui/students/{{ student_id }}/practice/{{ x.topic.id }}">{{ x.topic.title }}</a>
               <div class="muted small">
-                student fragility {{ "%.2f"|format(x.state.fragility_score) }}, mastery {{ "%.2f"|format(x.state.mastery_score) }}
-                · population-calibrated difficulty {{ "%.2f"|format(x.pop_calibrated) }}
+                fragility {{ "%.2f"|format(x.state.fragility_score) }}, mastery {{ "%.2f"|format(x.state.mastery_score) }}
               </div>
             </li>
           {% endfor %}

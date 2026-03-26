@@ -154,21 +154,6 @@
           </div>
 
           <div class="section">
-            <div class="sectionTitle">Population vs student state</div>
-            <p class="muted">Population-calibrated difficulty is global. Student-specific mastery/fragility/fluency only change for this student.</p>
-            {% if feedback.population %}
-              <div class="pillRow">
-                <span class="pill">Population difficulty (topic): {{ "%.2f"|format(feedback.population.topic_calibrated) }}</span>
-                <span class="pill">Prior: {{ "%.2f"|format(feedback.population.topic_prior) }}</span>
-              </div>
-              <div class="pillRow">
-                <span class="pill">Population difficulty (question): {{ "%.2f"|format(feedback.population.question_calibrated) }}</span>
-                <span class="pill">Prior: {{ "%.2f"|format(feedback.population.question_prior) }}</span>
-              </div>
-            {% endif %}
-          </div>
-
-          <div class="section">
             <div class="sectionTitle">Hint / explanation</div>
             <details>
               <summary>Show hint</summary>

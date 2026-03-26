@@ -18,7 +18,7 @@ from app.models.domain import Attempt, Question, StudentTopicState
 from app.repo.attempt_repo import insert_attempt, list_recent_attempts
 from app.repo.edge_repo import get_prereq_topic_ids, list_edges_for_topic, get_encompassing_parent_ids, get_edge_weight
 from app.repo.question_repo import get_question, list_questions_by_topic
-from app.repo.population_repo import ensure_population_priors, get_population_topic_difficulty, get_population_question_difficulty, update_population_from_attempt
+from app.repo.population_repo import ensure_population_priors, get_population_question_difficulty, update_population_from_attempt
 from app.repo.student_state_repo import get_student_topic_state, upsert_student_topic_state
 from app.repo.topic_repo import get_topic, list_topics
 from app.repo.state_propagation import apply_soft_neighbor_update
@@ -159,14 +159,11 @@ def ui_student_dashboard(request: Request, student_id: str) -> HTMLResponse:
         enriched = []
         for t in topics:
             st = states_by_topic.get(t.id)
-            pop = get_population_topic_difficulty(conn, t.id)
             enriched.append(
                 {
                     "topic": t,
                     "state": st,
                     "status": topic_status_label(st),
-                    "pop_prior": pop[0] if pop else t.difficulty_prior,
-                    "pop_calibrated": pop[1] if pop else t.difficulty_prior,
                 }
             )
 
@@ -396,9 +393,6 @@ def ui_submit_attempt(
             next_topic_title=topic.title if rec.next_topic_id == topic.id else None,
         )
 
-        pop_q = get_population_question_difficulty(conn, q.id)
-        pop_t = get_population_topic_difficulty(conn, topic_id)
-
         feedback = {
             "is_correct": correctness,
             "correct_answer": q.correct_answer,
@@ -409,12 +403,6 @@ def ui_submit_attempt(
             "diagnosis_explanation": diagnosis_expl,
             "recommendation": rec,
             "recommendation_explanation": rec_expl,
-            "population": {
-                "question_prior": pop_q[0] if pop_q else q.difficulty_prior,
-                "question_calibrated": pop_q[1] if pop_q else q.difficulty_prior,
-                "topic_prior": pop_t[0] if pop_t else topic.difficulty_prior,
-                "topic_calibrated": pop_t[1] if pop_t else topic.difficulty_prior,
-            },
         }
 
         return templates.TemplateResponse(

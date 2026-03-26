@@ -26,7 +26,7 @@ from app.repo.edge_repo import get_encompassing_parent_ids, get_edge_weight
 from app.repo.question_repo import get_question, list_questions_by_topic
 from app.repo.student_state_repo import get_student_topic_state, upsert_student_topic_state
 from app.repo.topic_repo import get_topic, list_topics
-from app.repo.population_repo import update_population_from_attempt, ensure_population_priors, get_population_question_difficulty, get_population_topic_difficulty
+from app.repo.population_repo import update_population_from_attempt, ensure_population_priors, get_population_question_difficulty
 from app.repo.state_propagation import apply_soft_neighbor_update
 
 
@@ -72,7 +72,6 @@ class AttemptCreateResponse(BaseModel):
     topic_state: dict[str, Any]
     diagnosis: dict[str, Any]
     recommendation: dict[str, Any]
-    population: dict[str, Any]
 
 
 class DashboardResponse(BaseModel):
@@ -260,8 +259,6 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
             next_topic_title=next_topic_title,
         )
 
-        pop_t = get_population_topic_difficulty(conn, topic_id)
-
         return AttemptCreateResponse(
             attempt={
                 **att.model_dump(),
@@ -284,18 +281,6 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
                 "rationale": rec.rationale,
                 "payload": rec.payload,
                 "explanation": rec_explanation,
-            },
-            population={
-                "question": {
-                    "question_id": q.id,
-                    "prior_difficulty": pop_q[0] if pop_q else q.difficulty_prior,
-                    "calibrated_difficulty": pop_q[1] if pop_q else q.difficulty_prior,
-                },
-                "topic": {
-                    "topic_id": topic_id,
-                    "prior_difficulty": pop_t[0] if pop_t else (get_topic(conn, topic_id).difficulty_prior if get_topic(conn, topic_id) else 0.5),
-                    "calibrated_difficulty": pop_t[1] if pop_t else (get_topic(conn, topic_id).difficulty_prior if get_topic(conn, topic_id) else 0.5),
-                },
             },
         )
     finally:
