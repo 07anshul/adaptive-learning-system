@@ -66,7 +66,8 @@
         <ul class="list">
           {% for x in strongest %}
             <li>
-              <span class="badge badgeStrong">{{ x.status }}</span>
+              {% set s = x.status %}
+              <span class="badge {% if s=='Strong' %}badgeStrong{% elif s=='Fragile' %}badgeFragile{% elif s=='Weak' %}badgeWeak{% elif s=='Okay' %}badgeOkay{% else %}badgeUnseen{% endif %}">{{ s }}</span>
               <a href="/ui/students/{{ student_id }}/practice/{{ x.topic.id }}">{{ x.topic.title }}</a>
               <div class="muted small">
                 mastery {{ "%.2f"|format(x.state.mastery_score) }}, fragility {{ "%.2f"|format(x.state.fragility_score) }}
@@ -85,7 +86,8 @@
         <ul class="list">
           {% for x in weakest %}
             <li>
-              <span class="badge badgeWeak">{{ x.status }}</span>
+              {% set s = x.status %}
+              <span class="badge {% if s=='Strong' %}badgeStrong{% elif s=='Fragile' %}badgeFragile{% elif s=='Weak' %}badgeWeak{% elif s=='Okay' %}badgeOkay{% else %}badgeUnseen{% endif %}">{{ s }}</span>
               <a href="/ui/students/{{ student_id }}/practice/{{ x.topic.id }}">{{ x.topic.title }}</a>
               <div class="muted small">
                 mastery {{ "%.2f"|format(x.state.mastery_score) }}, fluency {{ "%.2f"|format(x.state.fluency_score) }}
@@ -104,7 +106,8 @@
         <ul class="list">
           {% for x in fragile %}
             <li>
-              <span class="badge badgeFragile">{{ x.status }}</span>
+              {% set s = x.status %}
+              <span class="badge {% if s=='Strong' %}badgeStrong{% elif s=='Fragile' %}badgeFragile{% elif s=='Weak' %}badgeWeak{% elif s=='Okay' %}badgeOkay{% else %}badgeUnseen{% endif %}">{{ s }}</span>
               <a href="/ui/students/{{ student_id }}/practice/{{ x.topic.id }}">{{ x.topic.title }}</a>
               <div class="muted small">
                 fragility {{ "%.2f"|format(x.state.fragility_score) }}, mastery {{ "%.2f"|format(x.state.mastery_score) }}

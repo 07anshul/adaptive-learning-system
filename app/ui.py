@@ -47,6 +47,10 @@ def _iso(dt: datetime) -> str:
 def topic_status_label(state: Optional[StudentTopicState]) -> str:
     if state is None:
         return "Unseen"
+    # Fresh/zero-evidence topics should not be labeled as Weak/Strong yet.
+    # We seed neutral defaults for demo convenience; treat them as "Unseen" until the student has evidence.
+    if int(getattr(state, "evidence_count", 0)) <= 0:
+        return "Unseen"
     m = state.mastery_score
     f = state.fragility_score
     # Demo-friendly thresholds (tuned so simulation profiles visibly differ):
