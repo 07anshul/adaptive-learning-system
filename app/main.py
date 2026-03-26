@@ -13,6 +13,7 @@ from app.core.diagnosis import diagnose_attempt
 from app.core.next_step import recommend_next_step
 from app.core.scoring import default_state, update_student_topic_state
 from app.core.explanations import explain_diagnosis, explain_recommendation
+from app.core.blending import blended_topic_state, DEFAULT_EVIDENCE_THRESHOLD
 from app.db import connect, init_db
 from app.models.domain import Attempt, Question, StudentTopicState
 from app.ui import router as ui_router
@@ -26,7 +27,12 @@ from app.repo.edge_repo import get_encompassing_parent_ids, get_edge_weight
 from app.repo.question_repo import get_question, list_questions_by_topic
 from app.repo.student_state_repo import get_student_topic_state, upsert_student_topic_state
 from app.repo.topic_repo import get_topic, list_topics
-from app.repo.population_repo import update_population_from_attempt, ensure_population_priors, get_population_question_difficulty
+from app.repo.population_repo import (
+    update_population_from_attempt,
+    ensure_population_priors,
+    get_population_question_difficulty,
+    get_population_topic_difficulty,
+)
 from app.repo.state_propagation import apply_soft_neighbor_update
 
 
@@ -204,6 +210,26 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
             if st is not None:
                 prereq_states.append(st)
 
+        # Population-vs-personal blending for early-stage decisions
+        pop_topic = get_population_topic_difficulty(conn, topic_id)
+        topic_calibrated_difficulty = pop_topic[1] if pop_topic is not None else q.difficulty_prior
+        effective_topic_state, _, _ = blended_topic_state(
+            upd.new,
+            population_calibrated_difficulty=topic_calibrated_difficulty,
+            threshold=DEFAULT_EVIDENCE_THRESHOLD,
+        )
+
+        effective_prereq_states: list[StudentTopicState] = []
+        for st in prereq_states:
+            pop_pr = get_population_topic_difficulty(conn, st.topic_id)
+            cal = pop_pr[1] if pop_pr is not None else topic_calibrated_difficulty
+            eff, _, _ = blended_topic_state(
+                st,
+                population_calibrated_difficulty=cal,
+                threshold=DEFAULT_EVIDENCE_THRESHOLD,
+            )
+            effective_prereq_states.append(eff)
+
         recent = list_recent_attempts_for_topic(conn, student_id=req.student_id, topic_id=topic_id, limit=20)
         # Build question map for history-based transfer/fluency detection
         qmap: dict[str, Question] = {q.id: q}
@@ -216,8 +242,8 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
         dx = diagnose_attempt(
             attempt=att,
             question=q,
-            topic_state=upd.new,
-            prereq_states=prereq_states,
+            topic_state=effective_topic_state,
+            prereq_states=effective_prereq_states,
             recent_attempts=list(reversed(recent)),  # chronological order
             recent_questions=qmap,
         )
@@ -230,7 +256,7 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
             latest_attempt=att,
             latest_question=q,
             diagnosis_label=dx.label,
-            topic_state=upd.new,
+            topic_state=effective_topic_state,
             prereq_topic_ids=prereq_ids,
             topics_in_order=topic_ids_in_order,
             available_questions=available_qs,
@@ -242,7 +268,7 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
 
         diagnosis_explanation = explain_diagnosis(
             diagnosis_label=dx.label,
-            topic_state=upd.new,
+            topic_state=effective_topic_state,
             topic_title=current_topic_title,
             evidence=dx.evidence,
         )
@@ -255,7 +281,7 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
         rec_explanation = explain_recommendation(
             recommendation_action=rec.action,
             diagnosis_label=dx.label,
-            topic_state=upd.new,
+            topic_state=effective_topic_state,
             next_topic_title=next_topic_title,
         )
 
@@ -319,7 +345,9 @@ def get_student_topic_states(student_id: str) -> list[dict[str, Any]]:
 
 
 def _dashboard_recommendation(conn, student_id: str) -> dict[str, Any]:
-    # Minimal: choose weakest topic if any state exists; else choose first topic in catalog.
+    # Minimal: choose weakest topic using *blended* effective mastery if any state exists;
+    # else choose first topic in catalog.
+    ensure_population_priors(conn)
     rows = conn.execute(
         """
         SELECT topic_id, mastery_score, fragility_score, fluency_score, evidence_count, last_updated_at
@@ -339,9 +367,35 @@ def _dashboard_recommendation(conn, student_id: str) -> dict[str, Any]:
             "next_topic_id": topics[0].id,
         }
 
-    weakest = min(rows, key=lambda r: float(r["mastery_score"]))
-    topic_id = weakest["topic_id"]
-    st = get_student_topic_state(conn, student_id=student_id, topic_id=topic_id) or default_state(student_id, topic_id)
+    # Pick the topic with lowest *effective* mastery. This makes early recommendations
+    # more population-guided (when evidence is low) and later more personal-history-guided.
+    weakest_row = None
+    weakest_eff_mastery = None
+    weakest_eff_state: Optional[StudentTopicState] = None
+    for r in rows:
+        topic_id = r["topic_id"]
+        personal = (
+            get_student_topic_state(conn, student_id=student_id, topic_id=topic_id)
+            or default_state(student_id, topic_id)
+        )
+        pop_topic = get_population_topic_difficulty(conn, topic_id)
+        cal = float(pop_topic[1]) if pop_topic is not None else 0.5
+        eff, _, _ = blended_topic_state(
+            personal,
+            population_calibrated_difficulty=cal,
+            threshold=DEFAULT_EVIDENCE_THRESHOLD,
+        )
+        m = float(eff.mastery_score)
+        if weakest_eff_mastery is None or m < weakest_eff_mastery:
+            weakest_row = r
+            weakest_eff_mastery = m
+            weakest_eff_state = eff
+
+    topic_id = weakest_row["topic_id"] if weakest_row is not None else rows[0]["topic_id"]
+    st_eff = weakest_eff_state or (
+        get_student_topic_state(conn, student_id=student_id, topic_id=topic_id)
+        or default_state(student_id, topic_id)
+    )
     # Minimal: pick a first question in the weakest topic.
     available_qs = list_questions_by_topic(conn, topic_id)
     q = available_qs[0] if available_qs else None
@@ -371,7 +425,7 @@ def _dashboard_recommendation(conn, student_id: str) -> dict[str, Any]:
         latest_attempt=fake_attempt,
         latest_question=q,
         diagnosis_label="direct_topic_weakness",
-        topic_state=st,
+        topic_state=st_eff,
         prereq_topic_ids=prereq_ids,
         topics_in_order=topic_ids_in_order,
         available_questions=available_qs,

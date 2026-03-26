@@ -13,12 +13,18 @@ from app.core.diagnosis import diagnose_attempt
 from app.core.next_step import recommend_next_step
 from app.core.explanations import explain_diagnosis, explain_recommendation
 from app.core.scoring import default_state, update_student_topic_state
+from app.core.blending import blended_topic_state, DEFAULT_EVIDENCE_THRESHOLD
 from app.db import connect, init_db
 from app.models.domain import Attempt, Question, StudentTopicState
 from app.repo.attempt_repo import insert_attempt, list_recent_attempts
 from app.repo.edge_repo import get_prereq_topic_ids, list_edges_for_topic, get_encompassing_parent_ids, get_edge_weight
 from app.repo.question_repo import get_question, list_questions_by_topic
-from app.repo.population_repo import ensure_population_priors, get_population_question_difficulty, update_population_from_attempt
+from app.repo.population_repo import (
+    ensure_population_priors,
+    get_population_question_difficulty,
+    get_population_topic_difficulty,
+    update_population_from_attempt,
+)
 from app.repo.student_state_repo import get_student_topic_state, upsert_student_topic_state
 from app.repo.topic_repo import get_topic, list_topics
 from app.repo.state_propagation import apply_soft_neighbor_update
@@ -350,6 +356,26 @@ def ui_submit_attempt(
             if st is not None:
                 prereq_states.append(st)
 
+        # Population-vs-personal blending for early-stage decisions (engine-only)
+        pop_topic = get_population_topic_difficulty(conn, topic_id)
+        topic_calibrated_difficulty = pop_topic[1] if pop_topic is not None else q.difficulty_prior
+        effective_topic_state, _, _ = blended_topic_state(
+            upd.new,
+            population_calibrated_difficulty=topic_calibrated_difficulty,
+            threshold=DEFAULT_EVIDENCE_THRESHOLD,
+        )
+
+        effective_prereq_states = []
+        for st in prereq_states:
+            pop_pr = get_population_topic_difficulty(conn, st.topic_id)
+            cal = pop_pr[1] if pop_pr is not None else topic_calibrated_difficulty
+            eff, _, _ = blended_topic_state(
+                st,
+                population_calibrated_difficulty=cal,
+                threshold=DEFAULT_EVIDENCE_THRESHOLD,
+            )
+            effective_prereq_states.append(eff)
+
         # For diagnosis history, reuse recent attempts in this topic.
         recent = list_recent_attempts(conn, student_id=student_id, limit=25)
         qmap = {q.id: q}
@@ -362,8 +388,8 @@ def ui_submit_attempt(
         dx = diagnose_attempt(
             attempt=att,
             question=q,
-            topic_state=upd.new,
-            prereq_states=prereq_states,
+            topic_state=effective_topic_state,
+            prereq_states=effective_prereq_states,
             recent_attempts=list(reversed(recent)),
             recent_questions=qmap,
         )
@@ -374,7 +400,7 @@ def ui_submit_attempt(
             latest_attempt=att,
             latest_question=q,
             diagnosis_label=dx.label,
-            topic_state=upd.new,
+            topic_state=effective_topic_state,
             prereq_topic_ids=prereq_ids,
             topics_in_order=topic_ids_in_order,
             available_questions=available_qs,
@@ -382,14 +408,14 @@ def ui_submit_attempt(
 
         diagnosis_expl = explain_diagnosis(
             diagnosis_label=dx.label,
-            topic_state=upd.new,
+            topic_state=effective_topic_state,
             topic_title=topic.title if topic is not None else upd.new.topic_id,
             evidence=dx.evidence,
         )
         rec_expl = explain_recommendation(
             recommendation_action=rec.action,
             diagnosis_label=dx.label,
-            topic_state=upd.new,
+            topic_state=effective_topic_state,
             next_topic_title=topic.title if rec.next_topic_id == topic.id else None,
         )
 
