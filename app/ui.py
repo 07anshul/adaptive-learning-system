@@ -40,11 +40,15 @@ def topic_status_label(state: Optional[StudentTopicState]) -> str:
         return "Unseen"
     m = state.mastery_score
     f = state.fragility_score
-    if m <= 0.40:
+    # Demo-friendly thresholds (tuned so simulation profiles visibly differ):
+    # - Weak: low mastery
+    # - Fragile: not weak, but unstable (high fragility)
+    # - Strong: good mastery + not fragile
+    if m <= 0.35:
         return "Weak"
     if f >= 0.60:
         return "Fragile"
-    if m >= 0.70 and f <= 0.40:
+    if m >= 0.65 and f <= 0.50:
         return "Strong"
     return "Okay"
 

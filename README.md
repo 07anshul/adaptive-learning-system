@@ -45,6 +45,12 @@ python -m venv .venv
 .venv/bin/python scripts/seed_questions.py
 ```
 
+### Simulate demo students (6–10 profiles)
+
+```bash
+.venv/bin/python scripts/simulate_students.py
+```
+
 ### Quick sanity check (counts)
 
 ```bash
