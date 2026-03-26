@@ -133,7 +133,7 @@
                 <span class="pill">topic {{ feedback.recommendation.next_topic_id }}</span>
               {% endif %}
               {% if feedback.recommendation.question_id %}
-                <span class="pill">question {{ feedback.recommendation.question_id }}</span>
+                <span class="pill">next question {{ feedback.recommendation.question_id }}</span>
               {% endif %}
             </div>
             {% if feedback.recommendation_explanation %}
@@ -146,9 +146,9 @@
             </ul>
             <div class="actions">
               {% if feedback.recommendation.next_topic_id %}
-                <a class="btn btnPrimary" href="/ui/students/{{ student_id }}/practice/{{ feedback.recommendation.next_topic_id }}">Do next step</a>
+                <a class="btn btnPrimary" href="/ui/students/{{ student_id }}/practice/{{ feedback.recommendation.next_topic_id }}{% if feedback.recommendation.question_id %}?question_id={{ feedback.recommendation.question_id }}{% endif %}">Do next step</a>
               {% else %}
-                <a class="btn btnPrimary" href="/ui/students/{{ student_id }}/practice/{{ topic.id }}">Keep practicing</a>
+                <a class="btn btnPrimary" href="/ui/students/{{ student_id }}/practice/{{ topic.id }}{% if feedback.recommendation.question_id %}?question_id={{ feedback.recommendation.question_id }}{% endif %}">Keep practicing</a>
               {% endif %}
             </div>
           </div>

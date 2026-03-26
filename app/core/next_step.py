@@ -27,37 +27,73 @@ class NextStepRecommendation:
     payload: dict
 
 
-def _choose_similar_question(questions: List[Question], *, latest: Question) -> Optional[Question]:
+def _choose_similar_question(
+    questions: List[Question],
+    *,
+    latest: Question,
+    avoid_question_id: Optional[str] = None,
+    prefer_easier: bool = False,
+) -> Optional[Question]:
     # Similar = same topic, low transfer, roughly similar difficulty.
+    # Avoid immediate repetition when alternatives exist.
     same_topic = [q for q in questions if q.topic_id == latest.topic_id]
     if not same_topic:
         return None
-    candidates = [q for q in same_topic if q.transfer_load <= 0.30]
+    filtered = [q for q in same_topic if q.id != avoid_question_id] if avoid_question_id else same_topic
+    pool = filtered or same_topic  # allow same only if no alternatives
+    candidates = [q for q in pool if q.transfer_load <= 0.30]
     if not candidates:
-        candidates = same_topic
-    candidates.sort(key=lambda q: (abs(q.difficulty_prior - latest.difficulty_prior), -q.diagnostic_value))
+        candidates = pool
+    if prefer_easier:
+        # Prefer easier/lower-transfer after wrong attempts.
+        candidates.sort(
+            key=lambda q: (
+                q.difficulty_prior,
+                q.transfer_load,
+                abs(q.difficulty_prior - latest.difficulty_prior),
+                -q.diagnostic_value,
+            )
+        )
+    else:
+        candidates.sort(key=lambda q: (abs(q.difficulty_prior - latest.difficulty_prior), q.transfer_load, -q.diagnostic_value))
     return candidates[0] if candidates else None
 
 
-def _choose_bridge_question(questions: List[Question], *, topic_id: str) -> Optional[Question]:
+def _choose_bridge_question(
+    questions: List[Question],
+    *,
+    topic_id: str,
+    avoid_question_id: Optional[str] = None,
+) -> Optional[Question]:
     # Bridge = moderate transfer and decent diagnostic value, not too hard.
     candidates = [q for q in questions if q.topic_id == topic_id]
     if not candidates:
         return None
+    filtered = [q for q in candidates if q.id != avoid_question_id] if avoid_question_id else candidates
+    use_candidates = filtered or candidates
     bridge = [
         q
-        for q in candidates
+        for q in use_candidates
         if 0.25 <= q.transfer_load <= 0.60 and q.difficulty_prior <= 0.70
     ]
     if not bridge:
-        bridge = candidates
+        bridge = use_candidates
     bridge.sort(key=lambda q: (-q.diagnostic_value, q.difficulty_prior))
     return bridge[0] if bridge else None
 
 
-def _choose_fluency_set(questions: List[Question], *, topic_id: str, k: int = 5) -> List[str]:
+def _choose_fluency_set(
+    questions: List[Question],
+    *,
+    topic_id: str,
+    k: int = 5,
+    avoid_question_id: Optional[str] = None,
+) -> List[str]:
     # Fluency = low transfer, more procedural than conceptual, easy->medium.
     candidates = [q for q in questions if q.topic_id == topic_id]
+    if avoid_question_id:
+        filtered = [q for q in candidates if q.id != avoid_question_id]
+        candidates = filtered or candidates
     candidates = [
         q
         for q in candidates
@@ -129,7 +165,12 @@ def recommend_next_step(
         )
 
     if diagnosis_label == "fluency_issue":
-        qset = _choose_fluency_set(available_questions, topic_id=latest_question.topic_id, k=5)
+        qset = _choose_fluency_set(
+            available_questions,
+            topic_id=latest_question.topic_id,
+            k=5,
+            avoid_question_id=latest_question.id,
+        )
         return NextStepRecommendation(
             action="assign_fluency_practice",
             next_topic_id=latest_question.topic_id,
@@ -144,10 +185,16 @@ def recommend_next_step(
     if diagnosis_label == "fragile_understanding":
         # If hints/low confidence already present, show explanation; otherwise bridge question.
         if latest_attempt.hints_used >= 1 or latest_attempt.confidence_rating <= 2:
+            follow_up = _choose_similar_question(
+                available_questions,
+                latest=latest_question,
+                avoid_question_id=latest_question.id,
+                prefer_easier=(not latest_attempt.correctness),
+            )
             return NextStepRecommendation(
                 action="show_hint_or_explanation",
                 next_topic_id=latest_question.topic_id,
-                question_id=latest_question.id,
+                question_id=follow_up.id if follow_up else latest_question.id,
                 rationale=[
                     "Correctness may be shaky due to low confidence or hints used.",
                     "Show a short hint/explanation to stabilize understanding.",
@@ -155,9 +202,14 @@ def recommend_next_step(
                 payload={
                     "hint_text": latest_question.hint_text,
                     "explanation_text": latest_question.explanation_text,
+                    "follow_up_question_id": follow_up.id if follow_up else latest_question.id,
                 },
             )
-        bridge = _choose_bridge_question(available_questions, topic_id=latest_question.topic_id)
+        bridge = _choose_bridge_question(
+            available_questions,
+            topic_id=latest_question.topic_id,
+            avoid_question_id=latest_question.id,
+        )
         return NextStepRecommendation(
             action="assign_bridge_question",
             next_topic_id=latest_question.topic_id,
@@ -170,7 +222,12 @@ def recommend_next_step(
         )
 
     if diagnosis_label == "direct_topic_weakness":
-        similar = _choose_similar_question(available_questions, latest=latest_question)
+        similar = _choose_similar_question(
+            available_questions,
+            latest=latest_question,
+            avoid_question_id=latest_question.id,
+            prefer_easier=(not latest_attempt.correctness),
+        )
         return NextStepRecommendation(
             action="retry_similar_question",
             next_topic_id=latest_question.topic_id,
@@ -185,7 +242,11 @@ def recommend_next_step(
     # 3) Tie-break / fallbacks when graph evidence is weak or no edges exist
     # If wrong + transfer heavy => bridge question; otherwise retry similar.
     if (not latest_attempt.correctness) and latest_question.transfer_load >= 0.60:
-        bridge = _choose_bridge_question(available_questions, topic_id=latest_question.topic_id)
+        bridge = _choose_bridge_question(
+            available_questions,
+            topic_id=latest_question.topic_id,
+            avoid_question_id=latest_question.id,
+        )
         return NextStepRecommendation(
             action="assign_bridge_question",
             next_topic_id=latest_question.topic_id,
@@ -197,7 +258,12 @@ def recommend_next_step(
             payload={"bridge_question_id": bridge.id if bridge else None},
         )
 
-    similar = _choose_similar_question(available_questions, latest=latest_question)
+    similar = _choose_similar_question(
+        available_questions,
+        latest=latest_question,
+        avoid_question_id=latest_question.id,
+        prefer_easier=(not latest_attempt.correctness),
+    )
     return NextStepRecommendation(
         action="retry_similar_question",
         next_topic_id=latest_question.topic_id,
