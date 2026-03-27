@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field
 
 from app.core.diagnosis import diagnose_attempt
 from app.core.next_step import recommend_next_step
-from app.core.scoring import default_state, update_student_topic_state
+from app.core.scoring import ScoringParams, default_state, expected_time_seconds, update_student_topic_state
 from app.core.explanations import explain_diagnosis, explain_recommendation
 from app.core.blending import blended_topic_state, DEFAULT_EVIDENCE_THRESHOLD
 from app.db import connect, init_db
@@ -258,10 +258,21 @@ def post_attempt(req: AttemptCreateRequest) -> AttemptCreateResponse:
             latest_attempt=att,
             latest_question=q,
             diagnosis_label=dx.label,
-            topic_state=effective_topic_state,
+            # For clean correct answers, rely on personal state (population is for cold-start).
+            topic_state=(
+                upd.new
+                if (
+                    att.correctness is True
+                    and att.hints_used == 0
+                    and att.confidence_rating >= 4
+                    and (att.time_taken_seconds / max(1.0, expected_time_seconds(q, ScoringParams()))) <= 1.05
+                )
+                else effective_topic_state
+            ),
             prereq_topic_ids=prereq_ids,
             topics_in_order=topic_ids_in_order,
             available_questions=available_qs,
+            recent_attempts=list(reversed(recent)),  # chronological
         )
 
         # Plain-English explanations (deterministic templates)

@@ -203,7 +203,12 @@ def update_student_topic_state(
             + p.mastery_w_speed * speed
             - p.mastery_w_hints * hints
         )
-        mastery_delta = lr * 0.10 * mastery_signal
+        # Demo-friendly: repeated "clean success" should move mastery noticeably.
+        clean = (
+            clamp01((speed + 1.0) / 2.0) * clamp01((conf + 1.0) / 2.0) * (1.0 - hints)
+        )
+        mastery_gain = 0.10 + 0.06 * clean  # up to +60% on very clean attempts
+        mastery_delta = lr * mastery_gain * mastery_signal
     else:
         mastery_signal = (
             -p.mastery_w_correct
@@ -220,7 +225,11 @@ def update_student_topic_state(
             + p.fluency_w_speed * speed
             - p.fluency_w_hints * hints
         )
-        fluency_delta = lr * 0.10 * fluency_signal
+        clean = (
+            clamp01((speed + 1.0) / 2.0) * clamp01((conf + 1.0) / 2.0) * (1.0 - hints)
+        )
+        fluency_gain = 0.10 + 0.05 * clean
+        fluency_delta = lr * fluency_gain * fluency_signal
     else:
         fluency_signal = (
             -0.70
@@ -241,7 +250,8 @@ def update_student_topic_state(
             * clamp01((conf + 1.0) / 2.0)  # high conf ->1
             * (1.0 - hints)
         )
-        fragility_delta = -lr * 0.10 * p.fragility_clean_success_drop * clean
+        # Demo-friendly: clean success should reduce fragility more strongly.
+        fragility_delta = -lr * (0.10 + 0.06 * clean) * p.fragility_clean_success_drop * clean
 
         # But correct-yet-shaky should still increase fragility a bit.
         shaky = 0.55 * low_conf + 0.45 * slow + 0.60 * hints

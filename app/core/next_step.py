@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 from app.core.diagnosis import DiagnosisLabel
-from app.core.scoring import ScoreBands, clamp01
+from app.core.scoring import ScoringParams, ScoreBands, clamp01, expected_time_seconds
 from app.models.domain import Attempt, Question, StudentTopicState
 
 
@@ -116,6 +116,109 @@ def _is_consistently_strong(latest_attempt: Attempt, state: StudentTopicState) -
     )
 
 
+def _is_clean_success(att: Attempt, q: Question) -> bool:
+    """
+    Demo-friendly "clean success":
+    - correct
+    - no hints
+    - high confidence
+    - not slow relative to expected time
+    """
+    if not att.correctness:
+        return False
+    if int(att.hints_used) != 0:
+        return False
+    if int(att.confidence_rating) < 4:
+        return False
+    exp = expected_time_seconds(q, ScoringParams())
+    if exp <= 1e-6:
+        return True
+    # Allow "reasonable" time: not exceeding ~expected time.
+    return (float(att.time_taken_seconds) / exp) <= 1.05
+
+
+def _recent_clean_rate(
+    recent_attempts: Optional[List[Attempt]],
+    *,
+    question_by_id: dict[str, Question],
+    window: int = 6,
+) -> float:
+    """
+    Fraction of attempts in the last `window` that are "clean successes".
+    Deterministic, interpretable, and uses per-question expected time when available.
+    """
+    if not recent_attempts:
+        return 0.0
+    tail = recent_attempts[-window:] if len(recent_attempts) > window else recent_attempts
+    if not tail:
+        return 0.0
+    clean_n = 0
+    for a in tail:
+        q = question_by_id.get(a.question_id)
+        if q is None:
+            # Conservative fallback (no time normalization): correct + no hints + high confidence.
+            if a.correctness and int(a.hints_used) == 0 and int(a.confidence_rating) >= 4:
+                clean_n += 1
+            continue
+        if _is_clean_success(a, q):
+            clean_n += 1
+    return clean_n / float(len(tail))
+
+
+def _recent_correct_rate(recent_attempts: Optional[List[Attempt]], window: int = 6) -> float:
+    if not recent_attempts:
+        return 0.0
+    tail = recent_attempts[-window:] if len(recent_attempts) > window else recent_attempts
+    if not tail:
+        return 0.0
+    return sum(1 for a in tail if a.correctness) / float(len(tail))
+
+
+def _recent_sample_n(recent_attempts: Optional[List[Attempt]], window: int = 6) -> int:
+    if not recent_attempts:
+        return 0
+    tail = recent_attempts[-window:] if len(recent_attempts) > window else recent_attempts
+    return len(tail)
+
+
+def _readiness_score(state: StudentTopicState) -> float:
+    """
+    Interpretable readiness score from state only (0..1).
+    Higher mastery + higher fluency + lower fragility => higher readiness.
+    """
+    m = clamp01(float(state.mastery_score))
+    f = clamp01(float(state.fluency_score))
+    fr = clamp01(float(state.fragility_score))
+    return clamp01(0.55 * m + 0.25 * f + 0.20 * (1.0 - fr))
+
+
+def _choose_progression_question(
+    questions: List[Question],
+    *,
+    latest: Question,
+    avoid_question_id: Optional[str],
+) -> Optional[Question]:
+    """
+    After a clean streak, prefer a different question that is:
+    - same topic
+    - not easier than the latest (roughly)
+    - optionally slightly higher transfer or difficulty
+    """
+    same = [q for q in questions if q.topic_id == latest.topic_id]
+    if avoid_question_id:
+        filtered = [q for q in same if q.id != avoid_question_id]
+    else:
+        filtered = same
+    pool = filtered or same
+    if not pool:
+        return None
+    # Prefer equal-or-harder and a bit more transfer (still capped).
+    cand = [q for q in pool if q.difficulty_prior >= (latest.difficulty_prior - 0.05)]
+    cand = cand or pool
+    cand.sort(key=lambda q: (-q.difficulty_prior, -q.transfer_load, -q.diagnostic_value))
+    return cand[0] if cand else None
+
+
 def recommend_next_step(
     *,
     latest_attempt: Attempt,
@@ -125,11 +228,72 @@ def recommend_next_step(
     prereq_topic_ids: List[str],
     topics_in_order: List[str],
     available_questions: List[Question],
+    recent_attempts: Optional[List[Attempt]] = None,
 ) -> NextStepRecommendation:
     """
     Minimal next-step recommender using allowed actions only.
     Works even if prereq_topic_ids is empty (no edges).
     """
+    # 0) Demo-friendly progression without hard-coded streak cliffs:
+    # If recent evidence is strong, stop recommending easier/remedial questions.
+    # This uses a readiness score (state) + a recent clean-success boost.
+    q_by_id = {q.id: q for q in available_questions}
+    clean_rate = _recent_clean_rate(recent_attempts, question_by_id=q_by_id, window=6)
+    correct_rate = _recent_correct_rate(recent_attempts, window=6)
+    n_recent = _recent_sample_n(recent_attempts, window=6)
+    readiness = _readiness_score(topic_state)
+    # Boost only when the latest attempt is correct; a new failure should remove the boost.
+    # Scale boost by sample size so we don't overreact after 1 clean attempt.
+    sample_scale = min(1.0, n_recent / 3.0)
+    recent_boost = (0.18 * clean_rate + 0.10 * correct_rate) * sample_scale if latest_attempt.correctness else 0.0
+    effective_readiness = clamp01(readiness + recent_boost)
+
+    # If the student looks ready, advance to next topic; otherwise choose a non-easier progression question.
+    if latest_attempt.correctness and n_recent >= 3 and (effective_readiness >= 0.70 or (clean_rate >= 0.80 and correct_rate >= 0.80)):
+        next_topic = None
+        if latest_question.topic_id in topics_in_order:
+            i = topics_in_order.index(latest_question.topic_id)
+            if i + 1 < len(topics_in_order):
+                next_topic = topics_in_order[i + 1]
+        if next_topic is not None:
+            return NextStepRecommendation(
+                action="advance_to_next_topic",
+                next_topic_id=next_topic,
+                question_id=None,
+                rationale=[
+                    "Recent performance is clean and consistent.",
+                    "Advance to keep momentum.",
+                ],
+                payload={
+                    "from_topic_id": latest_question.topic_id,
+                    "readiness": round(effective_readiness, 3),
+                    "recent_clean_rate": round(clean_rate, 3),
+                    "recent_n": int(n_recent),
+                },
+            )
+
+    if latest_attempt.correctness and n_recent >= 2 and (clean_rate >= 0.50 or effective_readiness >= 0.55):
+        prog = _choose_progression_question(
+            available_questions,
+            latest=latest_question,
+            avoid_question_id=latest_question.id,
+        )
+        return NextStepRecommendation(
+            action="retry_similar_question",
+            next_topic_id=latest_question.topic_id,
+            question_id=prog.id if prog else None,
+            rationale=[
+                "Recent performance is improving.",
+                "Use a different same-topic question (not easier) to confirm stability.",
+            ],
+            payload={
+                "readiness": round(effective_readiness, 3),
+                "recent_clean_rate": round(clean_rate, 3),
+                "recent_n": int(n_recent),
+                "progression_question_id": prog.id if prog else None,
+            },
+        )
+
     # 1) Strong performance can advance (only if it's truly strong)
     if _is_consistently_strong(latest_attempt, topic_state):
         # next topic = next in curated order; if not found, stay.
